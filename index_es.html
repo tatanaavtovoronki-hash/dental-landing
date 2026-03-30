@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ru" class="scroll-smooth">
+<html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dental.AI — AI-секретарь для стоматологий</title>
+    <title>Dental.AI — Recepcionista IA para Clínicas Dentales</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -26,23 +26,23 @@
     </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Tourney:wght@700&family=Russo+One&display=swap');
-        
+
         :root {
             --spz-purple: #7856FF;
             --spz-purple-light: #F2EEFF;
             --spz-peach: #FFD7CF;
             --spz-peach-light: #FFF0ED;
-            
+
             --t-dark: #1F2023;
             --t-gray: #4C4C4C;
             --t-light: #797979;
             --bg-body: #FFFFFF;
             --bg-white: #FFFFFF;
-            
+
             --spz-error: #FF7557;
             --spz-blue-light: #F0F9FE;
         }
-        
+
         body {
             font-family: 'Geist', 'Outfit', 'Garnett Medium', sans-serif;
             background-color: var(--bg-body);
@@ -126,13 +126,12 @@
             border-radius: 1.5rem;
             transition: all 0.3s ease;
         }
-        
+
         .clean-card:hover {
             box-shadow: 0 12px 32px -8px rgba(120, 86, 255, 0.15);
             transform: translateY(-4px);
         }
 
-        /* Nav: fully static, no hover animation */
         nav .clean-card {
             transition: none !important;
         }
@@ -159,11 +158,11 @@
           height: 180px;
           border-radius: 50%;
           outline: 10px solid #333;
-          background: repeating-radial-gradient(circle at 50% 50%, 
-          rgba(200,200,200,.2) 0%, rgba(200,200,200,.2) 2%, 
-          transparent 2%, transparent 3%, rgba(200,200,200,.2) 3%, 
-          transparent 3%), conic-gradient(white 0%, silver 10%, 
-          white 35%, silver 45%, white 60%, silver 70%, 
+          background: repeating-radial-gradient(circle at 50% 50%,
+          rgba(200,200,200,.2) 0%, rgba(200,200,200,.2) 2%,
+          transparent 2%, transparent 3%, rgba(200,200,200,.2) 3%,
+          transparent 3%), conic-gradient(white 0%, silver 10%,
+          white 35%, silver 45%, white 60%, silver 70%,
           white 80%, silver 95%, white 100%);
           box-shadow: inset 0 0 20px #0007;
         }
@@ -254,13 +253,8 @@
         }
 
         @keyframes watch {
-          0% {
-            transform: rotate(0deg);
-          }
-
-          100% {
-            transform: rotate(360deg);
-          }
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
         }
 
         /* AI ASSISTANT — dynamic swap */
@@ -271,7 +265,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            /* Constant height to prevent layout shift */
             height: clamp(80px, 15vw, 120px);
             margin-bottom: clamp(16px, 2.5vw, 32px);
             transition: transform 0.3s ease;
@@ -280,7 +273,7 @@
         .bold-copy-bg {
             font-size: clamp(32px, 8.5vw, 102px);
             line-height: 1;
-            color: rgba(31,32,35,0.08); /* Faint grey */
+            color: rgba(31,32,35,0.08);
             transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
             position: absolute;
             z-index: 1;
@@ -288,7 +281,7 @@
         }
 
         .bold-copy-fg {
-            font-size: clamp(20px, 4.5vw, 54px); /* Small black */
+            font-size: clamp(20px, 4.5vw, 54px);
             line-height: 1;
             color: #1F2023;
             transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -297,29 +290,25 @@
             white-space: nowrap;
         }
 
-        /* Hover/Active states */
         .bold-copy-wrap:hover .bold-copy-fg,
         .bold-copy-wrap.is-active .bold-copy-fg {
-            font-size: clamp(32px, 8.5vw, 102px); /* Expands to full size */
+            font-size: clamp(32px, 8.5vw, 102px);
         }
 
         .bold-copy-wrap:hover .bold-copy-bg,
         .bold-copy-wrap.is-active .bold-copy-bg {
-            font-size: clamp(20px, 4.5vw, 54px); /* Shrinks vice versa */
+            font-size: clamp(20px, 4.5vw, 54px);
             opacity: 0.2;
         }
 
-        /* Responsive adjustments for title */
         @media (max-width: 768px) {
             .bold-copy-wrap {
                 height: clamp(60px, 14vw, 80px);
                 touch-action: manipulation;
             }
-            /* Default: bg big/faint, fg small/dark — clear contrast on mobile */
             .bold-copy-bg { font-size: clamp(36px, 11vw, 56px); }
             .bold-copy-fg { font-size: clamp(16px, 5vw, 28px); }
 
-            /* Active/tap: fg grows big, bg shrinks */
             .bold-copy-wrap:hover .bold-copy-fg,
             .bold-copy-wrap.is-active .bold-copy-fg {
                 font-size: clamp(36px, 11vw, 56px);
@@ -340,7 +329,7 @@
             height: 100%;
             width: 100%;
             backface-visibility: hidden;
-            border-radius: 1.5rem; /* Matches rounded-2xl */
+            border-radius: 1.5rem;
             overflow: hidden;
             display: flex;
             flex-direction: column;
@@ -365,21 +354,18 @@
             content: '';
             position: absolute;
             background: #ffffff;
-            inset: 3px; /* Border thickness */
+            inset: 3px;
             border-radius: calc(1.5rem - 3px);
             z-index: 1;
         }
 
-        /* Russo One for all headings (supports Cyrillic, similar geometric feel to Tourney) */
         h1, h2, h3 {
             font-family: 'Russo One', 'Tourney', sans-serif;
         }
 
-        /* Fan Bridge — real-height block, centered on hero/problems boundary via negative margin */
         .fan-bridge {
             position: relative;
             z-index: 20;
-            /* negative margin = half card height → centers cards on the section boundary */
             margin-top: clamp(-145px, -23.75vw, -110px);
             padding-bottom: clamp(28px, 4vw, 48px);
             display: flex;
@@ -395,7 +381,6 @@
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            /* explicit width so flex centering works with negative-margin children */
             width: clamp(280px, 90vw, 540px);
             overflow: visible;
             min-height: clamp(185px, 47.5vw, 290px);
@@ -403,7 +388,6 @@
 
         .fan-container .glass {
             position: relative;
-            /* fluid width */
             width: clamp(140px, 36vw, 220px);
             height: clamp(185px, 47.5vw, 290px);
             background: linear-gradient(135deg, rgba(120,86,255,0.22) 0%, rgba(255,215,207,0.18) 100%);
@@ -414,7 +398,6 @@
             align-items: center;
             transition: 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
             border-radius: clamp(12px, 3vw, 18px);
-            /* overlap */
             margin: 0 clamp(-60px, -11vw, -35px);
             backdrop-filter: blur(10px);
             transform: rotate(calc(var(--r) * 1deg)) translateY(0);
@@ -476,7 +459,6 @@
             font-weight: 600;
         }
 
-        /* ── Responsive hero ───────────────────────────── */
         @media (max-width: 640px) {
             .hero-section {
                 padding-top: 100px !important;
@@ -499,7 +481,7 @@
                 <!-- Language Dropdown -->
                 <div class="relative" id="lang-dropdown">
                     <button onclick="document.getElementById('lang-menu').classList.toggle('hidden')" class="flex items-center gap-2 bg-gray-100 border border-gray-200 rounded-full px-4 py-2 text-sm font-bold text-gray-700 hover:bg-gray-200 transition focus:outline-none">
-                        <span id="lang-code">RU</span>
+                        <span id="lang-code">ES</span>
                         <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
                     </button>
                     <div id="lang-menu" class="hidden absolute right-0 mt-2 bg-white border border-gray-100 rounded-2xl shadow-xl py-1 z-50 min-w-[160px]">
@@ -510,7 +492,7 @@
                         <button onclick="setLang('ES')" class="w-full flex items-center gap-3 px-4 py-2.5 text-sm font-bold text-gray-700 hover:bg-gray-50 transition"><span class="text-xs text-gray-400 w-6">ES</span> Español</button>
                     </div>
                 </div>
-                <a href="#cta" class="hidden sm:inline-flex btn-neon" style="font-size: clamp(12px, 1.2vw, 14px); padding: 10px clamp(16px, 2vw, 24px);"><div class="btn-neon-inner"></div>Получить демо</a>
+                <a href="#cta" class="hidden sm:inline-flex btn-neon" style="font-size: clamp(12px, 1.2vw, 14px); padding: 10px clamp(16px, 2vw, 24px);"><div class="btn-neon-inner"></div>Solicitar demo</a>
             </div>
         </div>
     </nav>
@@ -520,15 +502,13 @@
 
         <!-- Blob background -->
         <div id="blob-wrapper" style="position:absolute; width:150%; height:150%; top:-25%; left:-25%; z-index:0; will-change:transform; transition:transform 0.12s ease-out; pointer-events:none;">
-            <!-- Blue blob -->
             <div class="animate-pop-blob" style="position:absolute; top:20%; right:15%; width:600px; height:600px; border-radius:50%; background:#93c5fd; opacity:0.35; filter:blur(90px);"></div>
-            <!-- Purple blob -->
             <div class="animate-pop-blob" style="position:absolute; bottom:15%; left:15%; width:600px; height:600px; border-radius:50%; background:#d8b4fe; opacity:0.35; filter:blur(90px); animation-delay:1.8s;"></div>
         </div>
 
         <!-- AI ASSISTANT Title -->
-        <div class="bold-copy-wrap relative z-10 w-full max-w-[900px] mx-auto overflow-visible" 
-             style="font-family: 'Tourney', cursive;" 
+        <div class="bold-copy-wrap relative z-10 w-full max-w-[900px] mx-auto overflow-visible"
+             style="font-family: 'Tourney', cursive;"
              onclick="this.classList.toggle('is-active')">
             <div class="bold-copy-bg uppercase select-none">
                 AI ASSISTANT
@@ -540,14 +520,14 @@
 
         <!-- Subtitle -->
         <p class="relative z-10 text-center text-gray-500 font-medium max-w-md sm:max-w-xl mx-auto px-6 leading-relaxed" style="font-size: clamp(15px, 2.2vw, 18px); margin-bottom: clamp(32px, 5vw, 72px);">
-            сразу отвечает на сообщения, даёт полную информацию и не теряет ни одной заявки. Пациент не уходит к конкуренту.
+            responde al instante, proporciona información completa y no pierde ni una sola consulta. Los pacientes no van a la competencia.
         </p>
 
         <!-- Button -->
         <div class="hero-cta-wrap relative z-10" style="margin-bottom: clamp(80px, 12vw, 140px);">
             <a href="#cta" class="btn-neon text-[15px] sm:text-[17px] px-12 py-4">
                 <div class="btn-neon-inner"></div>
-                Проверить в деле
+                Ver en acción
             </a>
         </div>
 
@@ -557,19 +537,19 @@
     <div class="fan-bridge">
         <div class="fan-container" onclick="this.classList.toggle('is-open')">
             <!-- Card 1 -->
-            <div class="glass" style="--r: -15;" data-text="Ответы 24/7">
+            <div class="glass" style="--r: -15;" data-text="Respuestas 24/7">
                 <svg class="card-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M20 2H4C2.9 2 2 2.9 2 4v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 12H6l-2 2V4h16v10z"/>
                 </svg>
             </div>
             <!-- Card 2 -->
-            <div class="glass" style="--r: 0;" data-text="Запись онлайн">
+            <div class="glass" style="--r: 0;" data-text="Reserva online">
                 <svg class="card-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M19 3h-1V1h-2v2H8V1H6v2H5C3.9 3 3 3.9 3 5v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
                 </svg>
             </div>
             <!-- Card 3 -->
-            <div class="glass" style="--r: 15;" data-text="Напоминания">
+            <div class="glass" style="--r: 15;" data-text="Recordatorios">
                 <svg class="card-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.1-1.6-5.6-4.5-6.3V4c0-.8-.7-1.5-1.5-1.5S10.5 3.2 10.5 4v.7C7.6 5.4 6 7.9 6 11v5l-2 2v1h16v-1l-2-2z"/>
                 </svg>
@@ -579,29 +559,28 @@
 
     <!-- PROBLEMS -->
     <section id="problems" class="problems-section bg-white relative overflow-hidden" style="background-color: #ffffff; padding-top: clamp(48px, 8vw, 100px); padding-bottom: 96px;">
-        <!-- Subtle background blob matching hero -->
         <div style="position:absolute; bottom:-100px; left:-100px; width:500px; height:500px; border-radius:50%; background:#d8b4fe; opacity:0.12; filter:blur(80px); pointer-events:none; z-index:0;"></div>
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="text-center max-w-2xl mx-auto mb-16">
-                <h2 class="text-3xl lg:text-4xl font-extrabold mb-6 text-gray-900 leading-tight tracking-tight">Что происходит без AI-ассистента</h2>
-                <p class="text-lg text-gray-500 font-medium">Каждый пропущенный звонок — потерянный пациент. Каждый забытый визит — прямые потери для клиники.</p>
+                <h2 class="text-3xl lg:text-4xl font-extrabold mb-6 text-gray-900 leading-tight tracking-tight">Qué ocurre sin un asistente IA</h2>
+                <p class="text-lg text-gray-500 font-medium">Cada llamada perdida es un paciente perdido. Cada cita olvidada son pérdidas directas para la clínica.</p>
             </div>
             <div class="grid md:grid-cols-2 gap-6">
                 <div class="clean-card p-8 bg-white border-l-4 border-l-spz-error">
-                    <h3 class="text-xl font-bold mb-3 text-gray-900">Отвечаете слишком поздно</h3>
-                    <p class="text-gray-500 text-base leading-relaxed font-medium">Пациент пишет вечером или сразу в несколько клиник. Пока вы отвечаете — он уже записался к другим.</p>
+                    <h3 class="text-xl font-bold mb-3 text-gray-900">Responde demasiado tarde</h3>
+                    <p class="text-gray-500 text-base leading-relaxed font-medium">Los pacientes escriben por la noche o a varias clínicas a la vez. Cuando respondes — ya han reservado en otro lugar.</p>
                 </div>
                 <div class="clean-card p-8 bg-white border-l-4 border-l-spz-error">
-                    <h3 class="text-xl font-bold mb-3 text-gray-900">Администратор перегружен</h3>
-                    <p class="text-gray-500 text-base leading-relaxed font-medium">Звонки, пациенты, задачи. Сообщения в мессенджерах ждут ответа и теряются.</p>
+                    <h3 class="text-xl font-bold mb-3 text-gray-900">Recepcionista saturada</h3>
+                    <p class="text-gray-500 text-base leading-relaxed font-medium">Llamadas, pacientes, tareas. Los mensajes en los chats esperan respuesta y se pierden.</p>
                 </div>
                 <div class="clean-card p-8 bg-white border-l-4 border-l-spz-error">
-                    <h3 class="text-xl font-bold mb-3 text-gray-900">Диалог не доводят до конца</h3>
-                    <p class="text-gray-500 text-base leading-relaxed font-medium">Ответили коротко или без уточнений. Пациент не понял — и пошёл искать дальше.</p>
+                    <h3 class="text-xl font-bold mb-3 text-gray-900">Conversaciones sin terminar</h3>
+                    <p class="text-gray-500 text-base leading-relaxed font-medium">Una respuesta corta o confusa. El paciente no obtuvo lo que necesitaba — y fue a buscar en otro sitio.</p>
                 </div>
                 <div class="clean-card p-8 bg-white border-l-4 border-l-spz-error">
-                    <h3 class="text-xl font-bold mb-3 text-gray-900">Нет стабильного качества ответа</h3>
-                    <p class="text-gray-500 text-base leading-relaxed font-medium">Сегодня ответили хорошо. Завтра — забыли или ответили "на бегу". Пациент выбирает там, где с ним общаются лучше.</p>
+                    <h3 class="text-xl font-bold mb-3 text-gray-900">Calidad de respuesta inconsistente</h3>
+                    <p class="text-gray-500 text-base leading-relaxed font-medium">Hoy una buena respuesta. Mañana olvidada o apresurada. Los pacientes eligen la clínica que mejor se comunica.</p>
                 </div>
             </div>
         </div>
@@ -612,9 +591,9 @@
     <section id="how" class="py-24 bg-[#FAFAFA] relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="text-center max-w-3xl mx-auto mb-20">
-                <h2 class="text-3xl lg:text-4xl font-extrabold mb-6 text-gray-900 leading-tight tracking-tight">Как работает AI-секретарь</h2>
-                <p class="text-lg text-gray-500 font-medium mb-4">АИ-ассистент — это администратор, который никогда не устаёт и всегда на связи.</p>
-                <p class="text-lg text-gray-500 font-medium">Это не просто чат-бот с готовыми кнопками. Это обученный искусственный интеллект, который понимает человеческий язык, контекст и ведёт живой диалог.</p>
+                <h2 class="text-3xl lg:text-4xl font-extrabold mb-6 text-gray-900 leading-tight tracking-tight">Cómo funciona el recepcionista IA</h2>
+                <p class="text-lg text-gray-500 font-medium mb-4">El asistente IA es un administrador que nunca se cansa y siempre está en línea.</p>
+                <p class="text-lg text-gray-500 font-medium">No es un simple chatbot con botones preestablecidos. Es una inteligencia artificial entrenada que comprende el lenguaje natural, el contexto y mantiene conversaciones reales.</p>
             </div>
 
             <div class="grid md:grid-cols-3 gap-8 relative">
@@ -627,8 +606,8 @@
                         1
                         <div class="absolute inset-0 rounded-full border border-spz-purple/20 scale-110 opacity-0 group-hover:opacity-100 group-hover:scale-125 transition duration-500"></div>
                     </div>
-                    <h3 class="text-2xl font-extrabold mb-4 text-gray-900">Работает в мессенджерах</h3>
-                    <p class="text-gray-500 font-medium leading-relaxed px-4">Telegram, WhatsApp, Instagram — AI-ассистент работает внутри ваших каналов и всегда онлайн.</p>
+                    <h3 class="text-2xl font-extrabold mb-4 text-gray-900">Trabaja en mensajeros</h3>
+                    <p class="text-gray-500 font-medium leading-relaxed px-4">Telegram, WhatsApp, Instagram — el asistente IA opera dentro de tus canales y siempre está en línea.</p>
                 </div>
                 <!-- Step 2 -->
                 <div class="relative z-10 text-center mx-auto max-w-sm group">
@@ -636,8 +615,8 @@
                         2
                         <div class="absolute inset-0 rounded-full border opacity-0 group-hover:opacity-100 group-hover:scale-125 transition duration-500" style="border-color: rgba(255,117,87,0.25); transform-origin: center; scale: 1.1;"></div>
                     </div>
-                    <h3 class="text-2xl font-extrabold mb-4 text-gray-900">Знает всё о клинике</h3>
-                    <p class="text-gray-500 font-medium leading-relaxed px-4">Услуги, цены, расписание врачей — отвечает точно и по делу на любой вопрос пациента.</p>
+                    <h3 class="text-2xl font-extrabold mb-4 text-gray-900">Conoce todo sobre tu clínica</h3>
+                    <p class="text-gray-500 font-medium leading-relaxed px-4">Servicios, precios, horarios de médicos — responde con precisión a cualquier pregunta del paciente.</p>
                 </div>
                 <!-- Step 3 -->
                 <div class="relative z-10 text-center mx-auto max-w-sm group">
@@ -645,8 +624,8 @@
                         3
                         <div class="absolute inset-0 rounded-full border border-[#9073FF]/20 scale-110 opacity-0 group-hover:opacity-100 group-hover:scale-125 transition duration-500"></div>
                     </div>
-                    <h3 class="text-2xl font-extrabold mb-4 text-gray-900">Записывает в CRM</h3>
-                    <p class="text-gray-500 font-medium leading-relaxed px-4">Фиксирует запись на приём прямо в вашу CRM — без участия администратора.</p>
+                    <h3 class="text-2xl font-extrabold mb-4 text-gray-900">Registra citas en CRM</h3>
+                    <p class="text-gray-500 font-medium leading-relaxed px-4">Registra la cita directamente en tu CRM — sin involucrar a la recepcionista.</p>
                 </div>
             </div>
         </div>
@@ -656,65 +635,65 @@
     <section id="benefits" class="py-24 relative overflow-hidden" style="background-color: var(--spz-purple-light);">
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="text-center max-w-2xl mx-auto mb-16">
-                <h2 class="text-3xl lg:text-4xl font-extrabold mb-6 text-gray-900 leading-tight tracking-tight">Что вы получите уже в первую неделю</h2>
-                <p class="text-lg text-gray-500 font-medium">Результаты, которые видны сразу после запуска АИ-ассистента.</p>
+                <h2 class="text-3xl lg:text-4xl font-extrabold mb-6 text-gray-900 leading-tight tracking-tight">Lo que ganarás en la primera semana</h2>
+                <p class="text-lg text-gray-500 font-medium">Resultados visibles desde el primer día de funcionamiento del asistente IA.</p>
             </div>
 
             <div class="grid md:grid-cols-2 gap-8">
                 <!-- Benefit 1 -->
                 <div class="clean-card overflow-hidden bg-white flex flex-col md:flex-row">
                     <div class="md:w-48 w-full h-48 md:h-auto flex-shrink-0 overflow-hidden">
-                        <img src="assets/24_7.png" alt="Мгновенный ответ 24/7" class="w-full h-full object-cover">
+                        <img src="assets/24_7.png" alt="Respuesta instantánea 24/7" class="w-full h-full object-cover">
                     </div>
                     <div class="p-8">
-                        <h3 class="text-xl font-bold mb-3 text-gray-900">Мгновенный ответ 24/7</h3>
-                        <p class="text-gray-500 text-base leading-relaxed font-medium">Ни один пациент не останется без внимания, даже если он написал в 2 часа ночи в субботу.</p>
+                        <h3 class="text-xl font-bold mb-3 text-gray-900">Respuesta instantánea 24/7</h3>
+                        <p class="text-gray-500 text-base leading-relaxed font-medium">Ningún paciente quedará sin atención, aunque escriba a las 2 de la madrugada del sábado.</p>
                     </div>
                 </div>
                 <!-- Benefit 2 -->
                 <div class="clean-card overflow-hidden bg-white flex flex-col md:flex-row">
                     <div class="md:w-48 w-full h-48 md:h-auto flex-shrink-0 overflow-hidden">
-                        <img src="assets/Increased_conversion.png" alt="Повышение конверсии в запись" class="w-full h-full object-cover">
+                        <img src="assets/Increased_conversion.png" alt="Ahorro de tiempo de la recepcionista" class="w-full h-full object-cover">
                     </div>
                     <div class="p-8">
-                        <h3 class="text-xl font-bold mb-3 text-gray-900">Экономия времени администраторов</h3>
-                        <p class="text-gray-500 text-base leading-relaxed font-medium">АИ берёт на себя 70–80% рутинных переписок, освобождая людей для заботы о пациентах в клинике.</p>
+                        <h3 class="text-xl font-bold mb-3 text-gray-900">Ahorro de tiempo de la recepcionista</h3>
+                        <p class="text-gray-500 text-base leading-relaxed font-medium">La IA gestiona el 70–80% de los mensajes rutinarios, liberando al personal para atender a los pacientes en clínica.</p>
                     </div>
                 </div>
                 <!-- Benefit 3 -->
                 <div class="clean-card overflow-hidden bg-white flex flex-col md:flex-row">
                     <div class="md:w-48 w-full h-48 md:h-auto flex-shrink-0 overflow-hidden">
-                        <img src="assets/Save_time.png" alt="Экономия времени" class="w-full h-full object-cover">
+                        <img src="assets/Save_time.png" alt="Mayor conversión de reservas" class="w-full h-full object-cover">
                     </div>
                     <div class="p-8">
-                        <h3 class="text-xl font-bold mb-3 text-gray-900">Повышение конверсии в запись</h3>
-                        <p class="text-gray-500 text-base leading-relaxed font-medium">Скорость ответа — ключевой фактор. АИ-ассистент доводит диалог до записи на приём, пока пациент «горячий».</p>
+                        <h3 class="text-xl font-bold mb-3 text-gray-900">Mayor conversión de reservas</h3>
+                        <p class="text-gray-500 text-base leading-relaxed font-medium">La velocidad de respuesta es el factor clave. El asistente IA guía la conversación hacia una cita reservada mientras el paciente sigue motivado.</p>
                     </div>
                 </div>
                 <!-- Benefit 4 -->
                 <div class="clean-card overflow-hidden bg-white flex flex-col md:flex-row">
                     <div class="md:w-48 w-full h-48 md:h-auto flex-shrink-0 overflow-hidden">
-                        <img src="assets/Service_standardization.png" alt="Стандартизация сервиса" class="w-full h-full object-cover">
+                        <img src="assets/Service_standardization.png" alt="Estandarización del servicio" class="w-full h-full object-cover">
                     </div>
                     <div class="p-8">
-                        <h3 class="text-xl font-bold mb-3 text-gray-900">Стандартизация сервиса</h3>
-                        <p class="text-gray-500 text-base leading-relaxed font-medium">Вежливый, профессиональный и точный ответ каждому пациенту, всегда. У бота нет плохого настроения.</p>
+                        <h3 class="text-xl font-bold mb-3 text-gray-900">Estandarización del servicio</h3>
+                        <p class="text-gray-500 text-base leading-relaxed font-medium">Una respuesta educada, profesional y precisa a cada paciente, en todo momento. El bot nunca tiene un mal día.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FEATURES -->
+    <!-- FEATURES (hidden) -->
     <section id="features" class="py-24 bg-white relative overflow-hidden hidden">
         <div class="absolute right-0 top-1/2 w-[600px] h-[600px] bg-gradient-to-l from-[#FFF0ED] to-transparent opacity-50 blur-[80px] rounded-full transform -translate-y-1/2 pointer-events-none"></div>
 
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="text-center max-w-2xl mx-auto mb-16">
-                <h2 class="text-3xl lg:text-4xl font-extrabold mb-6 text-gray-900 leading-tight tracking-tight">Всё, что нужно вашей клинике</h2>
-                <p class="text-lg text-gray-500 font-medium">Один инструмент заменяет ночного администратора, систему напоминаний и колл-центр.</p>
+                <h2 class="text-3xl lg:text-4xl font-extrabold mb-6 text-gray-900 leading-tight tracking-tight">Todo lo que necesita tu clínica</h2>
+                <p class="text-lg text-gray-500 font-medium">Una herramienta reemplaza al recepcionista nocturno, al sistema de recordatorios y al centro de llamadas.</p>
             </div>
-            
+
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Card 1 -->
                 <div class="group h-72 w-full [perspective:1000px]">
@@ -733,14 +712,14 @@
                             </div>
                             <div class="relative z-[3] flex flex-col h-full justify-end p-6 pointer-events-none">
                                 <div class="text-center">
-                                    <h3 class="text-[17px] sm:text-lg font-extrabold text-gray-900 leading-tight">Работает 24/7</h3>
+                                    <h3 class="text-[17px] sm:text-lg font-extrabold text-gray-900 leading-tight">Trabaja 24/7</h3>
                                 </div>
                             </div>
                         </div>
                         <div class="animated-card-face [transform:rotateY(180deg)] p-8">
                             <div class="relative z-[3] flex flex-col h-full justify-center items-center text-center">
-                                <h3 class="text-xl font-bold text-gray-900 mb-4">Работает 24/7</h3>
-                                <p class="text-sm font-medium leading-relaxed text-gray-600">Ночью, в выходные, в праздники — AI-ассистент всегда на месте. Ни один запрос не останется без ответа.</p>
+                                <h3 class="text-xl font-bold text-gray-900 mb-4">Trabaja 24/7</h3>
+                                <p class="text-sm font-medium leading-relaxed text-gray-600">Por la noche, los fines de semana, en festivos — el asistente IA siempre está ahí. Ninguna consulta queda sin respuesta.</p>
                             </div>
                         </div>
                     </div>
@@ -750,17 +729,17 @@
                 <div class="group h-72 w-full [perspective:1000px]">
                     <div class="relative h-full w-full rounded-2xl transition-all duration-[1400ms] ease-out [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] shadow-xl hover:shadow-2xl">
                         <div class="animated-card-face text-gray-900">
-                            <img src="assets/calendar.png" alt="Онлайн-запись" class="absolute z-[2] object-cover pointer-events-none" style="inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);border-radius:calc(1.5rem - 3px);">
+                            <img src="assets/calendar.png" alt="Reserva online" class="absolute z-[2] object-cover pointer-events-none" style="inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);border-radius:calc(1.5rem - 3px);">
                             <div class="absolute inset-0 z-[3] flex flex-col justify-end pointer-events-none" style="background:linear-gradient(to top,rgba(255,255,255,1) 0%,rgba(255,255,255,0.7) 28%,transparent 58%);">
                                 <div class="text-center p-6">
-                                    <h3 class="text-[17px] sm:text-lg font-extrabold text-gray-900 leading-tight">Онлайн-запись</h3>
+                                    <h3 class="text-[17px] sm:text-lg font-extrabold text-gray-900 leading-tight">Reserva online</h3>
                                 </div>
                             </div>
                         </div>
                         <div class="animated-card-face [transform:rotateY(180deg)] p-8">
                             <div class="relative z-[3] flex flex-col h-full justify-center items-center text-center">
-                                <h3 class="text-xl font-bold text-gray-900 mb-4">Онлайн-запись</h3>
-                                <p class="text-sm font-medium leading-relaxed text-gray-600">Пациент выбирает удобное время прямо в диалоге. Запись сохраняется в вашей системе автоматически.</p>
+                                <h3 class="text-xl font-bold text-gray-900 mb-4">Reserva online</h3>
+                                <p class="text-sm font-medium leading-relaxed text-gray-600">El paciente elige un horario conveniente directamente en la conversación. La cita se guarda en tu sistema automáticamente.</p>
                             </div>
                         </div>
                     </div>
@@ -770,17 +749,17 @@
                 <div class="group h-72 w-full [perspective:1000px]">
                     <div class="relative h-full w-full rounded-2xl transition-all duration-[1400ms] ease-out [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] shadow-xl hover:shadow-2xl">
                         <div class="animated-card-face text-gray-900">
-                            <img src="assets/bell.png" alt="Напоминания о визите" class="absolute z-[2] object-cover pointer-events-none" style="inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);border-radius:calc(1.5rem - 3px);">
+                            <img src="assets/bell.png" alt="Recordatorios de cita" class="absolute z-[2] object-cover pointer-events-none" style="inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);border-radius:calc(1.5rem - 3px);">
                             <div class="absolute inset-0 z-[3] flex flex-col justify-end pointer-events-none" style="background:linear-gradient(to top,rgba(255,255,255,1) 0%,rgba(255,255,255,0.7) 28%,transparent 58%);">
                                 <div class="text-center p-6">
-                                    <h3 class="text-[17px] sm:text-lg font-extrabold text-gray-900 leading-tight">Напоминания о визите</h3>
+                                    <h3 class="text-[17px] sm:text-lg font-extrabold text-gray-900 leading-tight">Recordatorios de cita</h3>
                                 </div>
                             </div>
                         </div>
                         <div class="animated-card-face [transform:rotateY(180deg)] p-8">
                             <div class="relative z-[3] flex flex-col h-full justify-center items-center text-center">
-                                <h3 class="text-xl font-bold text-gray-900 mb-4">Напоминания о визите</h3>
-                                <p class="text-sm font-medium leading-relaxed text-gray-600">Автоматические напоминания за 24 часа и за час. Пациенты не забывают — кресла не пустуют.</p>
+                                <h3 class="text-xl font-bold text-gray-900 mb-4">Recordatorios de cita</h3>
+                                <p class="text-sm font-medium leading-relaxed text-gray-600">Recordatorios automáticos 24 horas y 1 hora antes. Los pacientes no olvidan — las sillas no se quedan vacías.</p>
                             </div>
                         </div>
                     </div>
@@ -790,17 +769,17 @@
                 <div class="group h-72 w-full [perspective:1000px]">
                     <div class="relative h-full w-full rounded-2xl transition-all duration-[1400ms] ease-out [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] shadow-xl hover:shadow-2xl">
                         <div class="animated-card-face text-gray-900">
-                            <img src="assets/question_mark.png" alt="Ответы на FAQ" class="absolute z-[2] object-cover pointer-events-none" style="inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);border-radius:calc(1.5rem - 3px);">
+                            <img src="assets/question_mark.png" alt="Preguntas frecuentes" class="absolute z-[2] object-cover pointer-events-none" style="inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);border-radius:calc(1.5rem - 3px);">
                             <div class="absolute inset-0 z-[3] flex flex-col justify-end pointer-events-none" style="background:linear-gradient(to top,rgba(255,255,255,1) 0%,rgba(255,255,255,0.7) 28%,transparent 58%);">
                                 <div class="text-center p-6">
-                                    <h3 class="text-[17px] sm:text-lg font-extrabold text-gray-900 leading-tight">Ответы на FAQ</h3>
+                                    <h3 class="text-[17px] sm:text-lg font-extrabold text-gray-900 leading-tight">Preguntas frecuentes</h3>
                                 </div>
                             </div>
                         </div>
                         <div class="animated-card-face [transform:rotateY(180deg)] p-8">
                             <div class="relative z-[3] flex flex-col h-full justify-center items-center text-center">
-                                <h3 class="text-xl font-bold text-gray-900 mb-4">Ответы на FAQ</h3>
-                                <p class="text-sm font-medium leading-relaxed text-gray-600">Часы работы, адрес, цены, подготовка к процедурам — AI-ассистент знает всё и отвечает мгновенно.</p>
+                                <h3 class="text-xl font-bold text-gray-900 mb-4">Preguntas frecuentes</h3>
+                                <p class="text-sm font-medium leading-relaxed text-gray-600">Horario, dirección, precios, preparación de procedimientos — el asistente IA sabe todo y responde al instante.</p>
                             </div>
                         </div>
                     </div>
@@ -810,17 +789,17 @@
                 <div class="group h-72 w-full [perspective:1000px]">
                     <div class="relative h-full w-full rounded-2xl transition-all duration-[1400ms] ease-out [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] shadow-xl hover:shadow-2xl">
                         <div class="animated-card-face text-gray-900">
-                            <img src="assets/speech_bubble.png" alt="Любые мессенджеры" class="absolute z-[2] object-cover pointer-events-none" style="inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);border-radius:calc(1.5rem - 3px);">
+                            <img src="assets/speech_bubble.png" alt="Cualquier mensajero" class="absolute z-[2] object-cover pointer-events-none" style="inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);border-radius:calc(1.5rem - 3px);">
                             <div class="absolute inset-0 z-[3] flex flex-col justify-end pointer-events-none" style="background:linear-gradient(to top,rgba(255,255,255,1) 0%,rgba(255,255,255,0.7) 28%,transparent 58%);">
                                 <div class="text-center p-6">
-                                    <h3 class="text-[17px] sm:text-lg font-extrabold text-gray-900 leading-tight">Любые мессенджеры</h3>
+                                    <h3 class="text-[17px] sm:text-lg font-extrabold text-gray-900 leading-tight">Cualquier mensajero</h3>
                                 </div>
                             </div>
                         </div>
                         <div class="animated-card-face [transform:rotateY(180deg)] p-8">
                             <div class="relative z-[3] flex flex-col h-full justify-center items-center text-center">
-                                <h3 class="text-xl font-bold text-gray-900 mb-4">Любые мессенджеры</h3>
-                                <p class="text-sm font-medium leading-relaxed text-gray-600">Telegram, WhatsApp, Instagram, сайт — пациент пишет откуда удобно, AI отвечает везде.</p>
+                                <h3 class="text-xl font-bold text-gray-900 mb-4">Cualquier mensajero</h3>
+                                <p class="text-sm font-medium leading-relaxed text-gray-600">Telegram, WhatsApp, Instagram, sitio web — el paciente escribe donde prefiera, la IA responde en todos.</p>
                             </div>
                         </div>
                     </div>
@@ -830,17 +809,17 @@
                 <div class="group h-72 w-full [perspective:1000px]">
                     <div class="relative h-full w-full rounded-2xl transition-all duration-[1400ms] ease-out [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] shadow-xl hover:shadow-2xl">
                         <div class="animated-card-face text-gray-900">
-                            <img src="assets/bar_chart.png" alt="Аналитика" class="absolute z-[2] object-cover pointer-events-none" style="inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);border-radius:calc(1.5rem - 3px);">
+                            <img src="assets/bar_chart.png" alt="Análisis" class="absolute z-[2] object-cover pointer-events-none" style="inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);border-radius:calc(1.5rem - 3px);">
                             <div class="absolute inset-0 z-[3] flex flex-col justify-end pointer-events-none" style="background:linear-gradient(to top,rgba(255,255,255,1) 0%,rgba(255,255,255,0.7) 28%,transparent 58%);">
                                 <div class="text-center p-6">
-                                    <h3 class="text-[17px] sm:text-lg font-extrabold text-gray-900 leading-tight">Аналитика</h3>
+                                    <h3 class="text-[17px] sm:text-lg font-extrabold text-gray-900 leading-tight">Análisis</h3>
                                 </div>
                             </div>
                         </div>
                         <div class="animated-card-face [transform:rotateY(180deg)] p-8">
                             <div class="relative z-[3] flex flex-col h-full justify-center items-center text-center">
-                                <h3 class="text-xl font-bold text-gray-900 mb-4">Аналитика</h3>
-                                <p class="text-sm font-medium leading-relaxed text-gray-600">Статистика обращений, популярные вопросы, конверсия в запись — понимайте пациентов лучше.</p>
+                                <h3 class="text-xl font-bold text-gray-900 mb-4">Análisis</h3>
+                                <p class="text-sm font-medium leading-relaxed text-gray-600">Estadísticas de consultas, preguntas frecuentes, conversión de reservas — conoce mejor a tus pacientes.</p>
                             </div>
                         </div>
                     </div>
@@ -851,21 +830,19 @@
 
     <!-- STATS -->
     <section id="stats" class="py-24 relative overflow-hidden" style="background-color: #2a2535; font-family: 'Geist', 'Outfit', sans-serif;">
-        <!-- bg glow -->
         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full opacity-15 blur-[120px] pointer-events-none" style="background: var(--spz-purple);"></div>
 
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="text-center max-w-2xl mx-auto mb-16">
-                <h2 class="text-3xl lg:text-4xl font-extrabold text-white leading-tight tracking-tight mb-4">Почему это важно прямо сейчас</h2>
-                <p class="text-lg font-medium" style="color: rgba(255,255,255,0.5);">Данные рынка, которые говорят сами за себя.</p>
+                <h2 class="text-3xl lg:text-4xl font-extrabold text-white leading-tight tracking-tight mb-4">Por qué esto importa ahora</h2>
+                <p class="text-lg font-medium" style="color: rgba(255,255,255,0.5);">Datos del mercado que hablan por sí solos.</p>
             </div>
 
-            <!-- Stat cards row -->
             <div class="grid md:grid-cols-3 gap-6 mb-12">
 
-                <!-- Stat 1: доля клиник с ИИ -->
+                <!-- Stat 1 -->
                 <div class="rounded-2xl p-8 flex flex-col" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">
-                    <p class="text-sm font-semibold uppercase tracking-wider mb-6" style="color: rgba(255,255,255,0.4);">Клиники США уже внедрили ИИ</p>
+                    <p class="text-sm font-semibold uppercase tracking-wider mb-6" style="color: rgba(255,255,255,0.4);">Clínicas de EE.UU. que ya usan IA</p>
                     <div class="flex items-center gap-6 mb-6">
                         <div class="relative flex-shrink-0" style="width:100px;height:100px;">
                             <svg viewBox="0 0 36 36" class="w-full h-full -rotate-90">
@@ -878,54 +855,51 @@
                             </div>
                         </div>
                         <div>
-                            <p class="font-bold text-lg leading-snug text-white">Каждая третья клиника</p>
-                            <p class="text-sm mt-1" style="color: rgba(255,255,255,0.45);">уже использует ИИ для работы с пациентами</p>
+                            <p class="font-bold text-lg leading-snug text-white">Una de cada tres clínicas</p>
+                            <p class="text-sm mt-1" style="color: rgba(255,255,255,0.45);">ya usa IA para interactuar con pacientes</p>
                         </div>
                     </div>
                     <div class="flex gap-4 mt-auto">
                         <div class="flex items-center gap-2">
                             <span class="w-3 h-3 rounded-full flex-shrink-0" style="background:#7856FF;"></span>
-                            <span class="text-xs" style="color: rgba(255,255,255,0.45);">С ИИ — 35%</span>
+                            <span class="text-xs" style="color: rgba(255,255,255,0.45);">Con IA — 35%</span>
                         </div>
                         <div class="flex items-center gap-2">
                             <span class="w-3 h-3 rounded-full flex-shrink-0" style="background:rgba(255,255,255,0.15);"></span>
-                            <span class="text-xs" style="color: rgba(255,255,255,0.45);">Без ИИ — 65%</span>
+                            <span class="text-xs" style="color: rgba(255,255,255,0.45);">Sin IA — 65%</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Stat 2: упущенные обращения -->
+                <!-- Stat 2 -->
                 <div class="rounded-2xl p-8 flex flex-col" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">
-                    <p class="text-sm font-semibold uppercase tracking-wider mb-6" style="color: rgba(255,255,255,0.4);">Пропущенных обращений</p>
-                    <!-- Bar labels row -->
+                    <p class="text-sm font-semibold uppercase tracking-wider mb-6" style="color: rgba(255,255,255,0.4);">Consultas perdidas</p>
                     <div class="flex gap-3 mb-1">
-                        <div class="flex-1 text-center"><span class="text-xs" style="color:rgba(255,255,255,0.4);">Рабочее</span></div>
-                        <div class="flex-1 text-center"><span class="text-xs" style="color:rgba(255,255,255,0.4);">В среднем</span></div>
-                        <div class="flex-1 text-center"><span class="text-xs" style="color:rgba(255,255,255,0.4);">Нерабочее</span></div>
+                        <div class="flex-1 text-center"><span class="text-xs" style="color:rgba(255,255,255,0.4);">Horario laboral</span></div>
+                        <div class="flex-1 text-center"><span class="text-xs" style="color:rgba(255,255,255,0.4);">Promedio</span></div>
+                        <div class="flex-1 text-center"><span class="text-xs" style="color:rgba(255,255,255,0.4);">Fuera de horario</span></div>
                     </div>
-                    <!-- Bar chart: bars grow from bottom -->
                     <div class="flex items-end gap-3 mb-1" style="height:80px;">
                         <div id="bar1" class="flex-1 rounded-t-lg" style="height:0px; max-height:40px; background:rgba(120,86,255,0.35); transition: height 1s ease-out;"></div>
                         <div id="bar2" class="flex-1 rounded-t-lg" style="height:0px; max-height:60px; background:#7856FF; transition: height 1s ease-out 0.15s;"></div>
                         <div id="bar3" class="flex-1 rounded-t-lg" style="height:0px; max-height:80px; background:#FF7557; transition: height 1s ease-out 0.3s;"></div>
                     </div>
-                    <!-- Value labels row -->
                     <div class="flex gap-3 mb-5">
                         <div class="flex-1 text-center"><span class="text-xs font-bold" style="color:rgba(255,255,255,0.5);">~10%</span></div>
                         <div class="flex-1 text-center"><span class="text-xs font-bold text-white">35%</span></div>
                         <div class="flex-1 text-center"><span class="text-xs font-bold" style="color:#FF7557;">60%+</span></div>
                     </div>
                     <p class="font-bold text-lg text-white mt-auto">$<span id="stat-loss-min">0</span> 000 – $<span id="stat-loss-max">0</span> 000</p>
-                    <p class="text-sm mt-1" style="color: rgba(255,255,255,0.45);">потери выручки в год на одну клинику</p>
+                    <p class="text-sm mt-1" style="color: rgba(255,255,255,0.45);">pérdida de ingresos al año por clínica</p>
                 </div>
 
-                <!-- Stat 3: конверсия -->
+                <!-- Stat 3 -->
                 <div class="rounded-2xl p-8 flex flex-col" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">
-                    <p class="text-sm font-semibold uppercase tracking-wider mb-6" style="color: rgba(255,255,255,0.4);">Конверсия в запись</p>
+                    <p class="text-sm font-semibold uppercase tracking-wider mb-6" style="color: rgba(255,255,255,0.4);">Conversión de reservas</p>
                     <div class="flex flex-col gap-5 mb-6 flex-1">
                         <div>
                             <div class="flex justify-between mb-2">
-                                <span class="text-sm" style="color:rgba(255,255,255,0.6);">ИИ отвечает за 10 секунд</span>
+                                <span class="text-sm" style="color:rgba(255,255,255,0.6);">IA responde en 10 segundos</span>
                                 <span class="font-bold text-sm text-white">3.4×</span>
                             </div>
                             <div class="w-full rounded-full overflow-hidden" style="height:10px; background:rgba(255,255,255,0.08);">
@@ -934,7 +908,7 @@
                         </div>
                         <div>
                             <div class="flex justify-between mb-2">
-                                <span class="text-sm" style="color:rgba(255,255,255,0.6);">Ответ до утра</span>
+                                <span class="text-sm" style="color:rgba(255,255,255,0.6);">Respuesta a la mañana siguiente</span>
                                 <span class="font-bold text-sm" style="color:rgba(255,255,255,0.4);">1×</span>
                             </div>
                             <div class="w-full rounded-full overflow-hidden" style="height:10px; background:rgba(255,255,255,0.08);">
@@ -942,24 +916,24 @@
                             </div>
                         </div>
                     </div>
-                    <p class="font-bold text-lg text-white">В <span id="stat-conv">0</span> раза больше записей</p>
-                    <p class="text-sm mt-1" style="color: rgba(255,255,255,0.45);">когда ИИ отвечает в первые 10 секунд</p>
+                    <p class="font-bold text-lg text-white"><span id="stat-conv">0</span>× más reservas</p>
+                    <p class="text-sm mt-1" style="color: rgba(255,255,255,0.45);">cuando la IA responde en los primeros 10 segundos</p>
                 </div>
 
             </div>
 
-            <p class="text-center text-xs" style="color:rgba(255,255,255,0.25);">Источники: отраслевые отчёты США, 2025–2026</p>
+            <p class="text-center text-xs" style="color:rgba(255,255,255,0.25);">Fuentes: informes del sector estadounidense, 2025–2026</p>
         </div>
     </section>
 
     <!-- CTA MID -->
     <section class="py-24 bg-gradient-cta relative overflow-hidden">
         <div class="max-w-2xl mx-auto px-6 text-center">
-            <h2 class="text-3xl lg:text-4xl font-extrabold mb-6 text-gray-900 leading-tight tracking-tight">Пока вы читаете это — другие клиники уже отвечают вашим пациентам.</h2>
-            <p class="text-lg text-gray-500 font-medium leading-relaxed mb-10">Каждый день без системы — это потерянные записи.</p>
+            <h2 class="text-3xl lg:text-4xl font-extrabold mb-6 text-gray-900 leading-tight tracking-tight">Mientras lees esto — otras clínicas ya están respondiendo a tus pacientes.</h2>
+            <p class="text-lg text-gray-500 font-medium leading-relaxed mb-10">Cada día sin el sistema significa reservas perdidas.</p>
             <a href="#cta" class="btn-neon text-[15px] sm:text-[17px] px-12 py-4">
                 <div class="btn-neon-inner"></div>
-                Протестировать ассистента
+                Probar el asistente
             </a>
         </div>
     </section>
@@ -968,37 +942,37 @@
     <section class="py-24 bg-[#FAFAFA] relative">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center max-w-2xl mx-auto mb-16">
-                <h2 class="text-3xl lg:text-4xl font-extrabold mb-6 text-gray-900 leading-tight tracking-tight">Это не сервис. Это ассистент под вашу клинику</h2>
-                <p class="text-lg text-gray-500 font-medium leading-relaxed">Мы не даём «готовый бот из коробки». Мы настраиваем ассистента под ваши услуги, цены и процесс записи.</p>
+                <h2 class="text-3xl lg:text-4xl font-extrabold mb-6 text-gray-900 leading-tight tracking-tight">No es un servicio. Es un asistente creado para tu clínica.</h2>
+                <p class="text-lg text-gray-500 font-medium leading-relaxed">No te entregamos un bot genérico de serie. Configuramos el asistente según tus servicios, precios y flujo de reservas.</p>
             </div>
 
             <div class="grid md:grid-cols-2 gap-6">
                 <div class="flex gap-6 items-start p-8 rounded-2xl" style="background: linear-gradient(135deg, #f8f5ff 0%, #ede6ff 100%); box-shadow: 0 4px 24px rgba(120,86,255,0.10);">
                     <svg class="flex-shrink-0 w-10 h-10 text-spz-purple" fill="currentColor" viewBox="0 0 24 24"><path d="M3 17v2h6v-2H3zM3 5v2h10V5H3zm10 16v-2h8v-2h-8v-2h-2v6h2zM7 9v2H3v2h4v2h2V9H7zm14 4v-2H11v2h10zm-6-4h2V7h4V5h-4V3h-2v6z"/></svg>
                     <div>
-                        <h4 class="font-extrabold text-xl mb-2 text-gray-900">Настроен под вашу клинику</h4>
-                        <p class="text-gray-500 font-medium leading-relaxed">Знает ваши процедуры, цены и правила записи. Отвечает так, как отвечает ваш администратор.</p>
+                        <h4 class="font-extrabold text-xl mb-2 text-gray-900">Configurado para tu clínica</h4>
+                        <p class="text-gray-500 font-medium leading-relaxed">Conoce tus procedimientos, precios y reglas de reserva. Responde exactamente como lo haría tu recepcionista.</p>
                     </div>
                 </div>
                 <div class="flex gap-6 items-start p-8 rounded-2xl" style="background: linear-gradient(135deg, #f8f5ff 0%, #ede6ff 100%); box-shadow: 0 4px 24px rgba(120,86,255,0.10);">
                     <svg class="flex-shrink-0 w-10 h-10 text-spz-purple" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C7.58 2 4 3.79 4 6v12c0 2.21 3.58 4 8 4s8-1.79 8-4V6c0-2.21-3.58-4-8-4zm6 16c0 .55-2.09 2-6 2s-6-1.45-6-2v-2.23c1.61.78 3.72 1.23 6 1.23s4.39-.45 6-1.23V18zm0-5c0 .55-2.09 2-6 2s-6-1.45-6-2v-2.23C7.61 11.55 9.72 12 12 12s4.39-.45 6-1.23V13zm-6-3C8.09 10 6 8.55 6 8s2.09-2 6-2 6 1.45 6 2-2.09 2-6 2z"/></svg>
                     <div>
-                        <h4 class="font-extrabold text-xl mb-2 text-gray-900">Работает с вашей системой</h4>
-                        <p class="text-gray-500 font-medium leading-relaxed">Подключается к вашей CRM или календарю. Не нужно менять привычные инструменты.</p>
+                        <h4 class="font-extrabold text-xl mb-2 text-gray-900">Funciona con tu sistema</h4>
+                        <p class="text-gray-500 font-medium leading-relaxed">Se conecta a tu CRM o calendario. No necesitas cambiar tus herramientas existentes.</p>
                     </div>
                 </div>
                 <div class="flex gap-6 items-start p-8 rounded-2xl" style="background: linear-gradient(135deg, #f8f5ff 0%, #ede6ff 100%); box-shadow: 0 4px 24px rgba(120,86,255,0.10);">
                     <svg class="flex-shrink-0 w-10 h-10 text-spz-purple" fill="currentColor" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
                     <div>
-                        <h4 class="font-extrabold text-xl mb-2 text-gray-900">Данные остаются у вас</h4>
-                        <p class="text-gray-500 font-medium leading-relaxed">Переписка хранится в вашей системе. Вы полностью контролируете данные пациентов.</p>
+                        <h4 class="font-extrabold text-xl mb-2 text-gray-900">Los datos son tuyos</h4>
+                        <p class="text-gray-500 font-medium leading-relaxed">Las conversaciones se almacenan en tu sistema. Tienes control total sobre los datos de los pacientes.</p>
                     </div>
                 </div>
                 <div class="flex gap-6 items-start p-8 rounded-2xl" style="background: linear-gradient(135deg, #f8f5ff 0%, #ede6ff 100%); box-shadow: 0 4px 24px rgba(120,86,255,0.10);">
                     <svg class="flex-shrink-0 w-10 h-10 text-spz-purple" fill="currentColor" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
                     <div>
-                        <h4 class="font-extrabold text-xl mb-2 text-gray-900">Учитывает требования рынка</h4>
-                        <p class="text-gray-500 font-medium leading-relaxed">Логика общения, запись и напоминания настроены под стандарты медицинского сервиса.</p>
+                        <h4 class="font-extrabold text-xl mb-2 text-gray-900">Cumple con los requisitos del mercado</h4>
+                        <p class="text-gray-500 font-medium leading-relaxed">Lógica de comunicación, reservas y recordatorios configurados según los estándares de servicios médicos.</p>
                     </div>
                 </div>
             </div>
@@ -1008,8 +982,8 @@
     <!-- CHANNELS -->
     <section class="py-24 bg-white relative">
         <div class="max-w-4xl mx-auto px-6 text-center">
-            <h2 class="text-3xl lg:text-4xl font-extrabold mb-6 text-gray-900 leading-tight tracking-tight">Ассистент отвечает там, где пишет пациент</h2>
-            <p class="text-lg text-gray-500 font-medium leading-relaxed mb-12">Пациент не переходит на сайт. Он пишет туда, где ему удобно — и получает ответ сразу.</p>
+            <h2 class="text-3xl lg:text-4xl font-extrabold mb-6 text-gray-900 leading-tight tracking-tight">El asistente responde donde escribe el paciente</h2>
+            <p class="text-lg text-gray-500 font-medium leading-relaxed mb-12">Los pacientes no van al sitio web. Escriben donde les resulta cómodo — y reciben una respuesta al instante.</p>
 
             <div class="flex flex-wrap justify-center gap-3 mb-10">
                 <span class="clean-card px-6 py-3 bg-white font-semibold text-gray-700 text-sm">Telegram</span>
@@ -1017,12 +991,12 @@
                 <span class="clean-card px-6 py-3 bg-white font-semibold text-gray-700 text-sm">Instagram</span>
                 <span class="clean-card px-6 py-3 bg-white font-semibold text-gray-700 text-sm">Viber</span>
                 <span class="clean-card px-6 py-3 bg-white font-semibold text-gray-700 text-sm">Facebook</span>
-                <span class="clean-card px-6 py-3 bg-white font-semibold text-gray-700 text-sm">Сайт</span>
+                <span class="clean-card px-6 py-3 bg-white font-semibold text-gray-700 text-sm">Sitio web</span>
                 <span class="clean-card px-6 py-3 bg-white font-semibold text-gray-700 text-sm">Email</span>
             </div>
 
-            <p class="text-gray-500 font-medium mb-2">Нет нужного канала? <span class="font-extrabold text-gray-900">Подключим.</span></p>
-            <p class="text-sm text-gray-400 font-medium">Все обращения — в одном месте. Вы ничего не теряете.</p>
+            <p class="text-gray-500 font-medium mb-2">¿No ves el canal que necesitas? <span class="font-extrabold text-gray-900">Lo añadimos.</span></p>
+            <p class="text-sm text-gray-400 font-medium">Todas las consultas — en un solo lugar. No pierdes nada.</p>
         </div>
     </section>
 
@@ -1030,69 +1004,69 @@
     <section id="faq" class="py-24 bg-white relative overflow-hidden">
         <div style="position:absolute; top:-80px; right:-80px; width:450px; height:450px; border-radius:50%; background:#93c5fd; opacity:0.12; filter:blur(80px); pointer-events:none; z-index:0;"></div>
         <div class="max-w-3xl mx-auto px-6 relative z-10">
-            <h2 class="text-3xl lg:text-4xl font-extrabold mb-12 text-center text-gray-900 leading-tight tracking-tight">Частые вопросы</h2>
+            <h2 class="text-3xl lg:text-4xl font-extrabold mb-12 text-center text-gray-900 leading-tight tracking-tight">Preguntas frecuentes</h2>
             <div class="space-y-4">
                 <details class="clean-card bg-white overflow-hidden group">
                     <summary class="p-6 cursor-pointer font-bold text-lg flex justify-between items-center outline-none text-gray-900">
-                        Сколько стоит установка?
+                        ¿Cuánto cuesta la configuración?
                         <span class="text-spz-purple text-2xl font-normal leading-none transition-transform group-open:rotate-45">+</span>
                     </summary>
                     <div class="px-6 pb-6 text-gray-500 font-medium leading-relaxed">
-                        Стоимость зависит от задач и интеграций. Оставьте заявку — покажем точный вариант под вашу клинику.
+                        El costo depende de los requisitos e integraciones. Deja una solicitud — te mostraremos una solución exacta para tu clínica.
                     </div>
                 </details>
                 <details class="clean-card bg-white overflow-hidden group">
                     <summary class="p-6 cursor-pointer font-bold text-lg flex justify-between items-center outline-none text-gray-900">
-                        Чем это отличается от обычного чат-бота?
+                        ¿En qué se diferencia de un chatbot normal?
                         <span class="text-spz-purple text-2xl font-normal leading-none transition-transform group-open:rotate-45">+</span>
                     </summary>
                     <div class="px-6 pb-6 text-gray-500 font-medium leading-relaxed">
-                        Обычный бот работает по кнопкам и шаблонам. Ассистент понимает свободный текст, ведёт диалог и задаёт вопросы. Он не просто отвечает — он помогает пациенту разобраться и продолжить общение.
+                        Un bot normal funciona con botones y plantillas. El asistente entiende texto libre, mantiene diálogos y hace preguntas. No solo responde — ayuda al paciente a entender y continuar la conversación.
                     </div>
                 </details>
                 <details class="clean-card bg-white overflow-hidden group">
                     <summary class="p-6 cursor-pointer font-bold text-lg flex justify-between items-center outline-none text-gray-900">
-                        Это не будет раздражать пациентов?
+                        ¿No molestará a los pacientes?
                         <span class="text-spz-purple text-2xl font-normal leading-none transition-transform group-open:rotate-45">+</span>
                     </summary>
                     <div class="px-6 pb-6 text-gray-500 font-medium leading-relaxed">
-                        Нет. Ответы выглядят как переписка с администратором. Пациент получает быстрый и понятный ответ — без ожидания. Если вопрос выходит за рамки сценария, ассистент не «теряется». Он передаёт диалог администратору и уведомляет его, например, в Telegram. Пациент всегда получает ответ. Просто в нужный момент подключается человек.
+                        No. Las respuestas parecen una conversación con un recepcionista. El paciente obtiene una respuesta rápida y clara — sin esperar. Si una pregunta está fuera del escenario, el asistente no se bloquea. Transfiere la conversación a un empleado y le notifica, por ejemplo por Telegram. El paciente siempre recibe una respuesta. Un humano simplemente interviene cuando es necesario.
                     </div>
                 </details>
                 <details class="clean-card bg-white overflow-hidden group">
                     <summary class="p-6 cursor-pointer font-bold text-lg flex justify-between items-center outline-none text-gray-900">
-                        Что значит «данные и ассистент на моём сервере»? Это сложно?
+                        ¿Qué significa "datos y asistente en mi servidor"? ¿Es complicado?
                         <span class="text-spz-purple text-2xl font-normal leading-none transition-transform group-open:rotate-45">+</span>
                     </summary>
                     <div class="px-6 pb-6 text-gray-500 font-medium leading-relaxed">
-                        Для вас — нет. Мы всё настраиваем и запускаем сами. Для вас это означает: ассистент развёрнут на вашей стороне и полностью принадлежит вашей клинике. Вся переписка и данные пациентов хранятся у вас — не в сторонних сервисах и не в «чужом облаке». Вы контролируете систему и не зависите от платформ.
+                        Para ti — no. Nosotros configuramos todo y lo lanzamos. Lo que significa para ti: el asistente se despliega en tu lado y pertenece completamente a tu clínica. Todas las conversaciones y datos de pacientes se almacenan contigo — no en servicios de terceros ni en alguna nube externa. Tú controlas el sistema y no dependes de ninguna plataforma.
                     </div>
                 </details>
                 <details class="clean-card bg-white overflow-hidden group">
                     <summary class="p-6 cursor-pointer font-bold text-lg flex justify-between items-center outline-none text-gray-900">
-                        Нужно ли менять CRM или систему записи?
+                        ¿Necesito cambiar mi CRM o sistema de reservas?
                         <span class="text-spz-purple text-2xl font-normal leading-none transition-transform group-open:rotate-45">+</span>
                     </summary>
                     <div class="px-6 pb-6 text-gray-500 font-medium leading-relaxed">
-                        Нет. Ассистент подключается к тому, что уже используется в клинике. Работаете как раньше — просто быстрее и без потерь заявок.
+                        No. El asistente se conecta a lo que ya estás usando. Trabajas como antes — solo más rápido y sin perder consultas.
                     </div>
                 </details>
                 <details class="clean-card bg-white overflow-hidden group">
                     <summary class="p-6 cursor-pointer font-bold text-lg flex justify-between items-center outline-none text-gray-900">
-                        Что если ассистент не поймёт вопрос?
+                        ¿Qué pasa si el asistente no entiende una pregunta?
                         <span class="text-spz-purple text-2xl font-normal leading-none transition-transform group-open:rotate-45">+</span>
                     </summary>
                     <div class="px-6 pb-6 text-gray-500 font-medium leading-relaxed">
-                        Он уточнит или передаст диалог администратору. Пациент не остаётся без ответа.
+                        Pedirá aclaraciones o transferirá la conversación a un empleado. El paciente nunca se queda sin respuesta.
                     </div>
                 </details>
                 <details class="clean-card bg-white overflow-hidden group">
                     <summary class="p-6 cursor-pointer font-bold text-lg flex justify-between items-center outline-none text-gray-900">
-                        Сколько времени занимает внедрение?
+                        ¿Cuánto tiempo lleva la implementación?
                         <span class="text-spz-purple text-2xl font-normal leading-none transition-transform group-open:rotate-45">+</span>
                     </summary>
                     <div class="px-6 pb-6 text-gray-500 font-medium leading-relaxed">
-                        В среднем от 7 рабочих дней. Срок зависит от количества каналов и интеграций.
+                        En promedio 7 días hábiles. El plazo depende del número de canales e integraciones.
                     </div>
                 </details>
             </div>
@@ -1103,33 +1077,33 @@
     <section id="cta" class="py-24 bg-gradient-cta relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="text-center max-w-2xl mx-auto mb-16">
-                <h2 class="text-3xl lg:text-4xl font-extrabold mb-6 text-gray-900 leading-tight tracking-tight">Напишите ассистенту прямо сейчас</h2>
-                <p class="text-lg text-gray-600 font-medium leading-relaxed">Один клик — и вы уже внутри живого диалога.</p>
+                <h2 class="text-3xl lg:text-4xl font-extrabold mb-6 text-gray-900 leading-tight tracking-tight">Escríbele al asistente ahora mismo</h2>
+                <p class="text-lg text-gray-600 font-medium leading-relaxed">Un clic — y ya estás dentro de una conversación en vivo.</p>
             </div>
 
             <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
                 <!-- Telegram Bot -->
                 <div class="clean-card p-10 flex flex-col h-full bg-white shadow-xl hover:shadow-2xl">
-                    <h3 class="text-2xl font-extrabold mb-4 text-gray-900">Попробуйте прямо сейчас</h3>
-                    <p class="text-gray-500 font-medium mb-8 text-sm leading-relaxed">Нажмите кнопку — откроется Telegram. Напишите как обычный пациент и посмотрите как ассистент отвечает в реальном времени.</p>
+                    <h3 class="text-2xl font-extrabold mb-4 text-gray-900">Pruébalo ahora mismo</h3>
+                    <p class="text-gray-500 font-medium mb-8 text-sm leading-relaxed">Haz clic en el botón — se abrirá Telegram. Escribe como un paciente normal y ve cómo responde el asistente en tiempo real.</p>
                     <ul class="mb-8 space-y-3 flex-grow text-sm font-medium text-gray-600">
-                        <li class="flex items-center gap-3"><span style="color: var(--spz-purple);">✓</span> Никакой регистрации</li>
-                        <li class="flex items-center gap-3"><span style="color: var(--spz-purple);">✓</span> Никаких форм</li>
-                        <li class="flex items-center gap-3"><span style="color: var(--spz-purple);">✓</span> Просто живой разговор</li>
+                        <li class="flex items-center gap-3"><span style="color: var(--spz-purple);">✓</span> Sin registro</li>
+                        <li class="flex items-center gap-3"><span style="color: var(--spz-purple);">✓</span> Sin formularios</li>
+                        <li class="flex items-center gap-3"><span style="color: var(--spz-purple);">✓</span> Solo una conversación en vivo</li>
                     </ul>
-                    <a href="https://t.me/DentalAI_test_bot" target="_blank" class="btn-neon w-full mt-auto"><div class="btn-neon-inner"></div>Открыть Telegram</a>
+                    <a href="https://t.me/DentalAI_test_bot" target="_blank" class="btn-neon w-full mt-auto"><div class="btn-neon-inner"></div>Abrir Telegram</a>
                 </div>
 
                 <!-- Custom Project -->
                 <div class="clean-card p-10 flex flex-col h-full bg-white shadow-xl hover:shadow-2xl">
-                    <h3 class="text-2xl font-extrabold mb-4 text-gray-900">Заявка на проект</h3>
-                    <p class="text-gray-500 font-medium mb-8 text-sm leading-relaxed">Уже знаете, что хотите? Опишите клинику и задачи — мы подготовим индивидуальное предложение.</p>
+                    <h3 class="text-2xl font-extrabold mb-4 text-gray-900">Enviar solicitud de proyecto</h3>
+                    <p class="text-gray-500 font-medium mb-8 text-sm leading-relaxed">¿Ya sabes lo que quieres? Describe tu clínica y objetivos — prepararemos una propuesta personalizada.</p>
                     <ul class="mb-8 space-y-3 flex-grow text-sm font-medium text-gray-600">
-                        <li class="flex items-center gap-3"><span style="color: var(--spz-purple);">✓</span> Под вашу CRM и мессенджеры</li>
-                        <li class="flex items-center gap-3"><span style="color: var(--spz-purple);">✓</span> Собственный сервер, HIPAA</li>
-                        <li class="flex items-center gap-3"><span style="color: var(--spz-purple);">✓</span> Запуск от 7 дней</li>
+                        <li class="flex items-center gap-3"><span style="color: var(--spz-purple);">✓</span> Adaptado a tu CRM y mensajeros</li>
+                        <li class="flex items-center gap-3"><span style="color: var(--spz-purple);">✓</span> Servidor propio, HIPAA</li>
+                        <li class="flex items-center gap-3"><span style="color: var(--spz-purple);">✓</span> Lanzamiento desde 7 días</li>
                     </ul>
-                    <a href="https://t.me/N8nBizAuto_bot" target="_blank" class="btn-neon w-full mt-auto"><div class="btn-neon-inner"></div>Оставить заявку</a>
+                    <a href="https://t.me/N8nBizAuto_bot" target="_blank" class="btn-neon w-full mt-auto"><div class="btn-neon-inner"></div>Enviar solicitud</a>
                 </div>
             </div>
         </div>
@@ -1138,35 +1112,31 @@
     <!-- FOOTER -->
     <footer class="py-12 bg-white border-t border-gray-100">
         <div class="max-w-7xl mx-auto px-6 text-center text-sm font-medium text-gray-400">
-            <p>&copy; 2026 Dental.AI — AI-ресепшн для стоматологических клиник. Все права защищены.</p>
+            <p>&copy; 2026 Dental.AI — Recepcionista IA para clínicas dentales. Todos los derechos reservados.</p>
         </div>
     </footer>
 
     <script>
         const wrapper = document.getElementById('blob-wrapper');
         if (wrapper) {
-            // Mouse Tracker (Desktop)
             document.addEventListener('mousemove', (e) => {
-                // Increased depth for stronger movement
-                const x = (e.clientX / window.innerWidth - 0.5) * 400; 
+                const x = (e.clientX / window.innerWidth - 0.5) * 400;
                 const y = (e.clientY / window.innerHeight - 0.5) * 400;
                 wrapper.style.transform = `translate(${x}px, ${y}px)`;
             });
 
-            // Touch Tracker (Mobile)
             document.addEventListener('touchmove', (e) => {
                 if (e.touches.length > 0) {
-                    const x = (e.touches[0].clientX / window.innerWidth - 0.5) * 200; 
+                    const x = (e.touches[0].clientX / window.innerWidth - 0.5) * 200;
                     const y = (e.touches[0].clientY / window.innerHeight - 0.5) * 200;
                     wrapper.style.transform = `translate(${x}px, ${y}px)`;
                 }
             }, { passive: true });
 
-            // Gyroscope Tracker (Mobile)
             window.addEventListener('deviceorientation', (e) => {
                 if (e.gamma !== null && e.beta !== null) {
-                    const x = Math.min(Math.max(e.gamma / 45, -1), 1) * 30; // Limit tilt impact
-                    const y = Math.min(Math.max((e.beta - 45) / 45, -1), 1) * 30; 
+                    const x = Math.min(Math.max(e.gamma / 45, -1), 1) * 30;
+                    const y = Math.min(Math.max((e.beta - 45) / 45, -1), 1) * 30;
                     wrapper.style.transform = `translate(${x}px, ${y}px)`;
                 }
             });
@@ -1186,7 +1156,6 @@
         });
     </script>
     <script>
-        // Mobile: auto-open fan cards on scroll into view
         if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
             const fanContainer = document.querySelector('.fan-container');
             if (fanContainer) {
@@ -1239,34 +1208,24 @@
         var observer = new IntersectionObserver(function(entries) {
             if (entries[0].isIntersecting && !animated) {
                 animated = true;
-
-                // Donut + counter
                 var donut = document.getElementById('stat-donut');
                 var clinicsNum = document.getElementById('stat-clinics-num');
                 if (donut) animateDonut(donut, 35, 100, 1400);
                 if (clinicsNum) counter(clinicsNum, 0, 35, 1400, '%');
-
-                // Bars
                 var b1 = document.getElementById('bar1');
                 var b2 = document.getElementById('bar2');
                 var b3 = document.getElementById('bar3');
                 if (b1) b1.style.height = '40px';
                 if (b2) b2.style.height = '60px';
                 if (b3) b3.style.height = '80px';
-
-                // Loss counters
                 var lossMin = document.getElementById('stat-loss-min');
                 var lossMax = document.getElementById('stat-loss-max');
                 if (lossMin) counter(lossMin, 0, 50, 1200, '');
                 if (lossMax) counter(lossMax, 0, 150, 1400, '');
-
-                // Progress bars
                 var p1 = document.getElementById('prog1');
                 var p2 = document.getElementById('prog2');
                 if (p1) p1.style.width = '100%';
                 if (p2) p2.style.width = '29%';
-
-                // Conversion counter
                 var conv = document.getElementById('stat-conv');
                 if (conv) counter(conv, 0, 3.4, 1400, '', 1);
             }

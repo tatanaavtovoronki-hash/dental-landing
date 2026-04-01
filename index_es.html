@@ -1159,15 +1159,18 @@
         if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
             const fanContainer = document.querySelector('.fan-container');
             if (fanContainer) {
+                let hasScrolled = false;
+                window.addEventListener('scroll', function() { hasScrolled = true; }, { passive: true, once: true });
+
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
-                        if (entry.isIntersecting) {
+                        if (entry.isIntersecting && hasScrolled) {
                             fanContainer.classList.add('is-open');
-                        } else {
+                        } else if (!entry.isIntersecting) {
                             fanContainer.classList.remove('is-open');
                         }
                     });
-                }, { threshold: 0.5 });
+                }, { threshold: 0.4 });
                 observer.observe(fanContainer);
             }
         }

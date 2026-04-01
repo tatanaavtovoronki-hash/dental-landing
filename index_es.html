@@ -1145,7 +1145,7 @@
     <script>
         function setLang(code) {
             document.getElementById('lang-menu').classList.add('hidden');
-            const map = { RU: 'index.html', UA: 'index_ua.html', EN: 'index_en.html', DE: 'index_de.html', ES: 'index_es.html' };
+            const map = { RU: '/', UA: '/ua', EN: '/en', DE: '/de', ES: '/es' };
             if (map[code]) window.location.href = map[code];
         }
         document.addEventListener('click', function(e) {

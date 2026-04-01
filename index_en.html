@@ -1181,23 +1181,20 @@
         });
     </script>
     <script>
-        // Mobile: auto-open fan cards on scroll into view (not on page load)
+        // Mobile: open fan cards on scroll, closed on page load
         if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
             const fanContainer = document.querySelector('.fan-container');
             if (fanContainer) {
-                let hasScrolled = false;
-                window.addEventListener('scroll', function() { hasScrolled = true; }, { passive: true, once: true });
-
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting && hasScrolled) {
-                            fanContainer.classList.add('is-open');
-                        } else if (!entry.isIntersecting) {
-                            fanContainer.classList.remove('is-open');
-                        }
-                    });
-                }, { threshold: 0.4 });
-                observer.observe(fanContainer);
+                function checkFan() {
+                    const rect = fanContainer.getBoundingClientRect();
+                    const inView = rect.top < window.innerHeight * 0.85 && rect.bottom > 0;
+                    if (inView && window.scrollY > 20) {
+                        fanContainer.classList.add('is-open');
+                    } else if (!inView) {
+                        fanContainer.classList.remove('is-open');
+                    }
+                }
+                window.addEventListener('scroll', checkFan, { passive: true });
             }
         }
     </script>

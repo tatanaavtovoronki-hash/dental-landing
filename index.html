@@ -864,7 +864,7 @@
             <div class="grid md:grid-cols-3 gap-6 mb-12">
 
                 <!-- Stat 1: доля клиник с ИИ -->
-                <div class="rounded-2xl p-8 flex flex-col" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">
+                <div id="stat-card-1" class="rounded-2xl p-8 flex flex-col" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">
                     <p class="text-sm font-semibold uppercase tracking-wider mb-6" style="color: rgba(255,255,255,0.4);">Клиники США уже внедрили ИИ</p>
                     <div class="flex items-center gap-6 mb-6">
                         <div class="relative flex-shrink-0" style="width:100px;height:100px;">
@@ -895,7 +895,7 @@
                 </div>
 
                 <!-- Stat 2: упущенные обращения -->
-                <div class="rounded-2xl p-8 flex flex-col" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">
+                <div id="stat-card-2" class="rounded-2xl p-8 flex flex-col" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">
                     <p class="text-sm font-semibold uppercase tracking-wider mb-6" style="color: rgba(255,255,255,0.4);">Пропущенных обращений</p>
                     <!-- Bar labels row -->
                     <div class="flex gap-3 mb-1">
@@ -920,7 +920,7 @@
                 </div>
 
                 <!-- Stat 3: конверсия -->
-                <div class="rounded-2xl p-8 flex flex-col" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">
+                <div id="stat-card-3" class="rounded-2xl p-8 flex flex-col" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">
                     <p class="text-sm font-semibold uppercase tracking-wider mb-6" style="color: rgba(255,255,255,0.4);">Конверсия в запись</p>
                     <div class="flex flex-col gap-5 mb-6 flex-1">
                         <div>
@@ -1232,47 +1232,48 @@
             requestAnimationFrame(step);
         }
 
-        var animated = false;
-        var statsSection = document.getElementById('stats');
-        if (!statsSection) return;
+        function makeObserver(cardId, animateFn) {
+            var done = false;
+            var card = document.getElementById(cardId);
+            if (!card) return;
+            var obs = new IntersectionObserver(function(entries) {
+                if (entries[0].isIntersecting && !done) {
+                    done = true;
+                    animateFn();
+                    obs.disconnect();
+                }
+            }, { threshold: 0.4 });
+            obs.observe(card);
+        }
 
-        var observer = new IntersectionObserver(function(entries) {
-            if (entries[0].isIntersecting && !animated) {
-                animated = true;
+        makeObserver('stat-card-1', function() {
+            var donut = document.getElementById('stat-donut');
+            var clinicsNum = document.getElementById('stat-clinics-num');
+            if (donut) animateDonut(donut, 35, 100, 1400);
+            if (clinicsNum) counter(clinicsNum, 0, 35, 1400, '%');
+        });
 
-                // Donut + counter
-                var donut = document.getElementById('stat-donut');
-                var clinicsNum = document.getElementById('stat-clinics-num');
-                if (donut) animateDonut(donut, 35, 100, 1400);
-                if (clinicsNum) counter(clinicsNum, 0, 35, 1400, '%');
+        makeObserver('stat-card-2', function() {
+            var b1 = document.getElementById('bar1');
+            var b2 = document.getElementById('bar2');
+            var b3 = document.getElementById('bar3');
+            if (b1) b1.style.height = '40px';
+            if (b2) b2.style.height = '60px';
+            if (b3) b3.style.height = '80px';
+            var lossMin = document.getElementById('stat-loss-min');
+            var lossMax = document.getElementById('stat-loss-max');
+            if (lossMin) counter(lossMin, 0, 50, 1200, '');
+            if (lossMax) counter(lossMax, 0, 150, 1400, '');
+        });
 
-                // Bars
-                var b1 = document.getElementById('bar1');
-                var b2 = document.getElementById('bar2');
-                var b3 = document.getElementById('bar3');
-                if (b1) b1.style.height = '40px';
-                if (b2) b2.style.height = '60px';
-                if (b3) b3.style.height = '80px';
-
-                // Loss counters
-                var lossMin = document.getElementById('stat-loss-min');
-                var lossMax = document.getElementById('stat-loss-max');
-                if (lossMin) counter(lossMin, 0, 50, 1200, '');
-                if (lossMax) counter(lossMax, 0, 150, 1400, '');
-
-                // Progress bars
-                var p1 = document.getElementById('prog1');
-                var p2 = document.getElementById('prog2');
-                if (p1) p1.style.width = '100%';
-                if (p2) p2.style.width = '29%';
-
-                // Conversion counter
-                var conv = document.getElementById('stat-conv');
-                if (conv) counter(conv, 0, 3.4, 1400, '', 1);
-            }
-        }, { threshold: 0.3 });
-
-        observer.observe(statsSection);
+        makeObserver('stat-card-3', function() {
+            var p1 = document.getElementById('prog1');
+            var p2 = document.getElementById('prog2');
+            if (p1) p1.style.width = '100%';
+            if (p2) p2.style.width = '29%';
+            var conv = document.getElementById('stat-conv');
+            if (conv) counter(conv, 0, 3.4, 1400, '', 1);
+        });
     })();
     </script>
 </body>

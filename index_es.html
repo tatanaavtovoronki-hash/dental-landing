@@ -1235,5 +1235,167 @@
         observer.observe(statsSection);
     })();
     </script>
+
+    <!-- ===== CHAT WIDGET ===== -->
+    <style>
+    #dnt-widget{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:10px;font-family:'Geist','Outfit',sans-serif;}
+    #dnt-bubble-area{min-height:44px;display:flex;align-items:flex-end;justify-content:flex-end;}
+    .dnt-bubble{background:#1a1b1e;color:#fff;padding:10px 18px;border-radius:50px;font-size:14px;font-weight:500;display:flex;align-items:center;gap:8px;box-shadow:0 4px 24px rgba(0,0,0,0.35);white-space:nowrap;animation:dntBubbleIn .4s ease;}
+    .dnt-dot{width:8px;height:8px;border-radius:50%;background:#4adebd;flex-shrink:0;}
+    .dnt-bottom{display:flex;align-items:center;gap:10px;}
+    .dnt-ask{background:#1a1b1e;color:#fff;border:none;padding:10px 18px;border-radius:50px;font-size:14px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:8px;box-shadow:0 4px 24px rgba(0,0,0,0.35);transition:transform .2s;font-family:'Geist','Outfit',sans-serif;}
+    .dnt-ask:hover{transform:scale(1.04);}
+    .dnt-toggle{width:54px;height:54px;border-radius:50%;background:#1a1b1e;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(0,0,0,0.35);transition:transform .2s;flex-shrink:0;}
+    .dnt-toggle:hover{transform:scale(1.08);}
+    @keyframes dntBubbleIn{from{opacity:0;transform:translateY(8px) scale(.95)}to{opacity:1;transform:translateY(0) scale(1)}}
+    @keyframes dntBubbleOut{from{opacity:1;transform:translateY(0) scale(1)}to{opacity:0;transform:translateY(-8px) scale(.95)}}
+    #dnt-chat{position:fixed;bottom:90px;right:24px;width:360px;height:520px;background:#0f0f12;border-radius:20px;z-index:10000;display:none;flex-direction:column;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.08);animation:dntChatIn .3s ease;}
+    #dnt-chat.open{display:flex;}
+    @keyframes dntChatIn{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+    .dnt-header{background:#1a1b1e;padding:14px 18px;display:flex;align-items:center;gap:12px;border-bottom:1px solid rgba(255,255,255,.06);}
+    .dnt-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#7856FF,#4adebd);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+    .dnt-title{color:#fff;font-weight:600;font-size:15px;}
+    .dnt-sub{color:#666;font-size:12px;margin-top:2px;}
+    .dnt-close{margin-left:auto;background:none;border:none;color:#666;cursor:pointer;font-size:22px;line-height:1;padding:4px;transition:color .2s;}
+    .dnt-close:hover{color:#fff;}
+    .dnt-msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;}
+    .dnt-msgs::-webkit-scrollbar{width:4px;}
+    .dnt-msgs::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:2px;}
+    .dnt-msg{max-width:82%;padding:10px 14px;border-radius:16px;font-size:14px;line-height:1.48;word-break:break-word;}
+    .dnt-msg.ai{background:#1a1b1e;color:#e0e0e0;border-bottom-left-radius:4px;align-self:flex-start;}
+    .dnt-msg.user{background:#7856FF;color:#fff;border-bottom-right-radius:4px;align-self:flex-end;}
+    .dnt-msg.typing{background:#1a1b1e;align-self:flex-start;}
+    .dnt-dots span{display:inline-block;width:6px;height:6px;border-radius:50%;background:#555;margin:0 2px;animation:dntDot 1.2s infinite;}
+    .dnt-dots span:nth-child(2){animation-delay:.2s;}
+    .dnt-dots span:nth-child(3){animation-delay:.4s;}
+    @keyframes dntDot{0%,80%,100%{transform:scale(1);opacity:.5}40%{transform:scale(1.4);opacity:1}}
+    .dnt-footer{padding:10px 14px;background:#1a1b1e;display:flex;gap:8px;align-items:flex-end;border-top:1px solid rgba(255,255,255,.06);}
+    .dnt-input{flex:1;background:#25262b;border:1px solid rgba(255,255,255,.08);color:#fff;border-radius:12px;padding:10px 13px;font-size:14px;resize:none;outline:none;font-family:'Geist','Outfit',sans-serif;max-height:100px;min-height:40px;line-height:1.4;transition:border-color .2s;}
+    .dnt-input:focus{border-color:rgba(120,86,255,.5);}
+    .dnt-input::placeholder{color:#55556a;}
+    .dnt-send{width:40px;height:40px;border-radius:10px;background:#7856FF;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s,transform .15s;}
+    .dnt-send:hover{background:#8e70ff;transform:scale(1.05);}
+    .dnt-send:disabled{background:#333;cursor:not-allowed;transform:none;}
+    @media(max-width:400px){#dnt-chat{right:12px;left:12px;width:auto;}}
+    </style>
+
+    <div id="dnt-widget">
+      <div id="dnt-bubble-area"></div>
+      <div class="dnt-bottom">
+        <button class="dnt-toggle" id="dnt-toggle-btn" onclick="dntToggle()">
+          <svg width="22" height="22" fill="none" viewBox="0 0 24 24"><path d="M20 2H4C2.9 2 2 2.9 2 4v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" fill="#fff"/></svg>
+        </button>
+        <button class="dnt-ask" onclick="dntToggle()">
+          <span class="dnt-dot"></span>
+          <span id="dnt-ask-lbl"></span>
+        </button>
+      </div>
+    </div>
+
+    <div id="dnt-chat">
+      <div class="dnt-header">
+        <div class="dnt-avatar">🦷</div>
+        <div>
+          <div class="dnt-title">Dental.AI</div>
+          <div class="dnt-sub" id="dnt-sub-lbl"></div>
+        </div>
+        <button class="dnt-close" onclick="dntToggle()">×</button>
+      </div>
+      <div class="dnt-msgs" id="dnt-msgs"></div>
+      <div class="dnt-footer">
+        <textarea class="dnt-input" id="dnt-input" rows="1"
+          oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"
+          onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();dntSend();}"></textarea>
+        <button class="dnt-send" id="dnt-send" onclick="dntSend()">
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z" fill="#fff"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <script>
+    (function(){
+      var WH='https://t-assist.xyz/webhook/344f5d58-bf0b-4c53-a087-59e71ef399f9';
+      var AUTH='Basic '+btoa('Dental.AI:2cf1fcfFAUL0bfda01');
+      var lang=document.documentElement.lang||'ru';
+      var T={
+        ru:{bubbles:['Захват лидов 24/7 без пропусков','Дайте менеджерам супер-силу 🔥','Теряете клиентов ночью? Решим!','ИИ-секретарь работает 24/7','Запись пациентов — автоматически'],ask:'Задать вопрос',online:'Онлайн · отвечает мгновенно',hi:'Привет! Я ИИ-секретарь Dental.AI 👋 Чем могу помочь?',ph:'Написать сообщение...',err:'Ошибка. Попробуйте позже.'},
+        uk:{bubbles:['Захоплення лідів 24/7 без пропусків','Дайте менеджерам супер-силу 🔥','Втрачаєте клієнтів вночі? Вирішимо!','ІІ-секретар працює 24/7','Запис пацієнтів — автоматично'],ask:'Задати питання',online:'Онлайн · відповідає миттєво',hi:'Привіт! Я ІІ-секретар Dental.AI 👋 Чим можу допомогти?',ph:'Написати повідомлення...',err:'Помилка. Спробуйте пізніше.'},
+        en:{bubbles:['Capture leads 24/7 — zero missed','Give your managers superpowers 🔥','Losing clients at night? We fix that!','AI secretary never sleeps','Patient booking — fully automated'],ask:'Ask a question',online:'Online · instant replies',hi:'Hi! I\'m the Dental.AI assistant 👋 How can I help?',ph:'Write a message...',err:'Error. Please try again.'},
+        de:{bubbles:['Leads erfassen 24/7 — kein Entgang','Geben Sie Managern Superkräfte 🔥','Nachts Kunden verloren? Wir lösen das!','KI-Sekretär schläft nie','Patiententermine — automatisiert'],ask:'Frage stellen',online:'Online · sofortige Antworten',hi:'Hallo! Ich bin der Dental.AI-Assistent 👋 Wie kann ich helfen?',ph:'Nachricht schreiben...',err:'Fehler. Bitte erneut versuchen.'},
+        es:{bubbles:['Capta leads 24/7 sin perder ninguno','Da superpoderes a tus managers 🔥','¿Pierdes clientes de noche? ¡Lo resolvemos!','El asistente IA nunca duerme','Citas de pacientes — automatizadas'],ask:'Hacer una pregunta',online:'En línea · respuestas al instante',hi:'¡Hola! Soy el asistente Dental.AI 👋 ¿En qué puedo ayudarte?',ph:'Escribe un mensaje...',err:'Error. Por favor, inténtalo de nuevo.'}
+      };
+      var t=T[lang]||T.ru;
+      var sid='s_'+Math.random().toString(36).substr(2,10);
+      var isOpen=false,busy=false,greeted=false,bi=0,btimer=null;
+
+      document.getElementById('dnt-ask-lbl').textContent=t.ask;
+      document.getElementById('dnt-sub-lbl').textContent=t.online;
+      document.getElementById('dnt-input').placeholder=t.ph;
+
+      function showBubble(){
+        var area=document.getElementById('dnt-bubble-area');
+        var old=area.querySelector('.dnt-bubble');
+        if(old){old.style.animation='dntBubbleOut .3s ease forwards';setTimeout(function(){if(old.parentNode)old.parentNode.removeChild(old);},300);}
+        setTimeout(function(){
+          if(isOpen)return;
+          var el=document.createElement('div');
+          el.className='dnt-bubble';
+          el.innerHTML='<span class="dnt-dot"></span><span>'+t.bubbles[bi%t.bubbles.length]+'</span>';
+          area.appendChild(el);bi++;
+        },old?360:0);
+      }
+      function startBubbles(){showBubble();btimer=setInterval(showBubble,4000);}
+      function stopBubbles(){clearInterval(btimer);document.getElementById('dnt-bubble-area').innerHTML='';}
+      startBubbles();
+
+      window.dntToggle=function(){
+        isOpen=!isOpen;
+        var chat=document.getElementById('dnt-chat');
+        var btn=document.getElementById('dnt-toggle-btn');
+        if(isOpen){
+          chat.classList.add('open');stopBubbles();
+          btn.innerHTML='<svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/></svg>';
+          if(!greeted){greeted=true;setTimeout(function(){addMsg(t.hi,'ai');},400);}
+          setTimeout(function(){document.getElementById('dnt-input').focus();},500);
+        }else{
+          chat.classList.remove('open');startBubbles();
+          btn.innerHTML='<svg width="22" height="22" fill="none" viewBox="0 0 24 24"><path d="M20 2H4C2.9 2 2 2.9 2 4v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" fill="#fff"/></svg>';
+        }
+      };
+
+      function addMsg(text,type){
+        var box=document.getElementById('dnt-msgs');
+        var el=document.createElement('div');
+        el.className='dnt-msg '+type;
+        if(type==='typing'){el.innerHTML='<div class="dnt-dots"><span></span><span></span><span></span></div>';}
+        else{el.textContent=text;}
+        box.appendChild(el);box.scrollTop=box.scrollHeight;
+        return el;
+      }
+
+      window.dntSend=function(){
+        if(busy)return;
+        var inp=document.getElementById('dnt-input');
+        var txt=inp.value.trim();if(!txt)return;
+        inp.value='';inp.style.height='auto';
+        addMsg(txt,'user');
+        var typing=addMsg('','typing');
+        busy=true;document.getElementById('dnt-send').disabled=true;
+        fetch(WH,{method:'POST',headers:{'Content-Type':'application/json','Authorization':AUTH},body:JSON.stringify({message:txt,sessionId:sid})})
+          .then(function(r){return r.json();})
+          .then(function(d){
+            if(typing.parentNode)typing.parentNode.removeChild(typing);
+            var reply=(d&&(d.output||d.text||d.message||d.reply))||'...';
+            addMsg(reply,'ai');
+          })
+          .catch(function(){
+            if(typing.parentNode)typing.parentNode.removeChild(typing);
+            addMsg(t.err,'ai');
+          })
+          .finally(function(){busy=false;document.getElementById('dnt-send').disabled=false;});
+      };
+    })();
+    </script>
+    <!-- ===== END CHAT WIDGET ===== -->
 </body>
 </html>

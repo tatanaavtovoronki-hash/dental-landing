@@ -1455,11 +1455,14 @@
         fetch(WH,{method:'POST',headers:{'Content-Type':'application/json','Authorization':AUTH},body:JSON.stringify({message:txt,sessionId:sid})})
           .then(function(r){if(!r.ok)throw new Error(r.status);return r.json();})
           .then(function(d){
+            console.log('[АСЯ] webhook response:', JSON.stringify(d));
             if(typing.parentNode)typing.parentNode.removeChild(typing);
-            var reply=(d&&(d.response||d.output||d.text||d.message||d.reply))||'...';
+            var obj=Array.isArray(d)?d[0]:d;
+            var reply=(obj&&(obj.response||obj.output||obj.text||obj.message||obj.reply))||'...';
             addMsg(reply,'ai');
           })
-          .catch(function(){
+          .catch(function(e){
+            console.log('[АСЯ] webhook error:', e);
             if(typing.parentNode)typing.parentNode.removeChild(typing);
             addMsg(t.err,'ai');
           })

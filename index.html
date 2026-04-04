@@ -1453,10 +1453,10 @@
         var typing=addMsg('','typing');
         busy=true;document.getElementById('dnt-send').disabled=true;
         fetch(WH,{method:'POST',headers:{'Content-Type':'application/json','Authorization':AUTH},body:JSON.stringify({message:txt,sessionId:sid})})
-          .then(function(r){return r.json();})
+          .then(function(r){if(!r.ok)throw new Error(r.status);return r.json();})
           .then(function(d){
             if(typing.parentNode)typing.parentNode.removeChild(typing);
-            var reply=(d&&(d.output||d.text||d.message||d.reply))||'...';
+            var reply=(d&&(d.response||d.output||d.text||d.message||d.reply))||'...';
             addMsg(reply,'ai');
           })
           .catch(function(){

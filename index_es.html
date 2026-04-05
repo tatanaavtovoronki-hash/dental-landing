@@ -1316,6 +1316,23 @@
     (function(){
       var WH='https://t-assist.xyz/webhook/344f5d58-bf0b-4c53-a087-59e71ef399f9';
       var AUTH='Basic '+btoa('Dental.AI:2cf1fcfFAUL0bfda01');
+      var SB='https://mybktwuukvphaypyewfp.supabase.co';
+      var SK='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im15Ymt0d3V1a3ZwaGF5cHlld2ZwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzkyNTkzNDEsImV4cCI6MjA1NDgzNTM0MX0.L2z4TdwK-Pj45rK2hYV1Q2Jq5n8Lq3g2q7Fk0Z5Jd5w';
+      var lastAdminTs=new Date().toISOString();var adminTimer=null;
+      function sbH(){return{'Content-Type':'application/json','apikey':SK,'Authorization':'Bearer '+SK};}
+      function sbLog(role,content){
+        fetch(SB+'/rest/v1/dental_sessions',{method:'POST',headers:Object.assign({},sbH(),{'Prefer':'resolution=merge-duplicates'}),body:JSON.stringify({session_id:sid,page_lang:lang,last_message_at:new Date().toISOString()})}).catch(function(){});
+        fetch(SB+'/rest/v1/dental_messages',{method:'POST',headers:sbH(),body:JSON.stringify({session_id:sid,role:role,content:content})}).catch(function(){});
+      }
+      function startAdminPoll(){
+        if(adminTimer)return;
+        adminTimer=setInterval(function(){
+          fetch(SB+'/rest/v1/dental_messages?session_id=eq.'+sid+'&role=eq.admin&created_at=gt.'+encodeURIComponent(lastAdminTs)+'&select=content,created_at&order=created_at.asc',{headers:{'apikey':SK,'Authorization':'Bearer '+SK}})
+            .then(function(r){return r.json();})
+            .then(function(msgs){if(msgs&&msgs.length){msgs.forEach(function(m){addMsg(m.content,'ai');lastAdminTs=m.created_at;});}})
+            .catch(function(){});
+        },5000);
+      }
       var lang=document.documentElement.lang||'ru';
       var T={
         ru:{
@@ -1409,14 +1426,18 @@
         var txt=inp.value.trim();if(!txt)return;
         inp.value='';inp.style.height='auto';
         addMsg(txt,'user');
+        sbLog('user',txt);
         var typing=addMsg('','typing');
         busy=true;document.getElementById('dnt-send').disabled=true;
         fetch(WH,{method:'POST',headers:{'Content-Type':'application/json','Authorization':AUTH},body:JSON.stringify({message:txt,sessionId:sid})})
           .then(function(r){if(!r.ok)throw new Error(r.status);return r.json();})
           .then(function(d){
             if(typing.parentNode)typing.parentNode.removeChild(typing);
-            var reply=(d&&(d.response||d.output||d.text||d.message||d.reply))||'...';
+            var obj=Array.isArray(d)?d[0]:d;
+            var reply=(obj&&(obj.response||obj.output||obj.text||obj.message||obj.reply))||'...';
             addMsg(reply,'ai');
+            sbLog('assistant',reply);
+            startAdminPoll();
           })
           .catch(function(){
             if(typing.parentNode)typing.parentNode.removeChild(typing);

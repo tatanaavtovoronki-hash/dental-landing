@@ -1321,8 +1321,9 @@
       var lastAdminTs=new Date().toISOString();var adminTimer=null;
       function sbH(){return{'Content-Type':'application/json','apikey':SK,'Authorization':'Bearer '+SK};}
       function sbLog(role,content){
-        fetch(SB+'/rest/v1/dental_sessions',{method:'POST',headers:Object.assign({},sbH(),{'Prefer':'resolution=merge-duplicates'}),body:JSON.stringify({session_id:sid,page_lang:lang,last_message_at:new Date().toISOString()})}).catch(function(){});
-        fetch(SB+'/rest/v1/dental_messages',{method:'POST',headers:sbH(),body:JSON.stringify({session_id:sid,role:role,content:content})}).catch(function(){});
+        fetch(SB+'/rest/v1/dental_sessions',{method:'POST',headers:Object.assign({},sbH(),{'Prefer':'resolution=merge-duplicates'}),body:JSON.stringify({session_id:sid,page_lang:lang,last_message_at:new Date().toISOString()})})
+          .then(function(){fetch(SB+'/rest/v1/dental_messages',{method:'POST',headers:sbH(),body:JSON.stringify({session_id:sid,role:role,content:content})}).catch(function(){});})
+          .catch(function(){});
       }
       function startAdminPoll(){
         if(adminTimer)return;

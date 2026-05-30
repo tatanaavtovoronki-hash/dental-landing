@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nibbl — AI-ассистент для стоматологий</title>
     <meta name="description" content="Nibbl — AI-ассистент для стоматологий: отвечает пациентам в мессенджерах за секунды, консультирует и помогает записаться на приём. Ни одной потерянной заявки.">
-    <meta name="theme-color" content="#FF7A6B">
+    <meta name="theme-color" content="#FAF4EC">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Nibbl — AI-ассистент для стоматологий">
@@ -32,7 +32,7 @@
         }
     </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Inter:wght@300;400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Inter:wght@300;400;500;600;700;800;900&family=DM+Mono:wght@400;500&family=Tourney:wght@700&display=swap');
 
         /* === Бренд Nibbl: тёплая палитра (имена переменных сохранены с прошлого бренда) === */
         :root {
@@ -161,7 +161,7 @@
         }
 
         .bg-gradient-cta {
-            background: linear-gradient(135deg, #FFF0ED 0%, #FAF4EC 50%, #E8E2FF 100%);
+            background: linear-gradient(135deg, #FAF4EC 0%, #EAF8F5 50%, #FFFFFF 100%);
         }
 
         details > summary { list-style: none; }
@@ -431,9 +431,9 @@
             /* fluid width */
             width: clamp(140px, 36vw, 220px);
             height: clamp(185px, 47.5vw, 290px);
-            background: linear-gradient(135deg, rgba(255, 122, 107,0.22) 0%, rgba(127, 217, 201,0.18) 100%);
-            border: 1px solid rgba(255, 122, 107,0.25);
-            box-shadow: 0 25px 40px rgba(255, 122, 107,0.20);
+            background: linear-gradient(135deg, rgba(127, 217, 201,0.28) 0%, rgba(127, 217, 201,0.10) 100%);
+            border: 1px solid rgba(127, 217, 201,0.45);
+            box-shadow: 0 25px 40px rgba(127, 217, 201,0.22);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -452,7 +452,7 @@
         .fan-container.is-open .glass {
             transform: rotate(0deg) translateY(-10px);
             margin: 0 clamp(4px, 1.8vw, 16px);
-            box-shadow: 0 35px 50px rgba(255, 122, 107,0.25);
+            box-shadow: 0 35px 50px rgba(127, 217, 201,0.30);
         }
 
         @media (max-width: 480px) {
@@ -472,16 +472,16 @@
             bottom: 0;
             width: 100%;
             height: clamp(36px, 9.5vw, 56px);
-            background: rgba(255, 122, 107,0.13);
+            background: rgba(127, 217, 201,0.20);
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #FF7A6B;
+            color: #2F7E72;
             font-family: 'Bricolage Grotesque', sans-serif;
             font-weight: 700;
             font-size: clamp(9px, 2.4vw, 15px);
             letter-spacing: 0.03em;
-            border-top: 1px solid rgba(255, 122, 107,0.18);
+            border-top: 1px solid rgba(127, 217, 201,0.30);
         }
 
         .fan-container .glass .card-icon {
@@ -519,7 +519,9 @@
     <nav class="fixed top-0 left-0 right-0 z-50 p-4">
         <div class="max-w-7xl mx-auto flex items-center justify-between clean-card px-6 py-3 bg-white/90 backdrop-blur-md" style="overflow: visible;">
             <a href="#" class="flex items-center gap-2.5">
-                <img src="assets/nibbl-avatar.png" alt="Nibbl" class="w-9 h-9 object-contain" style="filter: drop-shadow(0 3px 6px rgba(255,122,107,0.35));">
+                <span class="flex items-center justify-center rounded-full overflow-hidden flex-shrink-0" style="width:40px; height:40px; border:2px solid rgba(127,217,201,0.55); box-shadow:0 2px 8px rgba(58,58,58,0.10);">
+                    <img src="assets/nibbl-badge.png" alt="Nibbl" style="width:100%; height:100%; object-fit:cover;">
+                </span>
                 <span class="text-2xl font-black tracking-tight" style="color: var(--nibbl-charcoal); font-family: 'Bricolage Grotesque', sans-serif;">Nibbl</span>
             </a>
 
@@ -548,25 +550,21 @@
 
         <!-- Blob background -->
         <div id="blob-wrapper" style="position:absolute; width:150%; height:150%; top:-25%; left:-25%; z-index:0; will-change:transform; transition:transform 0.12s ease-out; pointer-events:none;">
-            <!-- Mint blob -->
-            <div class="animate-pop-blob" style="position:absolute; top:20%; right:15%; width:600px; height:600px; border-radius:50%; background:#7FD9C9; opacity:0.32; filter:blur(90px);"></div>
-            <!-- Coral blob -->
-            <div class="animate-pop-blob" style="position:absolute; bottom:15%; left:15%; width:600px; height:600px; border-radius:50%; background:#FF7A6B; opacity:0.28; filter:blur(90px); animation-delay:1.8s;"></div>
+            <!-- Mint blob (доминирует) -->
+            <div class="animate-pop-blob" style="position:absolute; top:20%; right:15%; width:640px; height:640px; border-radius:50%; background:#7FD9C9; opacity:0.30; filter:blur(95px);"></div>
+            <!-- Soft warm blob (мягкий, не яркий коралл) -->
+            <div class="animate-pop-blob" style="position:absolute; bottom:15%; left:15%; width:520px; height:520px; border-radius:50%; background:#FFD3A8; opacity:0.22; filter:blur(95px); animation-delay:1.8s;"></div>
         </div>
 
-        <!-- Mascot -->
-        <img src="assets/nibbl-hero.webp" alt="Nibbl — AI-ассистент для стоматологий"
-             class="nibbl-float relative z-10 w-36 sm:w-48 select-none"
-             style="margin-bottom: clamp(8px, 1.5vw, 20px); filter: drop-shadow(0 20px 32px rgba(255,122,107,0.30));">
-
-        <!-- Title -->
+        <!-- AI ASSISTANT Title (оригинальная анимация) -->
         <div class="bold-copy-wrap relative z-10 w-full max-w-[900px] mx-auto overflow-visible"
+             style="font-family: 'Tourney', cursive;"
              onclick="this.classList.toggle('is-active')">
             <div class="bold-copy-bg uppercase select-none">
-                NIBBL
+                AI ASSISTANT
             </div>
-            <div class="bold-copy-fg">
-                AI-ассистент для клиник
+            <div class="bold-copy-fg uppercase">
+                AI ASSISTANT
             </div>
         </div>
 
@@ -612,7 +610,7 @@
     <!-- PROBLEMS -->
     <section id="problems" class="problems-section bg-white relative overflow-hidden" style="background-color: #ffffff; padding-top: clamp(48px, 8vw, 100px); padding-bottom: 96px;">
         <!-- Subtle background blob matching hero -->
-        <div style="position:absolute; bottom:-100px; left:-100px; width:500px; height:500px; border-radius:50%; background:#FF7A6B; opacity:0.10; filter:blur(80px); pointer-events:none; z-index:0;"></div>
+        <div style="position:absolute; bottom:-100px; left:-100px; width:500px; height:500px; border-radius:50%; background:#7FD9C9; opacity:0.14; filter:blur(80px); pointer-events:none; z-index:0;"></div>
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="text-center max-w-2xl mx-auto mb-16">
                 <h2 class="text-3xl lg:text-4xl font-extrabold mb-6 text-gray-900 leading-tight tracking-tight">Что происходит без AI-ассистента</h2>
@@ -739,7 +737,7 @@
 
     <!-- FEATURES -->
     <section id="features" class="py-24 bg-white relative overflow-hidden hidden">
-        <div class="absolute right-0 top-1/2 w-[600px] h-[600px] bg-gradient-to-l from-[#FFF0ED] to-transparent opacity-50 blur-[80px] rounded-full transform -translate-y-1/2 pointer-events-none"></div>
+        <div class="absolute right-0 top-1/2 w-[600px] h-[600px] bg-gradient-to-l from-[#EAF8F5] to-transparent opacity-50 blur-[80px] rounded-full transform -translate-y-1/2 pointer-events-none"></div>
 
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="text-center max-w-2xl mx-auto mb-16">
@@ -884,7 +882,7 @@
     <!-- STATS -->
     <section id="stats" class="py-24 relative overflow-hidden" style="background-color: #2E2A28; font-family: 'Geist', 'Outfit', sans-serif;">
         <!-- bg glow -->
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full opacity-15 blur-[120px] pointer-events-none" style="background: var(--spz-purple);"></div>
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full opacity-15 blur-[120px] pointer-events-none" style="background: var(--nibbl-mint);"></div>
 
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="text-center max-w-2xl mx-auto mb-16">

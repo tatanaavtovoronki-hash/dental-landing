@@ -3,7 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dental.AI — KI-Rezeptionist für Zahnarztpraxen</title>
+    <title>Nibbl — KI-Assistent für Zahnarztpraxen</title>
+    <meta name="description" content="Nibbl — KI-Assistent für Zahnarztpraxen: antwortet Patienten in Sekunden in Messengern, beantwortet Fragen und hilft bei der Terminbuchung. Keine verlorene Anfrage.">
+    <meta name="theme-color" content="#FAF4EC">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Nibbl — KI-Assistent für Zahnarztpraxen">
+    <meta property="og:description" content="Antwortet Patienten in Sekunden in Messengern, beantwortet Fragen und hilft bei der Terminbuchung. Keine verlorene Anfrage.">
+    <meta property="og:image" content="assets/nibbl-hero.webp">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -25,26 +32,34 @@
         }
     </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Tourney:wght@700&family=Russo+One&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Inter:wght@300;400;500;600;700;800;900&family=DM+Mono:wght@400;500&family=Tourney:wght@700&display=swap');
 
+        /* === Бренд Nibbl: тёплая палитра (имена переменных сохранены с прошлого бренда) === */
         :root {
-            --spz-purple: #7856FF;
-            --spz-purple-light: #F2EEFF;
-            --spz-peach: #FFD7CF;
-            --spz-peach-light: #FFF0ED;
+            --spz-purple: #FF7A6B;        /* Coral Warmth — основной/CTA (бывш. фиолетовый) */
+            --spz-purple-light: #FAF4EC;  /* Cream Calm — фоны секций */
+            --spz-peach: #7FD9C9;         /* Mint Fresh — акцент/успех */
+            --spz-peach-light: #EAF8F5;   /* Mint light */
 
-            --t-dark: #1F2023;
-            --t-gray: #4C4C4C;
-            --t-light: #797979;
+            --t-dark: #3A3A3A;            /* Charcoal Soft — основной текст */
+            --t-gray: #5A5A5A;
+            --t-light: #8A8A8A;
             --bg-body: #FFFFFF;
             --bg-white: #FFFFFF;
 
-            --spz-error: #FF7557;
-            --spz-blue-light: #F0F9FE;
+            --spz-error: #D9543E;         /* Brick Soft */
+            --spz-blue-light: #EAF8F5;
+
+            /* Доп. бренд-токены Nibbl */
+            --nibbl-coral: #FF7A6B;
+            --nibbl-mint: #7FD9C9;
+            --nibbl-cream: #FAF4EC;
+            --nibbl-sun: #FFD3A8;
+            --nibbl-charcoal: #3A3A3A;
         }
 
         body {
-            font-family: 'Geist', 'Outfit', 'Garnett Medium', sans-serif;
+            font-family: 'Inter', system-ui, sans-serif;
             background-color: var(--bg-body);
             color: var(--t-dark);
             -webkit-font-smoothing: antialiased;
@@ -80,7 +95,7 @@
             pointer-events: none;
             position: absolute;
             inset: 0;
-            background-color: #43318F;
+            background-color: #E8604F;
             border-radius: inherit;
             z-index: -1;
         }
@@ -90,7 +105,7 @@
             position: absolute;
             inset: -4px;
             border-radius: 10px;
-            background: linear-gradient(-45deg, #e81cff 0%, #40c9ff 100%);
+            background: linear-gradient(-45deg, #FF7A6B 0%, #7FD9C9 100%);
             z-index: -2;
             pointer-events: none;
             transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -101,7 +116,7 @@
             z-index: -3;
             position: absolute;
             inset: 0;
-            background: linear-gradient(-45deg, #fc00ff 0%, #00dbde 100%);
+            background: linear-gradient(-45deg, #FF9A8B 0%, #7FD9C9 100%);
             transform: translate3d(0, 0, 0) scale(0.95);
             filter: blur(20px);
             transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -121,47 +136,49 @@
 
         .clean-card {
             background: var(--bg-white);
-            border: 1px solid rgba(120, 86, 255, 0.08);
-            box-shadow: 0 4px 24px -6px rgba(120, 86, 255, 0.08);
+            border: 1px solid rgba(255, 122, 107, 0.08);
+            box-shadow: 0 4px 24px -6px rgba(255, 122, 107, 0.08);
             border-radius: 1.5rem;
             transition: all 0.3s ease;
         }
-
+        
         .clean-card:hover {
-            box-shadow: 0 12px 32px -8px rgba(120, 86, 255, 0.15);
+            box-shadow: 0 12px 32px -8px rgba(255, 122, 107, 0.15);
             transform: translateY(-4px);
         }
 
+        /* Nav: fully static, no hover animation */
         nav .clean-card {
             transition: none !important;
         }
         nav .clean-card:hover {
             transform: none;
-            box-shadow: 0 4px 24px -6px rgba(120, 86, 255, 0.08);
+            box-shadow: 0 4px 24px -6px rgba(255, 122, 107, 0.08);
         }
 
         .bg-gradient-hero {
-            background: linear-gradient(135deg, #FFFFFF 0%, #FAFAFA 50%, #F2EEFF 100%);
+            background: linear-gradient(135deg, #FFFFFF 0%, #FAFAFA 50%, #FAF4EC 100%);
         }
 
         .bg-gradient-cta {
-            background: linear-gradient(135deg, #FFF0ED 0%, #F2EEFF 50%, #E8E2FF 100%);
+            background: linear-gradient(135deg, #FAF4EC 0%, #EAF8F5 50%, #FFFFFF 100%);
         }
 
         details > summary { list-style: none; }
         details > summary::-webkit-details-marker { display: none; }
 
+        /* Clock CSS */
         .face {
           position: relative;
           width: 180px;
           height: 180px;
           border-radius: 50%;
           outline: 10px solid #333;
-          background: repeating-radial-gradient(circle at 50% 50%,
-          rgba(200,200,200,.2) 0%, rgba(200,200,200,.2) 2%,
-          transparent 2%, transparent 3%, rgba(200,200,200,.2) 3%,
-          transparent 3%), conic-gradient(white 0%, silver 10%,
-          white 35%, silver 45%, white 60%, silver 70%,
+          background: repeating-radial-gradient(circle at 50% 50%, 
+          rgba(200,200,200,.2) 0%, rgba(200,200,200,.2) 2%, 
+          transparent 2%, transparent 3%, rgba(200,200,200,.2) 3%, 
+          transparent 3%), conic-gradient(white 0%, silver 10%, 
+          white 35%, silver 45%, white 60%, silver 70%, 
           white 80%, silver 95%, white 100%);
           box-shadow: inset 0 0 20px #0007;
         }
@@ -252,9 +269,23 @@
         }
 
         @keyframes watch {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
+          0% {
+            transform: rotate(0deg);
+          }
+
+          100% {
+            transform: rotate(360deg);
+          }
         }
+
+        /* AI ASSISTANT — dynamic swap */
+        /* Парение маскота Nibbl */
+        @keyframes nibbl-float {
+            0%, 100% { transform: translateY(0); }
+            50%      { transform: translateY(-14px); }
+        }
+        .nibbl-float { animation: nibbl-float 4.5s ease-in-out infinite; }
+        @media (prefers-reduced-motion: reduce) { .nibbl-float { animation: none; } }
 
         .bold-copy-wrap {
             cursor: pointer;
@@ -263,15 +294,16 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            height: clamp(80px, 15vw, 120px);
-            margin-bottom: clamp(16px, 2.5vw, 32px);
+            /* Constant height to prevent layout shift */
+            height: clamp(96px, 16vw, 140px);
+            margin-bottom: clamp(32px, 5vw, 60px);
             transition: transform 0.3s ease;
         }
 
         .bold-copy-bg {
             font-size: clamp(32px, 8.5vw, 102px);
             line-height: 1;
-            color: rgba(31,32,35,0.08);
+            color: rgba(31,32,35,0.08); /* Faint grey */
             transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
             position: absolute;
             z-index: 1;
@@ -279,7 +311,7 @@
         }
 
         .bold-copy-fg {
-            font-size: clamp(20px, 4.5vw, 54px);
+            font-size: clamp(20px, 4.5vw, 54px); /* Small black */
             line-height: 1;
             color: #1F2023;
             transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -288,25 +320,30 @@
             white-space: nowrap;
         }
 
+        /* Hover/Active states */
         .bold-copy-wrap:hover .bold-copy-fg,
         .bold-copy-wrap.is-active .bold-copy-fg {
-            font-size: clamp(32px, 8.5vw, 102px);
+            font-size: clamp(32px, 8.5vw, 102px); /* Expands to full size */
         }
 
         .bold-copy-wrap:hover .bold-copy-bg,
         .bold-copy-wrap.is-active .bold-copy-bg {
-            font-size: clamp(20px, 4.5vw, 54px);
+            font-size: clamp(20px, 4.5vw, 54px); /* Shrinks vice versa */
             opacity: 0.2;
         }
 
+        /* Responsive adjustments for title */
         @media (max-width: 768px) {
             .bold-copy-wrap {
-                height: clamp(60px, 14vw, 80px);
+                height: clamp(80px, 18vw, 110px);
+                margin-bottom: clamp(28px, 7vw, 44px);
                 touch-action: manipulation;
             }
+            /* Default: bg big/faint, fg small/dark — clear contrast on mobile */
             .bold-copy-bg { font-size: clamp(36px, 11vw, 56px); }
             .bold-copy-fg { font-size: clamp(16px, 5vw, 28px); }
 
+            /* Active/tap: fg grows big, bg shrinks */
             .bold-copy-wrap:hover .bold-copy-fg,
             .bold-copy-wrap.is-active .bold-copy-fg {
                 font-size: clamp(36px, 11vw, 56px);
@@ -327,11 +364,11 @@
             height: 100%;
             width: 100%;
             backface-visibility: hidden;
-            border-radius: 1.5rem;
+            border-radius: 1.5rem; /* Matches rounded-2xl */
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 10px 30px -10px rgba(120, 86, 255, 0.1);
+            box-shadow: 0 10px 30px -10px rgba(255, 122, 107, 0.1);
         }
 
         .animated-card-face::before {
@@ -339,7 +376,7 @@
             position: absolute;
             width: 150px;
             height: 250%;
-            background-image: linear-gradient(180deg, #e81cff 0%, #40c9ff 100%);
+            background-image: linear-gradient(180deg, #FF7A6B 0%, #7FD9C9 100%);
             animation: rotBGimg 10s linear infinite;
             top: -75%;
             left: 50%;
@@ -352,18 +389,23 @@
             content: '';
             position: absolute;
             background: #ffffff;
-            inset: 3px;
+            inset: 3px; /* Border thickness */
             border-radius: calc(1.5rem - 3px);
             z-index: 1;
         }
 
+        /* Bricolage Grotesque — заголовки бренда Nibbl (поддерживает кириллицу) */
         h1, h2, h3 {
-            font-family: 'Russo One', 'Tourney', sans-serif;
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-weight: 800;
+            letter-spacing: -0.01em;
         }
 
+        /* Fan Bridge — real-height block, centered on hero/problems boundary via negative margin */
         .fan-bridge {
             position: relative;
             z-index: 20;
+            /* negative margin = half card height → centers cards on the section boundary */
             margin-top: clamp(-145px, -23.75vw, -110px);
             padding-bottom: clamp(28px, 4vw, 48px);
             display: flex;
@@ -379,6 +421,7 @@
             justify-content: center;
             align-items: center;
             cursor: pointer;
+            /* explicit width so flex centering works with negative-margin children */
             width: clamp(280px, 90vw, 540px);
             overflow: visible;
             min-height: clamp(185px, 47.5vw, 290px);
@@ -386,16 +429,18 @@
 
         .fan-container .glass {
             position: relative;
+            /* fluid width */
             width: clamp(140px, 36vw, 220px);
             height: clamp(185px, 47.5vw, 290px);
-            background: linear-gradient(135deg, rgba(120,86,255,0.22) 0%, rgba(255,215,207,0.18) 100%);
-            border: 1px solid rgba(120,86,255,0.25);
-            box-shadow: 0 25px 40px rgba(120,86,255,0.20);
+            background: linear-gradient(135deg, rgba(127, 217, 201,0.28) 0%, rgba(127, 217, 201,0.10) 100%);
+            border: 1px solid rgba(127, 217, 201,0.45);
+            box-shadow: 0 25px 40px rgba(127, 217, 201,0.22);
             display: flex;
             justify-content: center;
             align-items: center;
             transition: 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
             border-radius: clamp(12px, 3vw, 18px);
+            /* overlap */
             margin: 0 clamp(-60px, -11vw, -35px);
             backdrop-filter: blur(10px);
             transform: rotate(calc(var(--r) * 1deg)) translateY(0);
@@ -408,7 +453,7 @@
         .fan-container.is-open .glass {
             transform: rotate(0deg) translateY(-10px);
             margin: 0 clamp(4px, 1.8vw, 16px);
-            box-shadow: 0 35px 50px rgba(120,86,255,0.25);
+            box-shadow: 0 35px 50px rgba(127, 217, 201,0.30);
         }
 
         @media (max-width: 480px) {
@@ -428,40 +473,41 @@
             bottom: 0;
             width: 100%;
             height: clamp(36px, 9.5vw, 56px);
-            background: rgba(120,86,255,0.13);
+            background: rgba(127, 217, 201,0.20);
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #7856FF;
-            font-family: 'Russo One', sans-serif;
+            color: #2F7E72;
+            font-family: 'Bricolage Grotesque', sans-serif;
             font-weight: 700;
             font-size: clamp(9px, 2.4vw, 15px);
             letter-spacing: 0.03em;
-            border-top: 1px solid rgba(120,86,255,0.18);
+            border-top: 1px solid rgba(127, 217, 201,0.30);
         }
 
         .fan-container .glass .card-icon {
             width: clamp(30px, 8vw, 60px);
             height: clamp(30px, 8vw, 60px);
-            fill: #7856FF;
+            fill: #FF7A6B;
             margin-bottom: clamp(36px, 9.5vw, 56px);
         }
 
         .fan-hint {
             font-family: 'Geist', sans-serif;
             font-size: clamp(10px, 2vw, 13px);
-            color: #9073FF;
+            color: #FF9A8B;
             opacity: 0.7;
             letter-spacing: 0.05em;
             text-transform: uppercase;
             font-weight: 600;
         }
 
+        /* ── Responsive hero ───────────────────────────── */
         @media (max-width: 640px) {
             .hero-section {
-                padding-top: 100px !important;
+                padding-top: 130px !important;
                 min-height: auto !important;
-                padding-bottom: 140px !important;
+                padding-bottom: 150px !important;
             }
             .hero-cta-wrap { margin-bottom: 0 !important; }
             .fan-hint { display: none; }
@@ -473,7 +519,12 @@
     <!-- NAVIGATION -->
     <nav class="fixed top-0 left-0 right-0 z-50 p-4">
         <div class="max-w-7xl mx-auto flex items-center justify-between clean-card px-6 py-3 bg-white/90 backdrop-blur-md" style="overflow: visible;">
-            <div class="text-2xl font-black tracking-tight text-gray-900">Dental<span style="color: var(--spz-purple);">.AI</span></div>
+            <a href="#" class="flex items-center gap-2.5">
+                <span class="flex items-center justify-center rounded-full overflow-hidden flex-shrink-0" style="width:40px; height:40px; border:2px solid rgba(127,217,201,0.55); box-shadow:0 2px 8px rgba(58,58,58,0.10);">
+                    <img src="assets/nibbl-badge.png" alt="Nibbl" style="width:100%; height:100%; object-fit:cover;">
+                </span>
+                <span class="text-2xl font-black tracking-tight" style="color: var(--nibbl-charcoal); font-family: 'Bricolage Grotesque', sans-serif;">Nibbl</span>
+            </a>
 
             <div class="flex items-center gap-4">
                 <!-- Language Dropdown -->
@@ -500,8 +551,8 @@
 
         <!-- Blob background -->
         <div id="blob-wrapper" style="position:absolute; width:150%; height:150%; top:-25%; left:-25%; z-index:0; will-change:transform; transition:transform 0.12s ease-out; pointer-events:none;">
-            <div class="animate-pop-blob" style="position:absolute; top:20%; right:15%; width:600px; height:600px; border-radius:50%; background:#93c5fd; opacity:0.35; filter:blur(90px);"></div>
-            <div class="animate-pop-blob" style="position:absolute; bottom:15%; left:15%; width:600px; height:600px; border-radius:50%; background:#d8b4fe; opacity:0.35; filter:blur(90px); animation-delay:1.8s;"></div>
+            <div class="animate-pop-blob" style="position:absolute; top:20%; right:15%; width:600px; height:600px; border-radius:50%; background:#7FD9C9; opacity:0.35; filter:blur(90px);"></div>
+            <div class="animate-pop-blob" style="position:absolute; bottom:15%; left:15%; width:600px; height:600px; border-radius:50%; background:#7FD9C9; opacity:0.35; filter:blur(90px); animation-delay:1.8s;"></div>
         </div>
 
         <!-- AI ASSISTANT Title -->
@@ -518,7 +569,7 @@
 
         <!-- Subtitle -->
         <p class="relative z-10 text-center text-gray-500 font-medium max-w-md sm:max-w-xl mx-auto px-6 leading-relaxed" style="font-size: clamp(15px, 2.2vw, 18px); margin-bottom: clamp(32px, 5vw, 72px);">
-            antwortet sofort, liefert vollständige Informationen und verpasst keine einzige Anfrage. Patienten gehen nicht zur Konkurrenz.
+            Antwortet Patienten in Sekunden in Messengern, beantwortet ihre Fragen und hilft bei der Terminbuchung. Keine Anfrage geht verloren — Patienten gehen nicht zur Konkurrenz.
         </p>
 
         <!-- Button -->
@@ -554,7 +605,7 @@
 
     <!-- PROBLEMS -->
     <section id="problems" class="problems-section bg-white relative overflow-hidden" style="background-color: #ffffff; padding-top: clamp(48px, 8vw, 100px); padding-bottom: 96px;">
-        <div style="position:absolute; bottom:-100px; left:-100px; width:500px; height:500px; border-radius:50%; background:#d8b4fe; opacity:0.12; filter:blur(80px); pointer-events:none; z-index:0;"></div>
+        <div style="position:absolute; bottom:-100px; left:-100px; width:500px; height:500px; border-radius:50%; background:#7FD9C9; opacity:0.12; filter:blur(80px); pointer-events:none; z-index:0;"></div>
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="text-center max-w-2xl mx-auto mb-16">
                 <h2 class="text-3xl lg:text-4xl font-extrabold mb-6 text-gray-900 leading-tight tracking-tight">Was ohne KI-Assistent passiert</h2>
@@ -614,9 +665,9 @@
                 </div>
                 <!-- Step 3 -->
                 <div class="relative z-10 text-center mx-auto max-w-sm group">
-                    <div class="w-32 h-32 bg-white rounded-full shadow-lg border-4 border-[#FAFAFA] flex items-center justify-center mx-auto mb-8 text-4xl font-black text-[#9073FF] relative group-hover:-translate-y-2 transition duration-300">
+                    <div class="w-32 h-32 bg-white rounded-full shadow-lg border-4 border-[#FAFAFA] flex items-center justify-center mx-auto mb-8 text-4xl font-black text-[#FF9A8B] relative group-hover:-translate-y-2 transition duration-300">
                         3
-                        <div class="absolute inset-0 rounded-full border border-[#9073FF]/20 scale-110 opacity-0 group-hover:opacity-100 group-hover:scale-125 transition duration-500"></div>
+                        <div class="absolute inset-0 rounded-full border border-[#FF9A8B]/20 scale-110 opacity-0 group-hover:opacity-100 group-hover:scale-125 transition duration-500"></div>
                     </div>
                     <h3 class="text-2xl font-extrabold mb-4 text-gray-900">Trägt in CRM ein</h3>
                     <p class="text-gray-500 font-medium leading-relaxed px-4">Erfasst Termine direkt in Ihrem CRM — ohne Beteiligung des Empfangspersonals.</p>
@@ -680,7 +731,7 @@
 
     <!-- FEATURES (hidden) -->
     <section id="features" class="py-24 bg-white relative overflow-hidden hidden">
-        <div class="absolute right-0 top-1/2 w-[600px] h-[600px] bg-gradient-to-l from-[#FFF0ED] to-transparent opacity-50 blur-[80px] rounded-full transform -translate-y-1/2 pointer-events-none"></div>
+        <div class="absolute right-0 top-1/2 w-[600px] h-[600px] bg-gradient-to-l from-[#EAF8F5] to-transparent opacity-50 blur-[80px] rounded-full transform -translate-y-1/2 pointer-events-none"></div>
 
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="text-center max-w-2xl mx-auto mb-16">
@@ -823,8 +874,8 @@
     </section>
 
     <!-- STATS -->
-    <section id="stats" class="py-24 relative overflow-hidden" style="background-color: #2a2535; font-family: 'Geist', 'Outfit', sans-serif;">
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full opacity-15 blur-[120px] pointer-events-none" style="background: var(--spz-purple);"></div>
+    <section id="stats" class="py-24 relative overflow-hidden" style="background-color: #2E2A28; font-family: 'Geist', 'Outfit', sans-serif;">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full opacity-15 blur-[120px] pointer-events-none" style="background: var(--nibbl-mint);"></div>
 
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="text-center max-w-2xl mx-auto mb-16">
@@ -841,7 +892,7 @@
                         <div class="relative flex-shrink-0" style="width:100px;height:100px;">
                             <svg viewBox="0 0 36 36" class="w-full h-full -rotate-90">
                                 <circle cx="18" cy="18" r="15.9" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="3.5"/>
-                                <circle cx="18" cy="18" r="15.9" fill="none" stroke="#7856FF" stroke-width="3.5"
+                                <circle cx="18" cy="18" r="15.9" fill="none" stroke="#FF7A6B" stroke-width="3.5"
                                     id="stat-donut" stroke-dasharray="0 100" stroke-linecap="round"/>
                             </svg>
                             <div class="absolute inset-0 flex items-center justify-center">
@@ -855,7 +906,7 @@
                     </div>
                     <div class="flex gap-4 mt-auto">
                         <div class="flex items-center gap-2">
-                            <span class="w-3 h-3 rounded-full flex-shrink-0" style="background:#7856FF;"></span>
+                            <span class="w-3 h-3 rounded-full flex-shrink-0" style="background:#FF7A6B;"></span>
                             <span class="text-xs" style="color: rgba(255,255,255,0.45);">Mit KI — 35%</span>
                         </div>
                         <div class="flex items-center gap-2">
@@ -874,8 +925,8 @@
                         <div class="flex-1 text-center"><span class="text-xs" style="color:rgba(255,255,255,0.4);">Außerhalb</span></div>
                     </div>
                     <div class="flex items-end gap-3 mb-1" style="height:80px;">
-                        <div id="bar1" class="flex-1 rounded-t-lg" style="height:0px; max-height:40px; background:rgba(120,86,255,0.35); transition: height 1s ease-out;"></div>
-                        <div id="bar2" class="flex-1 rounded-t-lg" style="height:0px; max-height:60px; background:#7856FF; transition: height 1s ease-out 0.15s;"></div>
+                        <div id="bar1" class="flex-1 rounded-t-lg" style="height:0px; max-height:40px; background:rgba(255, 122, 107,0.35); transition: height 1s ease-out;"></div>
+                        <div id="bar2" class="flex-1 rounded-t-lg" style="height:0px; max-height:60px; background:#FF7A6B; transition: height 1s ease-out 0.15s;"></div>
                         <div id="bar3" class="flex-1 rounded-t-lg" style="height:0px; max-height:80px; background:#FF7557; transition: height 1s ease-out 0.3s;"></div>
                     </div>
                     <div class="flex gap-3 mb-5">
@@ -897,7 +948,7 @@
                                 <span class="font-bold text-sm text-white">3,4×</span>
                             </div>
                             <div class="w-full rounded-full overflow-hidden" style="height:10px; background:rgba(255,255,255,0.08);">
-                                <div id="prog1" class="h-full rounded-full" style="width:0%; background:linear-gradient(90deg,#7856FF,#a78bfa); transition: width 1.2s ease-out 0.2s;"></div>
+                                <div id="prog1" class="h-full rounded-full" style="width:0%; background:linear-gradient(90deg,#FF7A6B,#a78bfa); transition: width 1.2s ease-out 0.2s;"></div>
                             </div>
                         </div>
                         <div>
@@ -941,28 +992,28 @@
             </div>
 
             <div class="grid md:grid-cols-2 gap-6">
-                <div class="flex gap-6 items-start p-8 rounded-2xl" style="background: linear-gradient(135deg, #f8f5ff 0%, #ede6ff 100%); box-shadow: 0 4px 24px rgba(120,86,255,0.10);">
+                <div class="flex gap-6 items-start p-8 rounded-2xl" style="background: linear-gradient(135deg, #f8f5ff 0%, #ede6ff 100%); box-shadow: 0 4px 24px rgba(255, 122, 107,0.10);">
                     <svg class="flex-shrink-0 w-10 h-10 text-spz-purple" fill="currentColor" viewBox="0 0 24 24"><path d="M3 17v2h6v-2H3zM3 5v2h10V5H3zm10 16v-2h8v-2h-8v-2h-2v6h2zM7 9v2H3v2h4v2h2V9H7zm14 4v-2H11v2h10zm-6-4h2V7h4V5h-4V3h-2v6z"/></svg>
                     <div>
                         <h4 class="font-extrabold text-xl mb-2 text-gray-900">Auf Ihre Praxis abgestimmt</h4>
                         <p class="text-gray-500 font-medium leading-relaxed">Kennt Ihre Behandlungen, Preise und Buchungsregeln. Antwortet so, wie Ihr Empfangspersonal es tun würde.</p>
                     </div>
                 </div>
-                <div class="flex gap-6 items-start p-8 rounded-2xl" style="background: linear-gradient(135deg, #f8f5ff 0%, #ede6ff 100%); box-shadow: 0 4px 24px rgba(120,86,255,0.10);">
+                <div class="flex gap-6 items-start p-8 rounded-2xl" style="background: linear-gradient(135deg, #f8f5ff 0%, #ede6ff 100%); box-shadow: 0 4px 24px rgba(255, 122, 107,0.10);">
                     <svg class="flex-shrink-0 w-10 h-10 text-spz-purple" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C7.58 2 4 3.79 4 6v12c0 2.21 3.58 4 8 4s8-1.79 8-4V6c0-2.21-3.58-4-8-4zm6 16c0 .55-2.09 2-6 2s-6-1.45-6-2v-2.23c1.61.78 3.72 1.23 6 1.23s4.39-.45 6-1.23V18zm0-5c0 .55-2.09 2-6 2s-6-1.45-6-2v-2.23C7.61 11.55 9.72 12 12 12s4.39-.45 6-1.23V13zm-6-3C8.09 10 6 8.55 6 8s2.09-2 6-2 6 1.45 6 2-2.09 2-6 2z"/></svg>
                     <div>
                         <h4 class="font-extrabold text-xl mb-2 text-gray-900">Arbeitet mit Ihrem System</h4>
                         <p class="text-gray-500 font-medium leading-relaxed">Verbindet sich mit Ihrem CRM oder Kalender. Keine Änderung Ihrer gewohnten Tools erforderlich.</p>
                     </div>
                 </div>
-                <div class="flex gap-6 items-start p-8 rounded-2xl" style="background: linear-gradient(135deg, #f8f5ff 0%, #ede6ff 100%); box-shadow: 0 4px 24px rgba(120,86,255,0.10);">
+                <div class="flex gap-6 items-start p-8 rounded-2xl" style="background: linear-gradient(135deg, #f8f5ff 0%, #ede6ff 100%); box-shadow: 0 4px 24px rgba(255, 122, 107,0.10);">
                     <svg class="flex-shrink-0 w-10 h-10 text-spz-purple" fill="currentColor" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
                     <div>
                         <h4 class="font-extrabold text-xl mb-2 text-gray-900">Daten bleiben bei Ihnen</h4>
                         <p class="text-gray-500 font-medium leading-relaxed">Der Schriftverkehr wird in Ihrem System gespeichert. Sie haben die volle Kontrolle über Patientendaten.</p>
                     </div>
                 </div>
-                <div class="flex gap-6 items-start p-8 rounded-2xl" style="background: linear-gradient(135deg, #f8f5ff 0%, #ede6ff 100%); box-shadow: 0 4px 24px rgba(120,86,255,0.10);">
+                <div class="flex gap-6 items-start p-8 rounded-2xl" style="background: linear-gradient(135deg, #f8f5ff 0%, #ede6ff 100%); box-shadow: 0 4px 24px rgba(255, 122, 107,0.10);">
                     <svg class="flex-shrink-0 w-10 h-10 text-spz-purple" fill="currentColor" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
                     <div>
                         <h4 class="font-extrabold text-xl mb-2 text-gray-900">Erfüllt Marktanforderungen</h4>
@@ -994,9 +1045,39 @@
         </div>
     </section>
 
+    <!-- ABOUT FOUNDER -->
+    <section id="about" class="py-24 relative overflow-hidden" style="background-color: var(--spz-purple-light);">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="clean-card bg-white p-8 sm:p-12 grid md:grid-cols-[190px_1fr] gap-8 md:gap-12 items-start">
+                <div class="text-center mx-auto">
+                    <div class="w-32 h-32 rounded-full mx-auto flex items-center justify-center" style="background:linear-gradient(135deg,#7FD9C9 0%,#FAF4EC 100%); border:3px solid #fff; box-shadow:0 12px 32px rgba(127,217,201,0.40);">
+                        <span class="font-black" style="font-size:42px; color:#234A44; font-family:'Bricolage Grotesque',sans-serif;">TO</span>
+                    </div>
+                    <div class="mt-5 font-extrabold text-gray-900">Tatiana Orlova</div>
+                    <div class="text-sm text-gray-400 font-medium mt-1">Entwicklerin von Nibbl</div>
+                </div>
+                <div>
+                    <h2 class="text-3xl lg:text-4xl font-extrabold mb-6 text-gray-900 leading-tight tracking-tight">Wer hinter Nibbl steht</h2>
+                    <div class="space-y-4 leading-relaxed" style="font-size:clamp(15px,2vw,17px); color:var(--t-gray);">
+                        <p>Mein Name ist Tatiana Orlova. Ich entwickle KI-Assistenten und automatisiere Prozesse, in denen Unternehmen Anfragen und die Zeit ihres Teams verlieren.</p>
+                        <p>Nibbl ist mein spezialisiertes Produkt für Zahnarztpraxen: ein Assistent, der Patienten in Sekunden in Messengern antwortet, Fragen beantwortet, bei der Terminbuchung hilft und keine Anfrage verpasst. Ich richte ihn individuell für jede Praxis ein — passend zu ihren Leistungen, ihrem Terminplan und ihrer Kommunikationsweise.</p>
+                        <p class="font-semibold" style="color:var(--t-dark);">Assistenten sind nur ein Teil meiner Arbeit. Ich übernehme auch größere KI-Projekte: Analytics-Systeme und KPI-Dashboards, schlüsselfertige SaaS-Produkte, CRM-Systeme und komplexe Geschäftsprozess-Automatisierung. Diese Ingenieurserfahrung steht hinter Nibbl.</p>
+                        <p>Ich arbeite individuell und diskret. Vertraulichkeit ist Teil der Leistung: Ich veröffentliche keine Kundennamen und lasse niemanden die Bots anderer Kunden testen. Ihr Projekt und Ihre Daten bleiben allein Ihre.</p>
+                    </div>
+                    <div class="mt-8 text-center md:text-left">
+                        <a href="https://t.me/Tatyana_rodOrlova" target="_blank" rel="noopener" class="btn-neon inline-flex text-[15px] px-10 py-3.5">
+                            <div class="btn-neon-inner"></div>
+                            Schreiben Sie mir
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- FAQ -->
     <section id="faq" class="py-24 bg-white relative overflow-hidden">
-        <div style="position:absolute; top:-80px; right:-80px; width:450px; height:450px; border-radius:50%; background:#93c5fd; opacity:0.12; filter:blur(80px); pointer-events:none; z-index:0;"></div>
+        <div style="position:absolute; top:-80px; right:-80px; width:450px; height:450px; border-radius:50%; background:#7FD9C9; opacity:0.12; filter:blur(80px); pointer-events:none; z-index:0;"></div>
         <div class="max-w-3xl mx-auto px-6 relative z-10">
             <h2 class="text-3xl lg:text-4xl font-extrabold mb-12 text-center text-gray-900 leading-tight tracking-tight">Häufige Fragen</h2>
             <div class="space-y-4">
@@ -1104,11 +1185,89 @@
     </section>
 
     <!-- FOOTER -->
-    <footer class="py-12 bg-white border-t border-gray-100">
-        <div class="max-w-7xl mx-auto px-6 text-center text-sm font-medium text-gray-400">
-            <p>&copy; 2026 Dental.AI — KI-Rezeptionist für Zahnarztpraxen. Alle Rechte vorbehalten.</p>
+    <footer class="bg-white border-t border-gray-100 pt-14 pb-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-10">
+                <div class="max-w-sm">
+                    <div class="flex items-center gap-2.5 mb-4">
+                        <span class="flex items-center justify-center rounded-full overflow-hidden flex-shrink-0" style="width:38px; height:38px; border:2px solid rgba(127,217,201,0.55);">
+                            <img src="assets/nibbl-badge.png" alt="Nibbl" style="width:100%; height:100%; object-fit:cover;">
+                        </span>
+                        <span class="text-2xl font-black tracking-tight" style="color:var(--nibbl-charcoal); font-family:'Bricolage Grotesque',sans-serif;">Nibbl</span>
+                    </div>
+                    <p class="text-sm text-gray-500 leading-relaxed">KI-Assistent für Zahnarztpraxen: antwortet Patienten in Messengern, beantwortet Fragen und hilft bei der Terminbuchung. Individuelle Entwicklung für jede Praxis.</p>
+                </div>
+                <div>
+                    <div class="font-bold text-gray-900 mb-4">Kontakt</div>
+                    <a href="https://t.me/Tatyana_rodOrlova" target="_blank" rel="noopener" class="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition mb-2">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
+                        Telegram @Tatyana_rodOrlova
+                    </a>
+                </div>
+                <div>
+                    <div class="font-bold text-gray-900 mb-4">Rechtliches</div>
+                    <button type="button" onclick="openPrivacy()" class="block text-sm text-gray-600 hover:text-gray-900 transition text-left mb-2">Datenschutzerklärung</button>
+                    <button type="button" onclick="openCookieSettings()" class="block text-sm text-gray-600 hover:text-gray-900 transition text-left">Cookie-Einstellungen</button>
+                </div>
+            </div>
+            <div class="border-t border-gray-100 mt-10 pt-6 text-center text-sm font-medium text-gray-400">
+                <p>&copy; 2026 Nibbl — KI-Assistent für Zahnarztpraxen. Alle Rechte vorbehalten.</p>
+            </div>
         </div>
     </footer>
+
+    <!-- PRIVACY MODAL -->
+    <div id="privacy-modal" class="hidden fixed inset-0 z-[10000] flex items-center justify-center p-4" style="background:rgba(58,58,58,0.45);" onclick="if(event.target===this)closePrivacy()">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto p-7 sm:p-9 relative">
+            <button type="button" onclick="closePrivacy()" class="absolute top-4 right-4 w-9 h-9 rounded-full flex items-center justify-center text-gray-400 hover:bg-gray-100 transition" aria-label="Schließen">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+            <h2 class="text-2xl font-extrabold text-gray-900 mb-1">Datenschutzerklärung</h2>
+            <p class="text-xs text-gray-400 mb-6">Aktualisiert am 30. Mai 2026</p>
+            <div class="space-y-4 text-sm leading-relaxed text-gray-600">
+                <p><strong class="text-gray-800">1. Allgemeines.</strong> Diese Erklärung beschreibt, wie Nibbl („wir") personenbezogene Daten der Website-Nutzer verarbeitet. Die Verarbeitung erfolgt gemäß der Datenschutz-Grundverordnung (DSGVO).</p>
+                <p><strong class="text-gray-800">2. Welche Daten wir erheben.</strong> Ihren Namen, Telefonnummer oder Messenger-Kontakt, E-Mail-Adresse, den Inhalt Ihrer Nachrichten sowie technische Daten (Cookies, IP-Adresse, Geräte- und Browsertyp), die automatisch übermittelt werden.</p>
+                <p><strong class="text-gray-800">3. Zwecke.</strong> Beantwortung Ihrer Anfragen, Beratung, Erstellung eines individuellen Angebots, Kontaktaufnahme und Verbesserung der Website.</p>
+                <p><strong class="text-gray-800">4. Rechtsgrundlage.</strong> Die Verarbeitung erfolgt auf Grundlage Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO), die Sie durch das Senden einer Nachricht über das Formular oder den Chat erteilen.</p>
+                <p><strong class="text-gray-800">5. Weitergabe an Dritte.</strong> Wir verkaufen Ihre Daten nicht und geben sie nicht zu Marketingzwecken an Dritte weiter. Daten können von Diensten verarbeitet werden, die wir zur Leistungserbringung nutzen (Messenger, Hosting, Analyse) — ausschließlich zu den genannten Zwecken.</p>
+                <p><strong class="text-gray-800">6. Speicherdauer.</strong> Wir speichern Daten so lange, wie es für die genannten Zwecke erforderlich ist, und löschen sie anschließend.</p>
+                <p><strong class="text-gray-800">7. Ihre Rechte.</strong> Sie haben das Recht auf Auskunft, Berichtigung, Löschung sowie auf Widerruf Ihrer Einwilligung. Schreiben Sie uns dazu auf Telegram <a href="https://t.me/Tatyana_rodOrlova" target="_blank" rel="noopener" class="font-semibold" style="color:var(--nibbl-coral);">@Tatyana_rodOrlova</a>.</p>
+                <p><strong class="text-gray-800">8. Cookies.</strong> Die Website verwendet Cookies für den korrekten Betrieb und zur Analyse. Sie können Cookies in Ihren Browsereinstellungen deaktivieren.</p>
+                <p><strong class="text-gray-800">9. Änderungen.</strong> Wir können diese Erklärung aktualisieren. Die aktuelle Version ist stets auf dieser Seite verfügbar.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- COOKIE BANNER -->
+    <div id="cookie-banner" class="hidden fixed top-0 left-0 right-0 z-[10001] bg-white border-b border-gray-100 shadow-md">
+        <div class="max-w-5xl mx-auto px-5 py-4 flex flex-col sm:flex-row sm:items-center gap-3">
+            <p class="text-sm text-gray-600 leading-relaxed flex-1">Wir verwenden Cookies für den korrekten Betrieb der Website und für Analysen. Sie können alle Cookies akzeptieren oder nur die notwendigen behalten. <button type="button" onclick="openPrivacy()" class="font-semibold underline" style="color:var(--nibbl-coral);">Mehr erfahren</button></p>
+            <div class="flex gap-2 flex-shrink-0">
+                <button type="button" onclick="acceptCookies('necessary')" class="font-bold text-sm py-2.5 px-4 rounded-xl border border-gray-200 text-gray-600 hover:bg-gray-50 transition">Nur notwendige</button>
+                <button type="button" onclick="acceptCookies('all')" class="font-bold text-sm py-2.5 px-5 rounded-xl transition" style="background:var(--nibbl-mint); color:#234A44;">Alle akzeptieren</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openPrivacy(){ document.getElementById('privacy-modal').classList.remove('hidden'); document.body.style.overflow='hidden'; }
+        function closePrivacy(){ document.getElementById('privacy-modal').classList.add('hidden'); document.body.style.overflow=''; }
+        function nibblSetWidget(show){ var w=document.getElementById('dnt-widget'); if(w) w.style.display = show ? '' : 'none'; }
+        function acceptCookies(mode){
+            try{ localStorage.setItem('nibbl_cookie', mode || 'all'); }catch(e){}
+            document.getElementById('cookie-banner').classList.add('hidden');
+            nibblSetWidget(true);
+        }
+        function openCookieSettings(){ var b=document.getElementById('cookie-banner'); if(b) b.classList.remove('hidden'); }
+        document.addEventListener('DOMContentLoaded', function(){
+            var c=null; try{ c=localStorage.getItem('nibbl_cookie'); }catch(e){}
+            if(c!=='all' && c!=='necessary'){
+                var b=document.getElementById('cookie-banner'); if(b) b.classList.remove('hidden');
+                nibblSetWidget(false);
+            }
+        });
+        document.addEventListener('keydown', function(e){ if(e.key==='Escape') closePrivacy(); });
+    </script>
 
     <script>
         const wrapper = document.getElementById('blob-wrapper');
@@ -1232,18 +1391,18 @@
     <style>
     #dnt-widget{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:10px;font-family:'Geist','Outfit',sans-serif;}
     #dnt-bubble-area{min-height:44px;display:flex;align-items:flex-end;justify-content:flex-end;}
-    .dnt-bubble{background:#fff;color:#1F2023;padding:10px 18px;border-radius:50px;font-size:14px;font-weight:500;display:flex;align-items:center;gap:8px;box-shadow:0 4px 20px rgba(120,86,255,0.18);border:1px solid #e8e0ff;white-space:nowrap;animation:dntBubbleIn .4s ease;}
-    .dnt-dot{width:8px;height:8px;border-radius:50%;background:#7856FF;flex-shrink:0;}
+    .dnt-bubble{background:#fff;color:#1F2023;padding:10px 18px;border-radius:50px;font-size:14px;font-weight:500;display:flex;align-items:center;gap:8px;box-shadow:0 4px 20px rgba(127, 217, 201,0.22);border:1px solid #e6f3f0;white-space:nowrap;animation:dntBubbleIn .4s ease;}
+    .dnt-dot{width:8px;height:8px;border-radius:50%;background:#FF7A6B;flex-shrink:0;}
     .dnt-bottom{display:flex;align-items:center;justify-content:flex-end;}
-    .dnt-ask{background:#7856FF;color:#fff;border:none;padding:12px 22px;border-radius:50px;font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px;box-shadow:0 6px 24px rgba(120,86,255,0.35);transition:transform .2s,box-shadow .2s;font-family:'Geist','Outfit',sans-serif;}
-    .dnt-ask:hover{transform:scale(1.04);box-shadow:0 8px 28px rgba(120,86,255,0.45);}
-    .dnt-ask .dnt-dot{background:rgba(255,255,255,0.7);}
+    .dnt-ask{background:#7FD9C9;color:#234A44;border:none;padding:12px 22px;border-radius:50px;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;box-shadow:0 6px 24px rgba(127, 217, 201,0.50);transition:transform .2s,box-shadow .2s;font-family:'Inter',sans-serif;}
+    .dnt-ask:hover{transform:scale(1.04);box-shadow:0 8px 28px rgba(127, 217, 201,0.65);}
+    .dnt-ask .dnt-dot{background:#FF7A6B;}
     @keyframes dntBubbleIn{from{opacity:0;transform:translateY(8px) scale(.95)}to{opacity:1;transform:translateY(0) scale(1)}}
     @keyframes dntBubbleOut{from{opacity:1;transform:translateY(0) scale(1)}to{opacity:0;transform:translateY(-8px) scale(.95)}}
-    #dnt-chat{position:fixed;bottom:80px;right:24px;width:368px;height:530px;background:#fff;border-radius:20px;z-index:10000;display:none;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(120,86,255,0.2),0 4px 20px rgba(0,0,0,0.08);border:1px solid #ede8ff;animation:dntChatIn .3s ease;}
+    #dnt-chat{position:fixed;bottom:80px;right:24px;width:368px;height:530px;background:#fff;border-radius:20px;z-index:10000;display:none;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(255, 122, 107,0.2),0 4px 20px rgba(0,0,0,0.08);border:1px solid #FFE3DE;animation:dntChatIn .3s ease;}
     #dnt-chat.open{display:flex;}
     @keyframes dntChatIn{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
-    .dnt-header{background:#7856FF;padding:16px 18px;display:flex;align-items:center;gap:12px;}
+    .dnt-header{background:#FF7A6B;padding:16px 18px;display:flex;align-items:center;gap:12px;}
     .dnt-avatar{width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
     .dnt-title{color:#fff;font-weight:700;font-size:15px;line-height:1.2;}
     .dnt-sub{color:rgba(255,255,255,0.75);font-size:12px;margin-top:3px;}
@@ -1253,20 +1412,20 @@
     .dnt-msgs::-webkit-scrollbar{width:4px;}
     .dnt-msgs::-webkit-scrollbar-thumb{background:#e0d8ff;border-radius:2px;}
     .dnt-msg{max-width:83%;padding:10px 14px;border-radius:16px;font-size:14px;line-height:1.5;word-break:break-word;}
-    .dnt-msg.ai{background:#F2EEFF;color:#1F2023;border-bottom-left-radius:4px;align-self:flex-start;}
-    .dnt-msg.user{background:#7856FF;color:#fff;border-bottom-right-radius:4px;align-self:flex-end;}
-    .dnt-msg.typing{background:#F2EEFF;align-self:flex-start;padding:12px 16px;}
-    .dnt-dots span{display:inline-block;width:6px;height:6px;border-radius:50%;background:#7856FF;margin:0 2px;animation:dntDot 1.2s infinite;opacity:.5;}
+    .dnt-msg.ai{background:#FAF4EC;color:#1F2023;border-bottom-left-radius:4px;align-self:flex-start;}
+    .dnt-msg.user{background:#FF7A6B;color:#fff;border-bottom-right-radius:4px;align-self:flex-end;}
+    .dnt-msg.typing{background:#FAF4EC;align-self:flex-start;padding:12px 16px;}
+    .dnt-dots span{display:inline-block;width:6px;height:6px;border-radius:50%;background:#FF7A6B;margin:0 2px;animation:dntDot 1.2s infinite;opacity:.5;}
     .dnt-dots span:nth-child(2){animation-delay:.2s;}
     .dnt-dots span:nth-child(3){animation-delay:.4s;}
     @keyframes dntDot{0%,80%,100%{transform:scale(1);opacity:.4}40%{transform:scale(1.4);opacity:1}}
-    .dnt-footer{padding:12px 14px;background:#fff;display:flex;gap:8px;align-items:flex-end;border-top:1px solid #ede8ff;}
-    .dnt-input{flex:1;background:#f5f3ff;border:1.5px solid #ede8ff;color:#1F2023;border-radius:12px;padding:10px 13px;font-size:14px;resize:none;outline:none;font-family:'Geist','Outfit',sans-serif;max-height:100px;min-height:40px;line-height:1.4;transition:border-color .2s;}
-    .dnt-input:focus{border-color:#7856FF;}
+    .dnt-footer{padding:12px 14px;background:#fff;display:flex;gap:8px;align-items:flex-end;border-top:1px solid #FFE3DE;}
+    .dnt-input{flex:1;background:#FFF4F1;border:1.5px solid #FFE3DE;color:#1F2023;border-radius:12px;padding:10px 13px;font-size:14px;resize:none;outline:none;font-family:'Geist','Outfit',sans-serif;max-height:100px;min-height:40px;line-height:1.4;transition:border-color .2s;}
+    .dnt-input:focus{border-color:#FF7A6B;}
     .dnt-input::placeholder{color:#aaa;}
-    .dnt-send{width:40px;height:40px;border-radius:10px;background:#7856FF;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s,transform .15s;}
-    .dnt-send:hover{background:#6a45f0;transform:scale(1.05);}
-    .dnt-send:disabled{background:#d0c8f5;cursor:not-allowed;transform:none;}
+    .dnt-send{width:40px;height:40px;border-radius:10px;background:#FF7A6B;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s,transform .15s;}
+    .dnt-send:hover{background:#E8604F;transform:scale(1.05);}
+    .dnt-send:disabled{background:#cfe9e3;cursor:not-allowed;transform:none;}
     @media(max-width:400px){#dnt-chat{right:12px;left:12px;width:auto;}}
     </style>
 
@@ -1283,7 +1442,7 @@
     <div id="dnt-chat">
       <div class="dnt-header">
         <div class="dnt-avatar">
-          <img src="asy-avatar.jpg" alt="АСЯ" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" onerror="this.style.display='none';this.parentNode.innerHTML='<span style='font-size:15px;font-weight:700;color:#fff;letter-spacing:-0.5px;'>АСЯ</span>';">
+          <img src="assets/nibbl-avatar.png" alt="Nibbl" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" onerror="this.style.display='none';this.parentNode.innerHTML='<span style='font-size:14px;font-weight:700;color:#fff;letter-spacing:-0.5px;'>Nibbl</span>';">
         </div>
         <div>
           <div class="dnt-title" id="dnt-title-lbl"></div>
@@ -1330,35 +1489,35 @@
       var T={
         ru:{
           bubbles:['Дайте администратору суперсилу','Теряете клиентов ночью? Решим!','AI-ассистент работает 24/7','Запись пациентов — автоматически'],
-          ask:'Задать вопрос',title:'АСЯ',
+          ask:'Задать вопрос',title:'Nibbl',
           online:'AI консультант',
           hi:'Привет! Я помогу разобраться, как внедрить AI-ассистента в вашу стоматологическую клинику и автоматизировать запись пациентов. Задайте любой вопрос по интеграции! 👋',
           ph:'Написать сообщение...',err:'Ошибка. Попробуйте позже.'
         },
         uk:{
           bubbles:['Дайте адміністратору суперсилу','Втрачаєте клієнтів вночі? Вирішимо!','AI-асистент працює 24/7','Запис пацієнтів — автоматично'],
-          ask:'Задати питання',title:'АСЯ',
+          ask:'Задати питання',title:'Nibbl',
           online:'AI консультант',
           hi:'Привіт! Я допоможу розібратись, як впровадити AI-асистента у вашу стоматологічну клініку та автоматизувати запис пацієнтів. Ставте будь-яке питання щодо інтеграції! 👋',
           ph:'Написати повідомлення...',err:'Помилка. Спробуйте пізніше.'
         },
         en:{
           bubbles:['Give your admin superpowers','Losing clients at night? We fix that!','AI assistant works 24/7','Patient booking — fully automated'],
-          ask:'Ask a question',title:'АСЯ',
+          ask:'Ask a question',title:'Nibbl',
           online:'AI consultant',
           hi:'Hi! I will help you understand how to implement an AI assistant in your dental clinic and automate patient booking. Ask me anything about the integration! 👋',
           ph:'Write a message...',err:'Error. Please try again.'
         },
         de:{
           bubbles:['Geben Sie dem Admin Superkräfte','Nachts Kunden verloren? Wir lösen das!','KI-Assistent arbeitet 24/7','Patiententermine — automatisiert'],
-          ask:'Frage stellen',title:'АСЯ',
+          ask:'Frage stellen',title:'Nibbl',
           online:'AI-Beraterin',
           hi:'Hallo! Ich helfe Ihnen zu verstehen, wie Sie einen KI-Assistenten in Ihre Zahnarztpraxis einführen und die Patientenbuchung automatisieren können. Fragen Sie alles zur Integration! 👋',
           ph:'Nachricht schreiben...',err:'Fehler. Bitte erneut versuchen.'
         },
         es:{
           bubbles:['Da superpoderes a tu administrador','¿Pierdes clientes de noche? ¡Lo resolvemos!','El asistente AI trabaja 24/7','Citas de pacientes — automatizadas'],
-          ask:'Hacer una pregunta',title:'АСЯ',
+          ask:'Hacer una pregunta',title:'Nibbl',
           online:'Consultora AI',
           hi:'¡Hola! Te ayudaré a entender cómo implementar un asistente AI en tu clínica dental y automatizar la cita de pacientes. ¡Pregunta cualquier cosa sobre la integración! 👋',
           ph:'Escribe un mensaje...',err:'Error. Por favor, inténtalo de nuevo.'

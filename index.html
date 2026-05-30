@@ -1078,10 +1078,12 @@
                         <p class="font-semibold" style="color:var(--t-dark);">Ассистенты — лишь часть того, что я делаю. Я берусь и за крупные проекты с внедрением ИИ: системы аналитики и KPI-дашборды, SaaS-продукты под ключ, CRM-системы и сложную автоматизацию бизнес-процессов. Этот инженерный опыт и стоит за Nibbl.</p>
                         <p>Работаю индивидуально и приватно. Конфиденциальность — часть услуги: я не публикую имена клиентов и не даю тестировать чужих ботов. Ваш проект и ваши данные остаются только вашими.</p>
                     </div>
-                    <a href="https://t.me/Tatyana_rodOrlova" target="_blank" rel="noopener" class="btn-neon mt-8 inline-flex text-[15px] px-10 py-3.5">
-                        <div class="btn-neon-inner"></div>
-                        Написать мне
-                    </a>
+                    <div class="mt-8 text-center md:text-left">
+                        <a href="https://t.me/Tatyana_rodOrlova" target="_blank" rel="noopener" class="btn-neon inline-flex text-[15px] px-10 py-3.5">
+                            <div class="btn-neon-inner"></div>
+                            Написать мне
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1221,7 +1223,8 @@
                 <!-- Legal -->
                 <div>
                     <div class="font-bold text-gray-900 mb-4">Документы</div>
-                    <button type="button" onclick="openPrivacy()" class="block text-sm text-gray-600 hover:text-gray-900 transition text-left">Политика конфиденциальности</button>
+                    <button type="button" onclick="openPrivacy()" class="block text-sm text-gray-600 hover:text-gray-900 transition text-left mb-2">Политика конфиденциальности</button>
+                    <button type="button" onclick="openCookieSettings()" class="block text-sm text-gray-600 hover:text-gray-900 transition text-left">Настройки cookie</button>
                 </div>
             </div>
             <div class="border-t border-gray-100 mt-10 pt-6 text-center text-sm font-medium text-gray-400">
@@ -1252,20 +1255,35 @@
         </div>
     </div>
 
-    <!-- COOKIE BANNER -->
-    <div id="cookie-banner" class="hidden fixed bottom-4 left-4 z-[9998] max-w-sm bg-white rounded-2xl shadow-xl border border-gray-100 p-5">
-        <p class="text-sm text-gray-600 leading-relaxed mb-3">Мы используем cookie для корректной работы сайта и аналитики. Продолжая пользоваться сайтом, вы соглашаетесь с этим. <button type="button" onclick="openPrivacy()" class="font-semibold underline" style="color:var(--nibbl-coral);">Подробнее</button></p>
-        <button type="button" onclick="acceptCookies()" class="w-full font-bold text-sm py-2.5 rounded-xl transition" style="background:var(--nibbl-mint); color:#234A44;">Принять</button>
+    <!-- COOKIE BANNER (сверху, до подтверждения виджет скрыт) -->
+    <div id="cookie-banner" class="hidden fixed top-0 left-0 right-0 z-[10001] bg-white border-b border-gray-100 shadow-md">
+        <div class="max-w-5xl mx-auto px-5 py-4 flex flex-col sm:flex-row sm:items-center gap-3">
+            <p class="text-sm text-gray-600 leading-relaxed flex-1">Мы используем cookie для корректной работы сайта и аналитики. Вы можете принять все cookie или оставить только необходимые. <button type="button" onclick="openPrivacy()" class="font-semibold underline" style="color:var(--nibbl-coral);">Подробнее</button></p>
+            <div class="flex gap-2 flex-shrink-0">
+                <button type="button" onclick="acceptCookies('necessary')" class="font-bold text-sm py-2.5 px-4 rounded-xl border border-gray-200 text-gray-600 hover:bg-gray-50 transition">Только необходимые</button>
+                <button type="button" onclick="acceptCookies('all')" class="font-bold text-sm py-2.5 px-5 rounded-xl transition" style="background:var(--nibbl-mint); color:#234A44;">Принять все</button>
+            </div>
+        </div>
     </div>
 
     <script>
         function openPrivacy(){ document.getElementById('privacy-modal').classList.remove('hidden'); document.body.style.overflow='hidden'; }
         function closePrivacy(){ document.getElementById('privacy-modal').classList.add('hidden'); document.body.style.overflow=''; }
-        function acceptCookies(){ try{ localStorage.setItem('nibbl_cookie_ok','1'); }catch(e){} document.getElementById('cookie-banner').classList.add('hidden'); }
-        (function(){
-            var ok='1'; try{ ok=localStorage.getItem('nibbl_cookie_ok'); }catch(e){}
-            if(ok!=='1'){ var b=document.getElementById('cookie-banner'); if(b) b.classList.remove('hidden'); }
-        })();
+        function nibblSetWidget(show){ var w=document.getElementById('dnt-widget'); if(w) w.style.display = show ? '' : 'none'; }
+        function acceptCookies(mode){
+            try{ localStorage.setItem('nibbl_cookie', mode || 'all'); }catch(e){}
+            document.getElementById('cookie-banner').classList.add('hidden');
+            nibblSetWidget(true);
+        }
+        // открыть настройки cookie заново (ссылка в футере)
+        function openCookieSettings(){ var b=document.getElementById('cookie-banner'); if(b) b.classList.remove('hidden'); }
+        document.addEventListener('DOMContentLoaded', function(){
+            var c=null; try{ c=localStorage.getItem('nibbl_cookie'); }catch(e){}
+            if(c!=='all' && c!=='necessary'){
+                var b=document.getElementById('cookie-banner'); if(b) b.classList.remove('hidden');
+                nibblSetWidget(false);   // виджет скрыт, пока не выбран вариант cookie
+            }
+        });
         document.addEventListener('keydown', function(e){ if(e.key==='Escape') closePrivacy(); });
     </script>
 

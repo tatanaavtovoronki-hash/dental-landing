@@ -1,0 +1,10 @@
+# Секреты — никогда не коммитить
+.env
+credentials.json
+
+# Локальные бэкапы
+dental-landing-server-backup-*.zip
+backup_server_*/
+
+# Временные файлы
+.tmp/

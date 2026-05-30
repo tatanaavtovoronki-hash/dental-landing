@@ -295,8 +295,8 @@
             align-items: center;
             justify-content: center;
             /* Constant height to prevent layout shift */
-            height: clamp(80px, 15vw, 120px);
-            margin-bottom: clamp(16px, 2.5vw, 32px);
+            height: clamp(96px, 16vw, 140px);
+            margin-bottom: clamp(32px, 5vw, 60px);
             transition: transform 0.3s ease;
         }
 
@@ -335,7 +335,8 @@
         /* Responsive adjustments for title */
         @media (max-width: 768px) {
             .bold-copy-wrap {
-                height: clamp(60px, 14vw, 80px);
+                height: clamp(80px, 18vw, 110px);
+                margin-bottom: clamp(28px, 7vw, 44px);
                 touch-action: manipulation;
             }
             /* Default: bg big/faint, fg small/dark — clear contrast on mobile */
@@ -504,9 +505,9 @@
         /* ── Responsive hero ───────────────────────────── */
         @media (max-width: 640px) {
             .hero-section {
-                padding-top: 100px !important;
+                padding-top: 130px !important;
                 min-height: auto !important;
-                padding-bottom: 140px !important;
+                padding-bottom: 150px !important;
             }
             .hero-cta-wrap { margin-bottom: 0 !important; }
             .fan-hint { display: none; }
@@ -546,7 +547,7 @@
     </nav>
 
     <!-- HERO SECTION -->
-    <section class="hero-section relative min-h-[100svh] flex flex-col items-center overflow-hidden bg-white" style="padding-top: clamp(120px, 15vw, 180px); padding-bottom: clamp(60px, 8vw, 100px);">
+    <section class="hero-section relative min-h-[100svh] flex flex-col items-center overflow-hidden bg-white" style="padding-top: clamp(150px, 19vw, 220px); padding-bottom: clamp(80px, 10vw, 120px);">
 
         <!-- Blob background -->
         <div id="blob-wrapper" style="position:absolute; width:150%; height:150%; top:-25%; left:-25%; z-index:0; will-change:transform; transition:transform 0.12s ease-out; pointer-events:none;">
@@ -569,7 +570,7 @@
         </div>
 
         <!-- Subtitle -->
-        <p class="relative z-10 text-center font-medium max-w-md sm:max-w-xl mx-auto px-6 leading-relaxed" style="font-size: clamp(15px, 2.2vw, 18px); margin-bottom: clamp(32px, 5vw, 72px); color: var(--t-gray);">
+        <p class="relative z-10 text-center font-medium max-w-md sm:max-w-xl mx-auto px-6 leading-relaxed" style="font-size: clamp(15px, 2.2vw, 18px); margin-bottom: clamp(44px, 6vw, 88px); color: var(--t-gray);">
             Отвечает пациентам в мессенджерах за секунды, консультирует и помогает записаться на приём. Ни одна заявка не теряется — пациент не уходит к конкуренту.
         </p>
 
@@ -1311,12 +1312,12 @@
     <style>
     #dnt-widget{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:10px;font-family:'Geist','Outfit',sans-serif;}
     #dnt-bubble-area{min-height:44px;display:flex;align-items:flex-end;justify-content:flex-end;}
-    .dnt-bubble{background:#fff;color:#1F2023;padding:10px 18px;border-radius:50px;font-size:14px;font-weight:500;display:flex;align-items:center;gap:8px;box-shadow:0 4px 20px rgba(255, 122, 107,0.18);border:1px solid #e8e0ff;white-space:nowrap;animation:dntBubbleIn .4s ease;}
+    .dnt-bubble{background:#fff;color:#1F2023;padding:10px 18px;border-radius:50px;font-size:14px;font-weight:500;display:flex;align-items:center;gap:8px;box-shadow:0 4px 20px rgba(127, 217, 201,0.22);border:1px solid #e6f3f0;white-space:nowrap;animation:dntBubbleIn .4s ease;}
     .dnt-dot{width:8px;height:8px;border-radius:50%;background:#FF7A6B;flex-shrink:0;}
     .dnt-bottom{display:flex;align-items:center;justify-content:flex-end;}
-    .dnt-ask{background:#FF7A6B;color:#fff;border:none;padding:12px 22px;border-radius:50px;font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px;box-shadow:0 6px 24px rgba(255, 122, 107,0.35);transition:transform .2s,box-shadow .2s;font-family:'Geist','Outfit',sans-serif;}
-    .dnt-ask:hover{transform:scale(1.04);box-shadow:0 8px 28px rgba(255, 122, 107,0.45);}
-    .dnt-ask .dnt-dot{background:rgba(255,255,255,0.7);}
+    .dnt-ask{background:#7FD9C9;color:#234A44;border:none;padding:12px 22px;border-radius:50px;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;box-shadow:0 6px 24px rgba(127, 217, 201,0.50);transition:transform .2s,box-shadow .2s;font-family:'Inter',sans-serif;}
+    .dnt-ask:hover{transform:scale(1.04);box-shadow:0 8px 28px rgba(127, 217, 201,0.65);}
+    .dnt-ask .dnt-dot{background:#FF7A6B;}
     @keyframes dntBubbleIn{from{opacity:0;transform:translateY(8px) scale(.95)}to{opacity:1;transform:translateY(0) scale(1)}}
     @keyframes dntBubbleOut{from{opacity:1;transform:translateY(0) scale(1)}to{opacity:0;transform:translateY(-8px) scale(.95)}}
     #dnt-chat{position:fixed;bottom:80px;right:24px;width:368px;height:530px;background:#fff;border-radius:20px;z-index:10000;display:none;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(255, 122, 107,0.2),0 4px 20px rgba(0,0,0,0.08);border:1px solid #FFE3DE;animation:dntChatIn .3s ease;}
@@ -1344,8 +1345,8 @@
     .dnt-input:focus{border-color:#FF7A6B;}
     .dnt-input::placeholder{color:#aaa;}
     .dnt-send{width:40px;height:40px;border-radius:10px;background:#FF7A6B;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s,transform .15s;}
-    .dnt-send:hover{background:#6a45f0;transform:scale(1.05);}
-    .dnt-send:disabled{background:#d0c8f5;cursor:not-allowed;transform:none;}
+    .dnt-send:hover{background:#E8604F;transform:scale(1.05);}
+    .dnt-send:disabled{background:#cfe9e3;cursor:not-allowed;transform:none;}
     @media(max-width:400px){#dnt-chat{right:12px;left:12px;width:auto;}}
     </style>
 

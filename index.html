@@ -1387,7 +1387,7 @@
                     animateFn();
                     obs.disconnect();
                 }
-            }, { threshold: 0.4 });
+            }, { threshold: 0, rootMargin: '0px 0px -35% 0px' });
             obs.observe(card);
         }
 

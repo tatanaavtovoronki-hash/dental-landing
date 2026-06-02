@@ -1052,15 +1052,24 @@
     <!-- ABOUT FOUNDER -->
     <section id="about" class="py-24 relative overflow-hidden" style="background-color: var(--spz-purple-light);">
         <div class="max-w-4xl mx-auto px-6">
-            <div class="clean-card bg-white p-8 sm:p-12 grid md:grid-cols-[190px_1fr] gap-8 md:gap-12 items-start">
-                <div class="text-center mx-auto">
-                    <div class="w-32 h-32 rounded-full mx-auto flex items-center justify-center" style="background:linear-gradient(135deg,#7FD9C9 0%,#FAF4EC 100%); border:3px solid #fff; box-shadow:0 12px 32px rgba(127,217,201,0.40);">
-                        <span class="font-black" style="font-size:42px; color:#234A44; font-family:'Bricolage Grotesque',sans-serif;">TO</span>
+            <div class="clean-card bg-white overflow-hidden grid md:grid-cols-[minmax(0,42%)_1fr] gap-0 items-stretch">
+                <!-- Photo -->
+                <div class="relative">
+                    <div class="absolute inset-0 pointer-events-none" style="background:linear-gradient(135deg, rgba(127,217,201,0.18), rgba(255,154,139,0.10));"></div>
+                    <picture>
+                        <source srcset="assets/tatyana-about.webp" type="image/webp">
+                        <img src="assets/tatyana-about.jpg" alt="Tatiana Orlova — creadora de Nibbl"
+                             class="w-full h-full object-cover object-top" style="min-height:340px;" loading="lazy" decoding="async">
+                    </picture>
+                    <div class="absolute bottom-4 left-4 right-4 md:left-5 md:bottom-5 md:right-auto">
+                        <div class="inline-flex flex-col rounded-2xl px-4 py-2.5" style="background:rgba(255,255,255,0.92); backdrop-filter:blur(8px); box-shadow:0 8px 24px rgba(58,58,58,0.18);">
+                            <span class="font-extrabold text-gray-900 leading-tight">Tatiana Orlova</span>
+                            <span class="text-xs font-semibold mt-0.5" style="color:var(--spz-purple);">creadora de Nibbl</span>
+                        </div>
                     </div>
-                    <div class="mt-5 font-extrabold text-gray-900">Tatiana Orlova</div>
-                    <div class="text-sm text-gray-400 font-medium mt-1">creadora de Nibbl</div>
                 </div>
-                <div>
+                <!-- Text -->
+                <div class="p-8 sm:p-12">
                     <h2 class="text-3xl lg:text-4xl font-extrabold mb-6 text-gray-900 leading-tight tracking-tight">Quién está detrás de Nibbl</h2>
                     <div class="space-y-4 leading-relaxed" style="font-size:clamp(15px,2vw,17px); color:var(--t-gray);">
                         <p>Me llamo Tatiana Orlova. Desarrollo asistentes de IA y automatizo los procesos donde los negocios pierden clientes potenciales y el tiempo de su equipo.</p>

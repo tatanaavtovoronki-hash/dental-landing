@@ -1276,8 +1276,8 @@
             var c=null; try{ c=localStorage.getItem('nibbl_cookie'); }catch(e){}
             if(c!=='all' && c!=='necessary'){
                 var b=document.getElementById('cookie-banner'); if(b) b.classList.remove('hidden');
-                nibblSetWidget(false);
             }
+            // el widget se muestra siempre — no usa cookies y solo envía datos por acción del usuario
         });
         document.addEventListener('keydown', function(e){ if(e.key==='Escape') closePrivacy(); });
     </script>

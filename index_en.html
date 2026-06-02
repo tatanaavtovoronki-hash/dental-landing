@@ -1284,8 +1284,8 @@
             var c=null; try{ c=localStorage.getItem('nibbl_cookie'); }catch(e){}
             if(c!=='all' && c!=='necessary'){
                 var b=document.getElementById('cookie-banner'); if(b) b.classList.remove('hidden');
-                nibblSetWidget(false);
             }
+            // widget is always shown — it sets no cookies and only sends data on user action
         });
         document.addEventListener('keydown', function(e){ if(e.key==='Escape') closePrivacy(); });
     </script>

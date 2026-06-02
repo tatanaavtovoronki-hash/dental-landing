@@ -1285,8 +1285,8 @@
             var c=null; try{ c=localStorage.getItem('nibbl_cookie'); }catch(e){}
             if(c!=='all' && c!=='necessary'){
                 var b=document.getElementById('cookie-banner'); if(b) b.classList.remove('hidden');
-                nibblSetWidget(false);   // виджет скрыт, пока не выбран вариант cookie
             }
+            // виджет показываем всегда — cookie он не ставит, данные шлёт только по действию пользователя
         });
         document.addEventListener('keydown', function(e){ if(e.key==='Escape') closePrivacy(); });
     </script>

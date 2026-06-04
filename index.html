@@ -651,18 +651,26 @@
             box-shadow: 0 3px 9px rgba(127,217,201,0.45);
         }
 
-        /* ===== HERO — Editorial + живой параллакс-фон ===== */
+        /* ===== HERO — живой параллакс-фон (орбы + частицы + подсветка + зерно) ===== */
         .hero-ed {
             position: relative; overflow: hidden;
-            background: linear-gradient(180deg, #FFF9F2 0%, #FAF4EC 52%, #F3EEE4 100%);
+            background: linear-gradient(180deg, #FFF6EC 0%, #FAF4EC 50%, #F1EBDF 100%);
         }
-        .hero-bg { position: absolute; inset: -20%; z-index: 0; pointer-events: none; }
-        .orb { position: absolute; border-radius: 50%; filter: blur(74px); will-change: transform; }
+        .hero-bg { position: absolute; inset: -25%; z-index: 0; pointer-events: none; }
+        .orb-wrap { position: absolute; will-change: transform; }
+        .orb-wrap > i { display: block; width: 100%; height: 100%; border-radius: 50%; filter: blur(56px); animation: orbBreathe 9s ease-in-out infinite; will-change: transform; }
+        @keyframes orbBreathe { 0%,100% { transform: scale(1); } 50% { transform: scale(1.16); } }
+        .hero-spot {
+            position: absolute; inset: 0; z-index: 1; pointer-events: none; mix-blend-mode: soft-light;
+            background: radial-gradient(440px 440px at var(--mx, 50%) var(--my, 36%), rgba(255,255,255,0.95), rgba(255,255,255,0) 62%);
+        }
+        #hero-particles { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
         .grain {
-            position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: 0.5; mix-blend-mode: soft-light;
+            position: absolute; inset: 0; z-index: 2; pointer-events: none; opacity: 0.55; mix-blend-mode: soft-light;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-            background-size: 180px 180px;
+            background-size: 170px 170px;
         }
+        @media (prefers-reduced-motion: reduce) { .orb-wrap > i { animation: none; } }
         .ed-eyebrow {
             font-size: 12.5px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
             color: #A98F76; display: inline-flex; align-items: center; gap: 12px;
@@ -732,11 +740,13 @@
     <!-- HERO — Editorial + параллакс-фон -->
     <section class="hero-ed relative" style="padding-top: clamp(124px, 15vw, 196px); padding-bottom: clamp(52px, 6vw, 88px);">
         <div class="hero-bg" aria-hidden="true">
-            <div class="orb" data-depth="0.05" style="width:min(58vw,620px);aspect-ratio:1;left:-7%;top:4%;background:radial-gradient(circle,#FF7A6B 0%,rgba(255,122,107,0) 70%);opacity:0.42;"></div>
-            <div class="orb" data-depth="0.10" style="width:min(60vw,680px);aspect-ratio:1;right:-9%;top:-6%;background:radial-gradient(circle,#7FD9C9 0%,rgba(127,217,201,0) 70%);opacity:0.5;"></div>
-            <div class="orb" data-depth="0.07" style="width:min(52vw,560px);aspect-ratio:1;left:28%;bottom:-24%;background:radial-gradient(circle,#FFD3A8 0%,rgba(255,211,168,0) 70%);opacity:0.55;"></div>
-            <div class="orb" data-depth="0.15" style="width:min(30vw,320px);aspect-ratio:1;right:22%;bottom:2%;background:radial-gradient(circle,#FF9A8B 0%,rgba(255,154,139,0) 70%);opacity:0.4;"></div>
+            <div class="orb-wrap" data-depth="0.06" style="width:min(60vw,640px);aspect-ratio:1;left:-6%;top:-2%;"><i style="background:radial-gradient(circle,#FF7A6B 0%,rgba(255,122,107,0) 68%);opacity:.58;"></i></div>
+            <div class="orb-wrap" data-depth="0.11" style="width:min(62vw,720px);aspect-ratio:1;right:-9%;top:-12%;"><i style="background:radial-gradient(circle,#7FD9C9 0%,rgba(127,217,201,0) 68%);opacity:.62;"></i></div>
+            <div class="orb-wrap" data-depth="0.08" style="width:min(54vw,580px);aspect-ratio:1;left:26%;bottom:-26%;"><i style="background:radial-gradient(circle,#FFD3A8 0%,rgba(255,211,168,0) 68%);opacity:.6;"></i></div>
+            <div class="orb-wrap" data-depth="0.16" style="width:min(32vw,340px);aspect-ratio:1;right:20%;bottom:0;"><i style="background:radial-gradient(circle,#FF9A8B 0%,rgba(255,154,139,0) 68%);opacity:.5;"></i></div>
         </div>
+        <canvas id="hero-particles" aria-hidden="true"></canvas>
+        <div class="hero-spot" aria-hidden="true"></div>
         <div class="grain" aria-hidden="true"></div>
 
         <div class="relative z-10 max-w-5xl mx-auto px-6 flex flex-col items-center text-center">
@@ -764,28 +774,52 @@
 
     <script>
     (function(){
-        var orbs = [].slice.call(document.querySelectorAll('.hero-ed .orb'));
-        if(!orbs.length || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-        var tmx=0, tmy=0, mx=0, my=0, sy=0, ticking=true;
-        window.addEventListener('mousemove', function(e){
+        var hero = document.querySelector('.hero-ed');
+        if(!hero) return;
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var wraps = [].slice.call(hero.querySelectorAll('.orb-wrap'));
+        var spot = hero.querySelector('.hero-spot');
+        var tmx=0, tmy=0, mx=0, my=0, sy=0, t=0;
+        hero.addEventListener('mousemove', function(e){
             tmx = (e.clientX/window.innerWidth - 0.5);
             tmy = (e.clientY/window.innerHeight - 0.5);
+            if(spot){ var r=hero.getBoundingClientRect(); spot.style.setProperty('--mx',(e.clientX-r.left)+'px'); spot.style.setProperty('--my',(e.clientY-r.top)+'px'); }
         }, {passive:true});
         window.addEventListener('scroll', function(){ sy = window.pageYOffset || 0; }, {passive:true});
-        var t=0;
         function raf(){
-            t += 0.0045;
-            mx += (tmx-mx)*0.06; my += (tmy-my)*0.06;
-            for(var i=0;i<orbs.length;i++){
-                var o=orbs[i], d=parseFloat(o.getAttribute('data-depth'))||0.05;
-                var ax = Math.sin(t + i*1.7) * (16 + i*6);
-                var ay = Math.cos(t*0.8 + i*1.3) * (14 + i*5);
-                var x = mx*d*260 + ax, y = my*d*260 + sy*d*0.55 + ay;
-                o.style.transform = 'translate3d('+x.toFixed(1)+'px,'+y.toFixed(1)+'px,0)';
+            t += 0.006;
+            mx += (tmx-mx)*0.07; my += (tmy-my)*0.07;
+            for(var i=0;i<wraps.length;i++){
+                var w=wraps[i], d=parseFloat(w.getAttribute('data-depth'))||0.06;
+                var ax = Math.sin(t + i*1.6) * (30 + i*10);
+                var ay = Math.cos(t*0.9 + i*1.2) * (26 + i*8);
+                var x = mx*d*420 + ax, y = my*d*420 + sy*d*0.7 + ay;
+                w.style.transform = 'translate3d('+x.toFixed(1)+'px,'+y.toFixed(1)+'px,0)';
             }
             requestAnimationFrame(raf);
         }
-        requestAnimationFrame(raf);
+        if(!reduce) requestAnimationFrame(raf);
+
+        // летящие светящиеся частицы
+        var cv = document.getElementById('hero-particles');
+        if(cv && !reduce){
+            var ctx = cv.getContext('2d'), W=0, H=0, parts=[];
+            function size(){ W = cv.width = hero.offsetWidth; H = cv.height = hero.offsetHeight; }
+            size(); window.addEventListener('resize', size, {passive:true});
+            var cols = ['255,122,107', '127,217,201', '255,176,128'];
+            for(var i=0;i<48;i++){ parts.push({ x:Math.random()*W, y:Math.random()*H, r:Math.random()*2.4+0.8, vy:-(Math.random()*0.45+0.12), vx:(Math.random()-0.5)*0.2, a:Math.random()*0.5+0.18, c:cols[i%3] }); }
+            (function loop(){
+                ctx.clearRect(0,0,W,H);
+                for(var i=0;i<parts.length;i++){
+                    var p=parts[i]; p.y+=p.vy; p.x+=p.vx;
+                    if(p.y<-8){ p.y=H+8; p.x=Math.random()*W; }
+                    ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,6.2832);
+                    ctx.fillStyle='rgba('+p.c+','+p.a+')'; ctx.shadowBlur=10; ctx.shadowColor='rgba('+p.c+',0.8)'; ctx.fill();
+                }
+                ctx.shadowBlur=0;
+                requestAnimationFrame(loop);
+            })();
+        }
     })();
     </script>
 

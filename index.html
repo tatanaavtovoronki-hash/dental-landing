@@ -708,22 +708,27 @@
         html { background: #FBF2E8; }
         .page-bg {
             position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden;
-            background: linear-gradient(170deg, #FCF5EC 0%, #FBF2E8 55%, #FAEFE3 100%);
+            background: linear-gradient(170deg, #FEFCFA 0%, #FDF9F4 55%, #FBF6F0 100%);
         }
         .page-bg .pb { position: absolute; will-change: transform; }
         .page-bg .pb > i {
             display: block; width: 100%; height: 100%;
             border-radius: 42% 58% 55% 45% / 48% 42% 58% 52%;
-            filter: blur(60px); mix-blend-mode: multiply; will-change: transform, border-radius;
-            animation: blobMorph 18s ease-in-out infinite;
+            filter: blur(85px); will-change: transform, border-radius;
+            animation: blobMorph 24s ease-in-out infinite;
         }
         @keyframes blobMorph {
             0%,100% { transform: translate(0,0) scale(1); border-radius: 42% 58% 55% 45% / 48% 42% 58% 52%; }
-            33% { transform: translate(4%,-5%) scale(1.14); border-radius: 62% 38% 46% 54% / 56% 58% 42% 44%; }
-            66% { transform: translate(-4%,4%) scale(0.9); border-radius: 48% 52% 62% 38% / 42% 54% 46% 58%; }
+            33% { transform: translate(5%,-6%) scale(1.18); border-radius: 62% 38% 46% 54% / 56% 58% 42% 44%; }
+            66% { transform: translate(-5%,5%) scale(0.85); border-radius: 48% 52% 62% 38% / 42% 54% 46% 58%; }
         }
         @media (prefers-reduced-motion: reduce) { .page-bg .pb > i { animation: none !important; } }
         .page-bg #page-particles { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+        .page-dots {
+            position: fixed; inset: 0; z-index: -1; pointer-events: none;
+            background-image: radial-gradient(rgba(80,64,56,0.05) 1px, transparent 1.3px);
+            background-size: 22px 22px;
+        }
         .ed-sub { font-size: clamp(16px, 1.45vw, 20px); line-height: 1.6; color: #6E655C; max-width: 34rem; text-wrap: pretty; }
         .pill {
             display: inline-flex; align-items: center; justify-content: center; gap: 9px;
@@ -749,12 +754,11 @@
 
     <!-- ЕДИНЫЙ ФОН НА ВСЮ СТРАНИЦУ -->
     <div class="page-bg" aria-hidden="true">
-        <div class="pb" data-sp="0.06" style="width:42vw;height:42vw;left:-7%;top:-4%;"><i style="background:#FF7A6B;opacity:.4;animation-delay:0s;"></i></div>
-        <div class="pb" data-sp="0.10" style="width:40vw;height:40vw;right:-7%;top:22%;"><i style="background:#7FD9C9;opacity:.4;animation-delay:-6s;"></i></div>
-        <div class="pb" data-sp="0.08" style="width:44vw;height:44vw;left:16%;top:56%;"><i style="background:#FFC59A;opacity:.42;animation-delay:-12s;"></i></div>
-        <div class="pb" data-sp="0.12" style="width:34vw;height:34vw;right:14%;top:78%;"><i style="background:#FF9A8B;opacity:.36;animation-delay:-3s;"></i></div>
-        <canvas id="page-particles" aria-hidden="true"></canvas>
+        <div class="pb" data-sp="0.05" style="width:48vw;height:48vw;left:-9%;top:-6%;"><i style="background:#FFCFC4;opacity:.5;animation-delay:0s;"></i></div>
+        <div class="pb" data-sp="0.08" style="width:44vw;height:44vw;right:-9%;top:24%;"><i style="background:#CFEDE5;opacity:.48;animation-delay:-8s;"></i></div>
+        <div class="pb" data-sp="0.06" style="width:50vw;height:50vw;left:18%;top:58%;"><i style="background:#FFE4D2;opacity:.52;animation-delay:-14s;"></i></div>
     </div>
+    <div class="page-dots" aria-hidden="true"></div>
 
     <!-- NAVIGATION -->
     <nav class="fixed top-0 left-0 right-0 z-50 p-4">

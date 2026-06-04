@@ -708,12 +708,20 @@
         html { background: #FBF2E8; }
         .page-bg {
             position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden;
-            background: linear-gradient(162deg, #FFF7EF 0%, #FCF2E7 36%, #F7ECEE 64%, #EEF4F0 100%);
+            background: linear-gradient(170deg, #FCF5EC 0%, #FBF2E8 55%, #FAEFE3 100%);
         }
         .page-bg .pb { position: absolute; will-change: transform; }
-        .page-bg .pb > i { display: block; width: 100%; height: 100%; border-radius: 50%; filter: blur(110px); will-change: transform; }
-        @keyframes pbDrift1 { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(44px,-32px) scale(1.12); } }
-        @keyframes pbDrift2 { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-46px,36px) scale(1.1); } }
+        .page-bg .pb > i {
+            display: block; width: 100%; height: 100%;
+            border-radius: 42% 58% 55% 45% / 48% 42% 58% 52%;
+            filter: blur(60px); mix-blend-mode: multiply; will-change: transform, border-radius;
+            animation: blobMorph 18s ease-in-out infinite;
+        }
+        @keyframes blobMorph {
+            0%,100% { transform: translate(0,0) scale(1); border-radius: 42% 58% 55% 45% / 48% 42% 58% 52%; }
+            33% { transform: translate(4%,-5%) scale(1.14); border-radius: 62% 38% 46% 54% / 56% 58% 42% 44%; }
+            66% { transform: translate(-4%,4%) scale(0.9); border-radius: 48% 52% 62% 38% / 42% 54% 46% 58%; }
+        }
         @media (prefers-reduced-motion: reduce) { .page-bg .pb > i { animation: none !important; } }
         .page-bg #page-particles { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
         .ed-sub { font-size: clamp(16px, 1.45vw, 20px); line-height: 1.6; color: #6E655C; max-width: 34rem; text-wrap: pretty; }
@@ -741,10 +749,10 @@
 
     <!-- ЕДИНЫЙ ФОН НА ВСЮ СТРАНИЦУ -->
     <div class="page-bg" aria-hidden="true">
-        <div class="pb" data-sp="0.06" style="width:62vw;height:62vw;left:-14%;top:2%;"><i style="background:radial-gradient(circle,#FFB6A0 0%,rgba(255,182,160,0) 70%);opacity:.32;animation:pbDrift1 24s ease-in-out infinite;"></i></div>
-        <div class="pb" data-sp="0.12" style="width:56vw;height:56vw;right:-14%;top:30%;"><i style="background:radial-gradient(circle,#9FE0D2 0%,rgba(159,224,210,0) 70%);opacity:.26;animation:pbDrift2 28s ease-in-out infinite;"></i></div>
-        <div class="pb" data-sp="0.08" style="width:52vw;height:52vw;left:8%;top:62%;"><i style="background:radial-gradient(circle,#FFD9B0 0%,rgba(255,217,176,0) 70%);opacity:.3;animation:pbDrift1 32s ease-in-out infinite;"></i></div>
-        <div class="pb" data-sp="0.14" style="width:40vw;height:40vw;right:6%;bottom:-6%;"><i style="background:radial-gradient(circle,#FFAE9A 0%,rgba(255,174,154,0) 70%);opacity:.24;animation:pbDrift2 26s ease-in-out infinite;"></i></div>
+        <div class="pb" data-sp="0.06" style="width:42vw;height:42vw;left:-7%;top:-4%;"><i style="background:#FF7A6B;opacity:.4;animation-delay:0s;"></i></div>
+        <div class="pb" data-sp="0.10" style="width:40vw;height:40vw;right:-7%;top:22%;"><i style="background:#7FD9C9;opacity:.4;animation-delay:-6s;"></i></div>
+        <div class="pb" data-sp="0.08" style="width:44vw;height:44vw;left:16%;top:56%;"><i style="background:#FFC59A;opacity:.42;animation-delay:-12s;"></i></div>
+        <div class="pb" data-sp="0.12" style="width:34vw;height:34vw;right:14%;top:78%;"><i style="background:#FF9A8B;opacity:.36;animation-delay:-3s;"></i></div>
         <canvas id="page-particles" aria-hidden="true"></canvas>
     </div>
 
@@ -1952,31 +1960,31 @@
         var ctx = cv.getContext('2d'), W = 0, H = 0;
         function size(){ W = cv.width = window.innerWidth; H = cv.height = window.innerHeight; }
         size(); window.addEventListener('resize', size, {passive:true});
-        var cols = [[232,96,79],[63,186,162],[240,158,86]];
+        var cols = [[255,128,112],[140,212,198],[255,190,150]];
         function pick(){ return cols[(Math.random()*cols.length)|0]; }
-        // мерцающие точки — появляются и пропадают периодически
-        function newDot(){ return { x:Math.random()*W, y:Math.random()*H, r:Math.random()*4+2.6, vy:-(Math.random()*0.26+0.08), c:pick(), life:0, max:(Math.random()*220+180)|0, delay:(Math.random()*60)|0 }; }
-        var dots = []; for(var i=0;i<46;i++){ var d=newDot(); d.life=(Math.random()*d.max)|0; d.delay=0; dots.push(d); }
-        // 3D-кляксы (пузыри) — всплывают раз в несколько секунд
-        var blobs = [], blobTimer = 60, blobEvery = 230;
-        function spawnBlob(){ blobs.push({ x:Math.random()*W, y:H+90, r:(Math.random()*78+72)|0, vy:-(Math.random()*0.32+0.2), life:0, max:(Math.random()*320+280)|0, c:pick() }); }
+        // мерцающие точки — деликатные, появляются и пропадают периодически
+        function newDot(){ return { x:Math.random()*W, y:Math.random()*H, r:Math.random()*1.7+0.8, vy:-(Math.random()*0.2+0.06), c:pick(), life:0, max:(Math.random()*240+220)|0, delay:(Math.random()*120)|0 }; }
+        var dots = []; for(var i=0;i<26;i++){ var d=newDot(); d.life=(Math.random()*d.max)|0; d.delay=(Math.random()*60)|0; dots.push(d); }
+        // мягкие пузыри — изредка всплывают
+        var blobs = [], blobTimer = 0, blobEvery = 520;
+        function spawnBlob(){ blobs.push({ x:Math.random()*W, y:H+80, r:(Math.random()*46+38)|0, vy:-(Math.random()*0.26+0.16), life:0, max:(Math.random()*340+300)|0, c:pick() }); }
         function loop(){
             ctx.clearRect(0,0,W,H);
             for(var i=0;i<dots.length;i++){ var d=dots[i];
                 if(d.delay>0){ d.delay--; continue; }
                 d.life++; d.y+=d.vy;
                 var t=d.life/d.max; if(t>=1){ dots[i]=newDot(); continue; }
-                var a=Math.sin(t*Math.PI);
+                var a=Math.sin(t*Math.PI)*0.42;
                 ctx.beginPath(); ctx.arc(d.x,d.y,d.r,0,6.2832);
                 ctx.fillStyle='rgba('+d.c[0]+','+d.c[1]+','+d.c[2]+','+a.toFixed(3)+')';
-                ctx.shadowBlur=16; ctx.shadowColor='rgba('+d.c[0]+','+d.c[1]+','+d.c[2]+',0.9)'; ctx.fill();
+                ctx.shadowBlur=7; ctx.shadowColor='rgba('+d.c[0]+','+d.c[1]+','+d.c[2]+',0.5)'; ctx.fill();
             }
             ctx.shadowBlur=0;
             blobTimer++; if(blobTimer>=blobEvery){ blobTimer=0; spawnBlob(); }
             for(var j=blobs.length-1;j>=0;j--){ var b=blobs[j];
                 b.life++; b.y+=b.vy;
                 var bt=b.life/b.max; if(bt>=1){ blobs.splice(j,1); continue; }
-                var ba=Math.sin(bt*Math.PI)*0.4;
+                var ba=Math.sin(bt*Math.PI)*0.12;
                 var g=ctx.createRadialGradient(b.x-b.r*0.34, b.y-b.r*0.34, b.r*0.1, b.x, b.y, b.r);
                 g.addColorStop(0,'rgba('+b.c[0]+','+b.c[1]+','+b.c[2]+','+(ba*1.8).toFixed(3)+')');
                 g.addColorStop(0.6,'rgba('+b.c[0]+','+b.c[1]+','+b.c[2]+','+(ba*0.7).toFixed(3)+')');

@@ -34,7 +34,7 @@
         }
     </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Inter:wght@300;400;500;600;700;800;900&family=DM+Mono:wght@400;500&family=Tourney:wght@700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Inter:wght@300;400;500;600;700;800;900&family=DM+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700&family=Tourney:wght@700&display=swap');
 
         /* === Бренд Nibbl: тёплая палитра (имена переменных сохранены с прошлого бренда) === */
         :root {
@@ -62,7 +62,7 @@
 
         body {
             font-family: 'Inter', system-ui, sans-serif;
-            background-color: var(--bg-body);
+            background-color: transparent;
             color: var(--t-dark);
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
@@ -396,12 +396,18 @@
             z-index: 1;
         }
 
-        /* Bricolage Grotesque — заголовки бренда Nibbl (поддерживает кириллицу) */
-        h1, h2, h3 {
+        /* Заголовки: H1/H2 — серив Playfair (как в референсах HNST/Nothing), H3 — Bricolage */
+        h1, h2 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 800;
+            letter-spacing: -0.005em;
+        }
+        h3 {
             font-family: 'Bricolage Grotesque', sans-serif;
             font-weight: 800;
             letter-spacing: -0.01em;
         }
+        h2 em, .h-accent { font-style: italic; font-weight: 700; color: #E8604F; }
 
         /* Fan Bridge — real-height block, centered on hero/problems boundary via negative margin */
         .fan-bridge {
@@ -514,9 +520,241 @@
             .hero-cta-wrap { margin-bottom: 0 !important; }
             .fan-hint { display: none; }
         }
+
+        /* ===== HERO 2.0 — продукт в герое (диалог) ===== */
+        .hero2 {
+            position: relative;
+            overflow: hidden;
+            background:
+                radial-gradient(60% 55% at 82% 18%, rgba(127,217,201,0.22) 0%, rgba(127,217,201,0) 60%),
+                radial-gradient(50% 50% at 8% 92%, rgba(255,211,168,0.20) 0%, rgba(255,211,168,0) 60%),
+                #ffffff;
+        }
+        .eyebrow {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 7px 14px 7px 12px; border-radius: 999px;
+            background: var(--nibbl-cream);
+            border: 1px solid rgba(255,122,107,0.18);
+            font-size: 13px; font-weight: 600; letter-spacing: 0.01em;
+            color: #8a5a4f;
+        }
+        .eyebrow .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--nibbl-mint); box-shadow: 0 0 0 4px rgba(127,217,201,0.25); }
+        .hero2-h1 {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-weight: 800;
+            color: var(--nibbl-charcoal);
+            font-size: clamp(32px, 3.9vw, 52px);
+            line-height: 1.06;
+            letter-spacing: -0.02em;
+            text-wrap: balance;
+        }
+        .hero2-h1 .accent { color: var(--nibbl-coral); }
+        .hero2-lead {
+            font-size: clamp(16px, 1.35vw, 19px); line-height: 1.6; color: var(--t-gray);
+            max-width: 30em; text-wrap: pretty;
+        }
+        .trust-row { display: flex; flex-wrap: wrap; gap: 10px 18px; }
+        .trust-item { display: inline-flex; align-items: center; gap: 7px; font-size: 13.5px; font-weight: 600; color: var(--t-gray); }
+        .trust-item svg { width: 16px; height: 16px; color: var(--nibbl-mint); flex-shrink: 0; }
+        .btn-ghost {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-weight: 700; font-size: 15px; color: var(--nibbl-charcoal);
+            padding: 14px 20px; border-radius: 10px;
+            border: 1.5px solid rgba(58,58,58,0.14);
+            text-decoration: none; transition: all .2s ease; background: #fff;
+        }
+        .btn-ghost:hover { border-color: var(--nibbl-mint); background: var(--spz-peach-light); transform: translateY(-1px); }
+
+        /* Phone / chat mockup */
+        .phone {
+            position: relative; width: 100%; max-width: 390px; margin: 0 auto;
+            background: #fff; border-radius: 30px;
+            box-shadow: 0 40px 80px -30px rgba(58,58,58,0.32), 0 8px 24px -12px rgba(58,58,58,0.18);
+            border: 1px solid rgba(58,58,58,0.06);
+            overflow: hidden;
+        }
+        .phone-bar {
+            display: flex; align-items: center; gap: 11px;
+            padding: 16px 18px; border-bottom: 1px solid rgba(58,58,58,0.07);
+            background: #fff;
+        }
+        .phone-av { width: 40px; height: 40px; border-radius: 50%; overflow: hidden; flex-shrink: 0; border: 2px solid rgba(127,217,201,0.5); }
+        .phone-av img { width: 100%; height: 100%; object-fit: cover; }
+        .phone-name { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 16px; color: var(--nibbl-charcoal); line-height: 1.1; }
+        .phone-status { font-size: 12px; color: var(--nibbl-mint); font-weight: 600; display: flex; align-items: center; gap: 5px; }
+        .phone-status .live { width: 7px; height: 7px; border-radius: 50%; background: var(--nibbl-mint); }
+        .phone-body {
+            padding: 18px 16px 16px; display: flex; flex-direction: column; gap: 11px;
+            background: linear-gradient(180deg, #FBFAF7 0%, #FFFFFF 100%);
+            min-height: 430px;
+        }
+        .msg { display: flex; gap: 9px; max-width: 100%; opacity: 0; animation: msgIn .5s cubic-bezier(.2,.8,.2,1) forwards; }
+        .msg.out { flex-direction: row-reverse; }
+        .msg-av { width: 28px; height: 28px; border-radius: 50%; overflow: hidden; flex-shrink: 0; align-self: flex-end; }
+        .msg-av img { width: 100%; height: 100%; object-fit: cover; }
+        .bubble { padding: 10px 13px; border-radius: 17px; font-size: 14px; line-height: 1.42; max-width: 80%; }
+        .bubble.in { background: #F1F2F4; color: #2D2D2D; border-bottom-left-radius: 6px; }
+        .bubble.out { background: var(--nibbl-mint); color: #15433c; border-bottom-right-radius: 6px; font-weight: 500; }
+        .bubble .t { display: block; font-size: 10.5px; opacity: 0.55; margin-top: 4px; font-weight: 500; }
+        .typing { display: inline-flex; gap: 4px; align-items: center; padding: 13px 14px; }
+        .typing span { width: 7px; height: 7px; border-radius: 50%; background: #B9BEC4; animation: typeBounce 1.2s infinite; }
+        .typing span:nth-child(2){ animation-delay: .18s; } .typing span:nth-child(3){ animation-delay: .36s; }
+        .booked {
+            margin: 4px auto 0; display: inline-flex; align-items: center; gap: 8px; align-self: center;
+            background: var(--spz-peach-light); color: #1f6b5e; border: 1px solid rgba(127,217,201,0.4);
+            padding: 8px 14px; border-radius: 999px; font-size: 12.5px; font-weight: 700;
+            opacity: 0; animation: msgIn .5s ease forwards;
+        }
+        .booked svg { width: 15px; height: 15px; }
+        @keyframes msgIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+        @keyframes typeBounce { 0%,60%,100% { transform: translateY(0); opacity:.5; } 30% { transform: translateY(-5px); opacity:1; } }
+        @keyframes floaty { 0%,100%{ transform: translateY(0); } 50%{ transform: translateY(-12px); } }
+        .phone-wrap { animation: floaty 6s ease-in-out infinite; }
+        @media (prefers-reduced-motion: reduce) {
+            .msg, .booked { opacity: 1 !important; animation: none !important; }
+            .phone-wrap, .typing span { animation: none !important; }
+        }
+
+        /* Иконки-плитки в секции «Проблемы» */
+        .prob-ic {
+            flex-shrink: 0; width: 46px; height: 46px; border-radius: 13px;
+            display: flex; align-items: center; justify-content: center;
+            background: #FFF1EE; color: var(--nibbl-coral);
+        }
+        .prob-ic svg { width: 23px; height: 23px; }
+
+        /* Кнопки — оригинальный неоновый стиль (свечение восстановлено) + единый радиус для всех CTA */
+        .btn-neon { border-radius: 12px; }
+        .btn-neon::before { border-radius: 14px; }
+
+        /* ===== P7 — типографика ===== */
+        h1, h2, h3 { text-wrap: balance; }
+        #stats [id^="stat-"] span, #stats .font-bold, #stats .font-black { font-variant-numeric: tabular-nums; }
+
+        /* ===== «Как работает» — круги с иконкой ===== */
+        .how-circle {
+            position: relative; width: 92px; height: 92px; border-radius: 50%;
+            background: #fff; border: 1px solid rgba(255,122,107,0.12);
+            box-shadow: 0 14px 34px -14px rgba(255,122,107,0.30);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--nibbl-coral); transition: transform .3s ease;
+        }
+        .how-step:hover .how-circle { transform: translateY(-6px); }
+        .how-circle svg { width: 38px; height: 38px; }
+        .how-num {
+            position: absolute; top: -7px; right: -7px; width: 28px; height: 28px; border-radius: 50%;
+            background: var(--nibbl-mint); color: #15433c;
+            font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 14px;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 3px 9px rgba(127,217,201,0.45);
+        }
+
+        /* ===== HERO — живой параллакс-фон (орбы + частицы + подсветка + зерно) ===== */
+        .hero-ed {
+            position: relative; overflow: hidden;
+            background: linear-gradient(180deg, #FFF6EC 0%, #FAF4EC 50%, #F1EBDF 100%);
+        }
+        .hero-bg { position: absolute; inset: -25%; z-index: 0; pointer-events: none; }
+        .orb-wrap { position: absolute; will-change: transform; }
+        .orb-wrap > i { display: block; width: 100%; height: 100%; border-radius: 50%; filter: blur(90px); animation: orbBreathe 13s ease-in-out infinite; will-change: transform; }
+        @keyframes orbBreathe { 0%,100% { transform: scale(1); } 50% { transform: scale(1.24); } }
+        .hero-spot {
+            position: absolute; inset: 0; z-index: 1; pointer-events: none; mix-blend-mode: soft-light;
+            background: radial-gradient(440px 440px at var(--mx, 50%) var(--my, 36%), rgba(255,255,255,0.95), rgba(255,255,255,0) 62%);
+        }
+        #hero-particles { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+        .grain {
+            position: absolute; inset: 0; z-index: 2; pointer-events: none; opacity: 0.55; mix-blend-mode: soft-light;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            background-size: 170px 170px;
+        }
+        @media (prefers-reduced-motion: reduce) { .orb-wrap > i { animation: none; } }
+        .ed-eyebrow {
+            font-family: 'DM Mono', monospace;
+            font-size: 12.5px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase;
+            color: #C0664E; display: inline-flex; align-items: center; gap: 12px;
+        }
+        .ed-eyebrow::before, .ed-eyebrow::after { content: ''; width: 24px; height: 1px; background: rgba(232,96,79,0.4); }
+        .ed-h1 {
+            font-family: 'Playfair Display', serif; font-weight: 800;
+            font-size: clamp(40px, 7.3vw, 94px); line-height: 1.03; letter-spacing: -0.005em;
+            color: var(--nibbl-charcoal); text-wrap: balance;
+        }
+        .ed-h1 .line { display: block; }
+        .ed-h1 em { font-style: italic; font-weight: 600; color: #E8604F; }
+        .dotgrid {
+            position: absolute; z-index: 1; pointer-events: none;
+            background-image: radial-gradient(rgba(232,96,79,0.5) 1.4px, transparent 1.5px);
+            background-size: 15px 15px; opacity: 0.55;
+        }
+
+        /* ===== Scroll-reveal: выдвигающиеся элементы по скроллу ===== */
+        .reveal { opacity: 0; transform: translateY(34px); transition: opacity .75s cubic-bezier(.2,.7,.2,1), transform .75s cubic-bezier(.2,.7,.2,1); will-change: opacity, transform; }
+        .reveal.in { opacity: 1; transform: none; }
+        .reveal-left { transform: translateX(-40px); }
+        .reveal-right { transform: translateX(40px); }
+        .reveal-left.in, .reveal-right.in { transform: none; }
+        @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1 !important; transform: none !important; transition: none; } }
+
+        /* мягкая тёплая аура-подложка для контентных секций + дот-акцент */
+        .sec-aura { position: absolute; border-radius: 50%; filter: blur(90px); pointer-events: none; z-index: 0; }
+        .sec-dots {
+            position: absolute; z-index: 0; pointer-events: none; opacity: 0.4;
+            background-image: radial-gradient(rgba(232,96,79,0.45) 1.3px, transparent 1.4px);
+            background-size: 16px 16px;
+        }
+
+        /* ===== Единый фон на всю страницу (виден сквозь все секции, двигается при скролле) ===== */
+        html { background: #FFFDFB; }
+        .page-bg {
+            position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden;
+            background: linear-gradient(170deg, #FFFFFF 0%, #FFFDFB 100%);
+        }
+        .page-bg .pb { position: absolute; }
+        .page-bg .pb > i {
+            display: block; width: 100%; height: 100%; border-radius: 44% 56% 52% 48%;
+            filter: blur(64px); mix-blend-mode: multiply; will-change: transform;
+        }
+        @keyframes drift1 { 0%,100%{transform:translate(0,0) scale(1);} 33%{transform:translate(170%,55%) scale(1.2);} 66%{transform:translate(90%,-45%) scale(0.85);} }
+        @keyframes drift2 { 0%,100%{transform:translate(0,0) scale(1);} 33%{transform:translate(-165%,-40%) scale(1.1);} 66%{transform:translate(-70%,45%) scale(0.88);} }
+        @keyframes drift3 { 0%,100%{transform:translate(0,0) scale(0.95);} 33%{transform:translate(140%,-60%) scale(1.18);} 66%{transform:translate(-110%,35%) scale(1.05);} }
+        @media (prefers-reduced-motion: reduce) { .page-bg .pb > i { animation: none !important; } }
+        .page-bg #page-particles { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+        .page-dots {
+            position: fixed; inset: 0; z-index: -1; pointer-events: none;
+            background-image: radial-gradient(rgba(80,64,56,0.05) 1px, transparent 1.3px);
+            background-size: 22px 22px;
+        }
+        .ed-sub { font-size: clamp(16px, 1.45vw, 20px); line-height: 1.6; color: #6E655C; max-width: 34rem; text-wrap: pretty; }
+        .pill {
+            display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+            border-radius: 999px; font-weight: 700; font-size: 16px; padding: 16px 30px;
+            text-decoration: none; transition: background .2s ease, transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+        }
+        .pill-coral { background: var(--nibbl-coral); color: #fff; box-shadow: 0 12px 26px -12px rgba(255,122,107,0.65); }
+        .pill-coral:hover { background: #F0664F; transform: translateY(-2px); }
+        .pill-ghost { background: transparent; color: #E8604F; border: 1.5px solid rgba(232,96,79,0.45); }
+        .pill-ghost:hover { border-color: #E8604F; transform: translateY(-2px); background: rgba(232,96,79,0.06); }
+        .ed-sticker { position: absolute; z-index: 2; animation: floaty 6.5s ease-in-out infinite; pointer-events: none; }
+        .ticker { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
+        .ticker-track { display: inline-flex; white-space: nowrap; animation: tick 30s linear infinite; }
+        .ticker-item { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: clamp(19px, 2.6vw, 30px); color: rgba(58,58,58,0.14); padding: 0 26px; letter-spacing: -0.01em; }
+        .ticker-item .d { color: rgba(255,122,107,0.5); }
+        @keyframes tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        @media (prefers-reduced-motion: reduce) { .ticker-track { animation: none; } .ed-sticker { animation: none; } }
+        @media (max-width: 720px) { .ed-sticker { display: none; } }
+
     </style>
 </head>
 <body class="antialiased min-h-screen selection:bg-spz-purple selection:text-white">
+
+    <!-- ЕДИНЫЙ ФОН НА ВСЮ СТРАНИЦУ -->
+    <div class="page-bg" aria-hidden="true">
+        <div class="pb" style="width:26vw;height:26vw;left:2%;top:8%;"><i style="background:#FFC2B6;opacity:.28;animation:drift1 38s ease-in-out infinite;"></i></div>
+        <div class="pb" style="width:24vw;height:24vw;right:4%;top:40%;"><i style="background:#BFE8DD;opacity:.26;animation:drift2 46s ease-in-out infinite;"></i></div>
+        <div class="pb" style="width:28vw;height:28vw;left:32%;top:66%;"><i style="background:#FFDDC2;opacity:.28;animation:drift3 42s ease-in-out infinite;"></i></div>
+    </div>
+    <div class="page-dots" aria-hidden="true"></div>
 
     <!-- NAVIGATION -->
     <nav class="fixed top-0 left-0 right-0 z-50 p-4">
@@ -548,87 +786,127 @@
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
-    <section class="hero-section relative min-h-[100svh] flex flex-col items-center overflow-hidden bg-white" style="padding-top: clamp(120px, 15vw, 180px); padding-bottom: clamp(60px, 8vw, 100px);">
-
-        <!-- Blob background -->
-        <div id="blob-wrapper" style="position:absolute; width:150%; height:150%; top:-25%; left:-25%; z-index:0; will-change:transform; transition:transform 0.12s ease-out; pointer-events:none;">
-            <div class="animate-pop-blob" style="position:absolute; top:20%; right:15%; width:600px; height:600px; border-radius:50%; background:#7FD9C9; opacity:0.35; filter:blur(90px);"></div>
-            <div class="animate-pop-blob" style="position:absolute; bottom:15%; left:15%; width:600px; height:600px; border-radius:50%; background:#7FD9C9; opacity:0.35; filter:blur(90px); animation-delay:1.8s;"></div>
+    <!-- HERO — Editorial + параллакс-фон -->
+    <section class="hero-ed relative" style="padding-top: clamp(104px, 11vw, 148px); padding-bottom: clamp(48px, 6vw, 84px);">
+        <div class="hero-bg" aria-hidden="true">
+            <div class="orb-wrap" data-depth="0.06" style="width:min(72vw,820px);aspect-ratio:1;left:-10%;top:-10%;"><i style="background:radial-gradient(circle,#FF7A6B 0%,rgba(255,122,107,0) 66%);opacity:.28;"></i></div>
+            <div class="orb-wrap" data-depth="0.10" style="width:min(74vw,860px);aspect-ratio:1;right:-12%;top:-16%;"><i style="background:radial-gradient(circle,#7FD9C9 0%,rgba(127,217,201,0) 66%);opacity:.34;"></i></div>
+            <div class="orb-wrap" data-depth="0.08" style="width:min(64vw,720px);aspect-ratio:1;left:20%;bottom:-32%;"><i style="background:radial-gradient(circle,#FFD3A8 0%,rgba(255,211,168,0) 66%);opacity:.32;"></i></div>
+            <div class="orb-wrap" data-depth="0.14" style="width:min(48vw,540px);aspect-ratio:1;right:22%;bottom:-6%;"><i style="background:radial-gradient(circle,#FF9A8B 0%,rgba(255,154,139,0) 66%);opacity:.24;"></i></div>
+            <div class="orb-wrap" data-depth="0.12" style="width:min(42vw,460px);aspect-ratio:1;left:2%;bottom:-12%;"><i style="background:radial-gradient(circle,#7FD9C9 0%,rgba(127,217,201,0) 66%);opacity:.3;"></i></div>
         </div>
+        <canvas id="hero-particles" aria-hidden="true"></canvas>
+        <div class="hero-spot" aria-hidden="true"></div>
+        <div class="dotgrid" style="top:clamp(118px,15vw,182px);left:5%;width:78px;height:118px;" aria-hidden="true"></div>
+        <div class="dotgrid" style="bottom:13%;right:6%;width:118px;height:80px;" aria-hidden="true"></div>
+        <div class="grain" aria-hidden="true"></div>
 
-        <!-- AI ASSISTANT Title -->
-        <div class="bold-copy-wrap relative z-10 w-full max-w-[900px] mx-auto overflow-visible"
-             style="font-family: 'Tourney', cursive;"
-             onclick="this.classList.toggle('is-active')">
-            <div class="bold-copy-bg uppercase select-none">
-                AI ASSISTANT
+        <div class="relative z-10 max-w-5xl mx-auto px-6 flex flex-col items-center text-center">
+            <span class="ed-eyebrow">KI-Assistent für Zahnarztpraxen</span>
+            <h1 class="ed-h1 mt-8">
+                <span class="line">Patient schreibt —</span>
+                <span class="line">Nibbl <em>antwortet</em></span>
+                <span class="line">und bucht den Termin.</span>
+            </h1>
+            <p class="ed-sub mt-9">Berät Patienten in Telegram, WhatsApp und Instagram und führt sie bis zur Terminbuchung. Auch nachts — ganz ohne Empfang.</p>
+            <div class="flex items-center justify-center mt-10">
+                <a href="#cta" class="btn-neon text-[15px] sm:text-[17px] px-12 py-4"><div class="btn-neon-inner"></div>Nibbl kennenlernen</a>
             </div>
-            <div class="bold-copy-fg uppercase">
-                AI ASSISTANT
+        </div>
+
+        <div class="ticker relative z-10" style="margin-top: clamp(46px, 6vw, 88px);">
+            <div class="ticker-track">
+                <span class="ticker-item"><span class="d">•</span>&nbsp;Telegram</span><span class="ticker-item"><span class="d">•</span>&nbsp;WhatsApp</span><span class="ticker-item"><span class="d">•</span>&nbsp;Instagram</span><span class="ticker-item"><span class="d">•</span>&nbsp;Viber</span><span class="ticker-item"><span class="d">•</span>&nbsp;Facebook</span><span class="ticker-item"><span class="d">•</span>&nbsp;Website</span><span class="ticker-item"><span class="d">•</span>&nbsp;E-Mail</span><span class="ticker-item"><span class="d">•</span>&nbsp;Telegram</span><span class="ticker-item"><span class="d">•</span>&nbsp;WhatsApp</span><span class="ticker-item"><span class="d">•</span>&nbsp;Instagram</span><span class="ticker-item"><span class="d">•</span>&nbsp;Viber</span><span class="ticker-item"><span class="d">•</span>&nbsp;Facebook</span><span class="ticker-item"><span class="d">•</span>&nbsp;Website</span><span class="ticker-item"><span class="d">•</span>&nbsp;E-Mail</span>
             </div>
         </div>
-
-        <!-- Subtitle -->
-        <p class="relative z-10 text-center text-gray-500 font-medium max-w-md sm:max-w-xl mx-auto px-6 leading-relaxed" style="font-size: clamp(15px, 2.2vw, 18px); margin-bottom: clamp(32px, 5vw, 72px);">
-            Antwortet Patienten in Sekunden in Messengern, beantwortet ihre Fragen und hilft bei der Terminbuchung. Keine Anfrage geht verloren — Patienten gehen nicht zur Konkurrenz.
-        </p>
-
-        <!-- Button -->
-        <div class="hero-cta-wrap relative z-10" style="margin-bottom: clamp(80px, 12vw, 140px);">
-            <a href="#cta" class="btn-neon text-[15px] sm:text-[17px] px-12 py-4">
-                <div class="btn-neon-inner"></div>
-                Jetzt testen
-            </a>
-        </div>
-
     </section>
 
-    <!-- FAN BRIDGE -->
-    <div class="fan-bridge">
-        <div class="fan-container" onclick="this.classList.toggle('is-open')">
-            <div class="glass" style="--r: -15;" data-text="Antworten 24/7">
-                <svg class="card-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M20 2H4C2.9 2 2 2.9 2 4v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 12H6l-2 2V4h16v10z"/>
-                </svg>
-            </div>
-            <div class="glass" style="--r: 0;" data-text="Online-Termin">
-                <svg class="card-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M19 3h-1V1h-2v2H8V1H6v2H5C3.9 3 3 3.9 3 5v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
-                </svg>
-            </div>
-            <div class="glass" style="--r: 15;" data-text="Erinnerungen">
-                <svg class="card-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.1-1.6-5.6-4.5-6.3V4c0-.8-.7-1.5-1.5-1.5S10.5 3.2 10.5 4v.7C7.6 5.4 6 7.9 6 11v5l-2 2v1h16v-1l-2-2z"/>
-                </svg>
-            </div>
-        </div>
-    </div>
+    <script>
+    (function(){
+        var hero = document.querySelector('.hero-ed');
+        if(!hero) return;
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var wraps = [].slice.call(hero.querySelectorAll('.orb-wrap'));
+        var spot = hero.querySelector('.hero-spot');
+        var tmx=0, tmy=0, mx=0, my=0, sy=0, t=0;
+        hero.addEventListener('mousemove', function(e){
+            tmx = (e.clientX/window.innerWidth - 0.5);
+            tmy = (e.clientY/window.innerHeight - 0.5);
+            if(spot){ var r=hero.getBoundingClientRect(); spot.style.setProperty('--mx',(e.clientX-r.left)+'px'); spot.style.setProperty('--my',(e.clientY-r.top)+'px'); }
+        }, {passive:true});
+        window.addEventListener('scroll', function(){ sy = window.pageYOffset || 0; }, {passive:true});
+        function raf(){
+            t += 0.006;
+            mx += (tmx-mx)*0.07; my += (tmy-my)*0.07;
+            for(var i=0;i<wraps.length;i++){
+                var w=wraps[i], d=parseFloat(w.getAttribute('data-depth'))||0.06;
+                var ax = Math.sin(t + i*1.6) * (30 + i*10);
+                var ay = Math.cos(t*0.9 + i*1.2) * (26 + i*8);
+                var x = mx*d*420 + ax, y = my*d*420 + sy*d*0.7 + ay;
+                w.style.transform = 'translate3d('+x.toFixed(1)+'px,'+y.toFixed(1)+'px,0)';
+            }
+            requestAnimationFrame(raf);
+        }
+        if(!reduce) requestAnimationFrame(raf);
+
+        // летящие светящиеся частицы
+        var cv = document.getElementById('hero-particles');
+        if(cv && !reduce){
+            var ctx = cv.getContext('2d'), W=0, H=0, parts=[];
+            function size(){ W = cv.width = hero.offsetWidth; H = cv.height = hero.offsetHeight; }
+            size(); window.addEventListener('resize', size, {passive:true});
+            var cols = ['255,122,107', '127,217,201', '255,176,128'];
+            for(var i=0;i<48;i++){ parts.push({ x:Math.random()*W, y:Math.random()*H, r:Math.random()*2.4+0.8, vy:-(Math.random()*0.45+0.12), vx:(Math.random()-0.5)*0.2, a:Math.random()*0.5+0.18, c:cols[i%3] }); }
+            (function loop(){
+                ctx.clearRect(0,0,W,H);
+                for(var i=0;i<parts.length;i++){
+                    var p=parts[i]; p.y+=p.vy; p.x+=p.vx;
+                    if(p.y<-8){ p.y=H+8; p.x=Math.random()*W; }
+                    ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,6.2832);
+                    ctx.fillStyle='rgba('+p.c+','+p.a+')'; ctx.shadowBlur=10; ctx.shadowColor='rgba('+p.c+',0.8)'; ctx.fill();
+                }
+                ctx.shadowBlur=0;
+                requestAnimationFrame(loop);
+            })();
+        }
+    })();
+    </script>
 
     <!-- PROBLEMS -->
-    <section id="problems" class="problems-section bg-white relative overflow-hidden" style="background-color: #ffffff; padding-top: clamp(48px, 8vw, 100px); padding-bottom: 96px;">
-        <div style="position:absolute; bottom:-100px; left:-100px; width:500px; height:500px; border-radius:50%; background:#7FD9C9; opacity:0.12; filter:blur(80px); pointer-events:none; z-index:0;"></div>
-        <div class="max-w-7xl mx-auto px-6 relative z-10">
-            <div class="text-center max-w-2xl mx-auto mb-16">
-                <h2 class="text-3xl lg:text-4xl font-extrabold mb-6 text-gray-900 leading-tight tracking-tight">Was ohne KI-Assistent passiert</h2>
-                <p class="text-lg text-gray-500 font-medium">Jeder verpasste Anruf ist ein verlorener Patient. Jeder vergessene Termin sind direkte Verluste für die Praxis.</p>
+    <section id="problems" class="problems-section relative" style="padding-top: clamp(64px, 9vw, 112px); padding-bottom: clamp(64px, 9vw, 112px);">
+        <div class="max-w-6xl mx-auto px-6 relative z-10">
+            <div class="max-w-2xl mb-14">
+                <h2 class="text-3xl lg:text-[2.6rem] font-extrabold mb-5 text-gray-900 leading-[1.1] tracking-tight" style="text-wrap:balance;">Was ohne KI-Assistent passiert</h2>
+                <p class="text-lg text-gray-500 font-medium leading-relaxed" style="text-wrap:pretty;">Jeder verpasste Anruf ist ein verlorener Patient. Jeder vergessene Termin sind direkte Verluste für die Praxis.</p>
             </div>
-            <div class="grid md:grid-cols-2 gap-6">
-                <div class="clean-card p-8 bg-white border-l-4 border-l-spz-error">
-                    <h3 class="text-xl font-bold mb-3 text-gray-900">Zu späte Antworten</h3>
-                    <p class="text-gray-500 text-base leading-relaxed font-medium">Patienten schreiben abends oder gleichzeitig an mehrere Praxen. Bis Sie antworten, haben sie bereits woanders einen Termin gebucht.</p>
+            <div class="grid md:grid-cols-2 gap-x-12 gap-y-10">
+                <div class="flex gap-4 items-start reveal">
+                    <span class="prob-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+                    <div>
+                        <h3 class="text-lg font-bold mb-1.5 text-gray-900">Zu späte Antworten</h3>
+                        <p class="text-gray-500 leading-relaxed">Patienten schreiben abends oder gleichzeitig an mehrere Praxen. Bis Sie antworten, haben sie bereits woanders einen Termin gebucht.</p>
+                    </div>
                 </div>
-                <div class="clean-card p-8 bg-white border-l-4 border-l-spz-error">
-                    <h3 class="text-xl font-bold mb-3 text-gray-900">Überlastetes Personal</h3>
-                    <p class="text-gray-500 text-base leading-relaxed font-medium">Telefonate, Patienten, Aufgaben. Nachrichten in Messengern warten auf eine Antwort und gehen verloren.</p>
+                <div class="flex gap-4 items-start reveal">
+                    <span class="prob-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg></span>
+                    <div>
+                        <h3 class="text-lg font-bold mb-1.5 text-gray-900">Überlastetes Personal</h3>
+                        <p class="text-gray-500 leading-relaxed">Telefonate, Patienten, Aufgaben. Nachrichten in Messengern warten auf eine Antwort und gehen verloren.</p>
+                    </div>
                 </div>
-                <div class="clean-card p-8 bg-white border-l-4 border-l-spz-error">
-                    <h3 class="text-xl font-bold mb-3 text-gray-900">Unvollständige Gespräche</h3>
-                    <p class="text-gray-500 text-base leading-relaxed font-medium">Eine kurze oder unklare Antwort. Der Patient hat nicht bekommen, was er brauchte — und sucht woanders weiter.</p>
+                <div class="flex gap-4 items-start reveal">
+                    <span class="prob-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"/></svg></span>
+                    <div>
+                        <h3 class="text-lg font-bold mb-1.5 text-gray-900">Unvollständige Gespräche</h3>
+                        <p class="text-gray-500 leading-relaxed">Eine kurze oder unklare Antwort. Der Patient hat nicht bekommen, was er brauchte — und sucht woanders weiter.</p>
+                    </div>
                 </div>
-                <div class="clean-card p-8 bg-white border-l-4 border-l-spz-error">
-                    <h3 class="text-xl font-bold mb-3 text-gray-900">Inkonsistente Antwortqualität</h3>
-                    <p class="text-gray-500 text-base leading-relaxed font-medium">Heute eine gute Antwort. Morgen vergessen oder hastig. Patienten wählen die Praxis, die besser kommuniziert.</p>
+                <div class="flex gap-4 items-start reveal">
+                    <span class="prob-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
+                    <div>
+                        <h3 class="text-lg font-bold mb-1.5 text-gray-900">Inkonsistente Antwortqualität</h3>
+                        <p class="text-gray-500 leading-relaxed">Heute eine gute Antwort. Morgen vergessen oder hastig. Patienten wählen die Praxis, die besser kommuniziert.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -636,7 +914,7 @@
 
 
     <!-- HOW IT WORKS -->
-    <section id="how" class="py-24 bg-[#FAFAFA] relative overflow-hidden">
+    <section id="how" class="py-24 relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="text-center max-w-3xl mx-auto mb-20">
                 <h2 class="text-3xl lg:text-4xl font-extrabold mb-6 text-gray-900 leading-tight tracking-tight">Wie der KI-Rezeptionist funktioniert</h2>
@@ -645,33 +923,34 @@
             </div>
 
             <div class="grid md:grid-cols-3 gap-8 relative">
-                <div class="hidden md:block absolute top-[60px] left-[10%] right-[10%] h-0.5 z-0" style="background: linear-gradient(90deg, var(--spz-purple-light) 0%, var(--spz-purple) 50%, var(--spz-purple-light) 100%); opacity: 0.4;"></div>
+                <!-- Connecting line for desktop -->
+                <div class="hidden md:block absolute top-[46px] left-[16%] right-[16%] h-0.5 z-0" style="background: linear-gradient(90deg, transparent 0%, var(--nibbl-coral) 50%, transparent 100%); opacity: 0.25;"></div>
 
                 <!-- Step 1 -->
-                <div class="relative z-10 text-center mx-auto max-w-sm group">
-                    <div class="w-32 h-32 bg-white rounded-full shadow-lg border-4 border-[#FAFAFA] flex items-center justify-center mx-auto mb-8 text-4xl font-black text-spz-purple relative group-hover:-translate-y-2 transition duration-300">
-                        1
-                        <div class="absolute inset-0 rounded-full border border-spz-purple/20 scale-110 opacity-0 group-hover:opacity-100 group-hover:scale-125 transition duration-500"></div>
+                <div class="how-step relative z-10 text-center mx-auto max-w-sm reveal">
+                    <div class="how-circle mx-auto mb-7">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+                        <span class="how-num">1</span>
                     </div>
-                    <h3 class="text-2xl font-extrabold mb-4 text-gray-900">Arbeitet in Messengern</h3>
+                    <h3 class="text-2xl font-extrabold mb-3 text-gray-900">Arbeitet in Messengern</h3>
                     <p class="text-gray-500 font-medium leading-relaxed px-4">Telegram, WhatsApp, Instagram — der KI-Assistent arbeitet in Ihren Kanälen und ist immer online.</p>
                 </div>
                 <!-- Step 2 -->
-                <div class="relative z-10 text-center mx-auto max-w-sm group">
-                    <div class="w-32 h-32 bg-white rounded-full shadow-lg border-4 border-[#FAFAFA] flex items-center justify-center mx-auto mb-8 text-4xl font-black relative group-hover:-translate-y-2 transition duration-300" style="color: #FF7557;">
-                        2
-                        <div class="absolute inset-0 rounded-full border opacity-0 group-hover:opacity-100 group-hover:scale-125 transition duration-500" style="border-color: rgba(255,117,87,0.25); transform-origin: center; scale: 1.1;"></div>
+                <div class="how-step relative z-10 text-center mx-auto max-w-sm reveal">
+                    <div class="how-circle mx-auto mb-7">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                        <span class="how-num">2</span>
                     </div>
-                    <h3 class="text-2xl font-extrabold mb-4 text-gray-900">Kennt alles über Ihre Praxis</h3>
+                    <h3 class="text-2xl font-extrabold mb-3 text-gray-900">Kennt alles über Ihre Praxis</h3>
                     <p class="text-gray-500 font-medium leading-relaxed px-4">Leistungen, Preise, Terminpläne der Ärzte — antwortet präzise und zielgerichtet auf jede Patientenfrage.</p>
                 </div>
                 <!-- Step 3 -->
-                <div class="relative z-10 text-center mx-auto max-w-sm group">
-                    <div class="w-32 h-32 bg-white rounded-full shadow-lg border-4 border-[#FAFAFA] flex items-center justify-center mx-auto mb-8 text-4xl font-black text-[#FF9A8B] relative group-hover:-translate-y-2 transition duration-300">
-                        3
-                        <div class="absolute inset-0 rounded-full border border-[#FF9A8B]/20 scale-110 opacity-0 group-hover:opacity-100 group-hover:scale-125 transition duration-500"></div>
+                <div class="how-step relative z-10 text-center mx-auto max-w-sm reveal">
+                    <div class="how-circle mx-auto mb-7">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M9 16l2 2 4-4"/></svg>
+                        <span class="how-num">3</span>
                     </div>
-                    <h3 class="text-2xl font-extrabold mb-4 text-gray-900">Trägt in CRM ein</h3>
+                    <h3 class="text-2xl font-extrabold mb-3 text-gray-900">Trägt in CRM ein</h3>
                     <p class="text-gray-500 font-medium leading-relaxed px-4">Erfasst Termine direkt in Ihrem CRM — ohne Beteiligung des Empfangspersonals.</p>
                 </div>
             </div>
@@ -679,7 +958,7 @@
     </section>
 
     <!-- BENEFITS -->
-    <section id="benefits" class="py-24 relative overflow-hidden" style="background-color: var(--spz-purple-light);">
+    <section id="benefits" class="py-24 relative overflow-hidden" style="">
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="text-center max-w-2xl mx-auto mb-16">
                 <h2 class="text-3xl lg:text-4xl font-extrabold mb-6 text-gray-900 leading-tight tracking-tight">Was Sie bereits in der ersten Woche erhalten</h2>
@@ -688,7 +967,7 @@
 
             <div class="grid md:grid-cols-2 gap-8">
                 <!-- Benefit 1 -->
-                <div class="clean-card overflow-hidden bg-white flex flex-col md:flex-row">
+                <div class="clean-card overflow-hidden bg-white flex flex-col md:flex-row reveal">
                     <div class="md:w-48 w-full h-48 md:h-auto flex-shrink-0 overflow-hidden">
                         <img src="assets/24_7.png" alt="Sofortige Antwort 24/7" class="w-full h-full object-cover">
                     </div>
@@ -698,7 +977,7 @@
                     </div>
                 </div>
                 <!-- Benefit 2 -->
-                <div class="clean-card overflow-hidden bg-white flex flex-col md:flex-row">
+                <div class="clean-card overflow-hidden bg-white flex flex-col md:flex-row reveal">
                     <div class="md:w-48 w-full h-48 md:h-auto flex-shrink-0 overflow-hidden">
                         <img src="assets/Increased_conversion.png" alt="Höhere Terminkonversion" class="w-full h-full object-cover">
                     </div>
@@ -708,7 +987,7 @@
                     </div>
                 </div>
                 <!-- Benefit 3 -->
-                <div class="clean-card overflow-hidden bg-white flex flex-col md:flex-row">
+                <div class="clean-card overflow-hidden bg-white flex flex-col md:flex-row reveal">
                     <div class="md:w-48 w-full h-48 md:h-auto flex-shrink-0 overflow-hidden">
                         <img src="assets/Save_time.png" alt="Zeitersparnis" class="w-full h-full object-cover">
                     </div>
@@ -718,7 +997,7 @@
                     </div>
                 </div>
                 <!-- Benefit 4 -->
-                <div class="clean-card overflow-hidden bg-white flex flex-col md:flex-row">
+                <div class="clean-card overflow-hidden bg-white flex flex-col md:flex-row reveal">
                     <div class="md:w-48 w-full h-48 md:h-auto flex-shrink-0 overflow-hidden">
                         <img src="assets/Service_standardization.png" alt="Servicestandardisierung" class="w-full h-full object-cover">
                     </div>
@@ -876,10 +1155,11 @@
     </section>
 
     <!-- STATS -->
-    <section id="stats" class="py-24 relative overflow-hidden" style="background-color: #2E2A28; font-family: 'Geist', 'Outfit', sans-serif;">
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full opacity-15 blur-[120px] pointer-events-none" style="background: var(--nibbl-mint);"></div>
-
-        <div class="max-w-7xl mx-auto px-6 relative z-10">
+    <section id="stats" class="py-16 relative" style="font-family: 'Geist', 'Outfit', sans-serif;">
+        <div class="max-w-7xl mx-auto px-5 sm:px-6">
+        <div class="relative z-10 rounded-[2.2rem] overflow-hidden px-6 sm:px-10 py-16 reveal" style="background:#2E2A28; box-shadow:0 40px 90px -45px rgba(46,42,40,0.55);">
+            <!-- bg glow -->
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full opacity-20 blur-[120px] pointer-events-none" style="background: var(--nibbl-mint);"></div>
             <div class="text-center max-w-2xl mx-auto mb-16">
                 <h2 class="text-3xl lg:text-4xl font-extrabold text-white leading-tight tracking-tight mb-4">Warum das jetzt wichtig ist</h2>
                 <p class="text-lg font-medium" style="color: rgba(255,255,255,0.5);">Marktdaten, die für sich sprechen.</p>
@@ -888,7 +1168,7 @@
             <div class="grid md:grid-cols-3 gap-6 mb-12">
 
                 <!-- Stat 1 -->
-                <div id="stat-card-1" class="rounded-2xl p-8 flex flex-col" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">
+                <div id="stat-card-1" class="rounded-2xl p-8 flex flex-col reveal" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">
                     <p class="text-sm font-semibold uppercase tracking-wider mb-6" style="color: rgba(255,255,255,0.4);">US-Praxen nutzen bereits KI</p>
                     <div class="flex items-center gap-6 mb-6">
                         <div class="relative flex-shrink-0" style="width:100px;height:100px;">
@@ -919,7 +1199,7 @@
                 </div>
 
                 <!-- Stat 2 -->
-                <div id="stat-card-2" class="rounded-2xl p-8 flex flex-col" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">
+                <div id="stat-card-2" class="rounded-2xl p-8 flex flex-col reveal" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">
                     <p class="text-sm font-semibold uppercase tracking-wider mb-6" style="color: rgba(255,255,255,0.4);">Verpasste Anfragen</p>
                     <div class="flex gap-3 mb-1">
                         <div class="flex-1 text-center"><span class="text-xs" style="color:rgba(255,255,255,0.4);">Arbeitszeit</span></div>
@@ -941,7 +1221,7 @@
                 </div>
 
                 <!-- Stat 3 -->
-                <div id="stat-card-3" class="rounded-2xl p-8 flex flex-col" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">
+                <div id="stat-card-3" class="rounded-2xl p-8 flex flex-col reveal" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">
                     <p class="text-sm font-semibold uppercase tracking-wider mb-6" style="color: rgba(255,255,255,0.4);">Terminkonversion</p>
                     <div class="flex flex-col gap-5 mb-6 flex-1">
                         <div>
@@ -971,10 +1251,11 @@
 
             <p class="text-center text-xs" style="color:rgba(255,255,255,0.25);">Quellen: US-Branchenberichte, 2025–2026</p>
         </div>
+        </div>
     </section>
 
     <!-- CTA MID -->
-    <section class="py-24 bg-gradient-cta relative overflow-hidden">
+    <section class="py-24 relative overflow-hidden">
         <div class="max-w-2xl mx-auto px-6 text-center">
             <h2 class="text-3xl lg:text-4xl font-extrabold mb-6 text-gray-900 leading-tight tracking-tight">Während Sie das lesen — antworten andere Praxen bereits Ihren Patienten.</h2>
             <p class="text-lg text-gray-500 font-medium leading-relaxed mb-10">Jeder Tag ohne das System bedeutet verlorene Buchungen.</p>
@@ -986,36 +1267,36 @@
     </section>
 
     <!-- CUSTOM FIT -->
-    <section class="py-24 bg-[#FAFAFA] relative">
-        <div class="max-w-7xl mx-auto px-6">
+    <section class="py-24 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="text-center max-w-2xl mx-auto mb-16">
                 <h2 class="text-3xl lg:text-4xl font-extrabold mb-6 text-gray-900 leading-tight tracking-tight">Das ist kein Service. Das ist ein Assistent für Ihre Praxis.</h2>
                 <p class="text-lg text-gray-500 font-medium leading-relaxed">Wir liefern keinen fertigen Standardbot. Wir konfigurieren den Assistenten auf Ihre Leistungen, Preise und Buchungsabläufe.</p>
             </div>
 
             <div class="grid md:grid-cols-2 gap-6">
-                <div class="flex gap-6 items-start p-8 rounded-2xl" style="background: linear-gradient(135deg, #F1FAF7 0%, #E2F4EF 100%); box-shadow: 0 4px 24px rgba(255, 122, 107,0.10);">
+                <div class="flex gap-6 items-start p-8 rounded-2xl reveal" style="background:#ffffff; border:1px solid rgba(255,122,107,0.08); box-shadow: 0 14px 36px -16px rgba(255,122,107,0.22), 0 4px 14px -8px rgba(58,58,58,0.06);">
                     <svg class="flex-shrink-0 w-10 h-10 text-spz-purple" fill="currentColor" viewBox="0 0 24 24"><path d="M3 17v2h6v-2H3zM3 5v2h10V5H3zm10 16v-2h8v-2h-8v-2h-2v6h2zM7 9v2H3v2h4v2h2V9H7zm14 4v-2H11v2h10zm-6-4h2V7h4V5h-4V3h-2v6z"/></svg>
                     <div>
                         <h4 class="font-extrabold text-xl mb-2 text-gray-900">Auf Ihre Praxis abgestimmt</h4>
                         <p class="text-gray-500 font-medium leading-relaxed">Kennt Ihre Behandlungen, Preise und Buchungsregeln. Antwortet so, wie Ihr Empfangspersonal es tun würde.</p>
                     </div>
                 </div>
-                <div class="flex gap-6 items-start p-8 rounded-2xl" style="background: linear-gradient(135deg, #F1FAF7 0%, #E2F4EF 100%); box-shadow: 0 4px 24px rgba(255, 122, 107,0.10);">
+                <div class="flex gap-6 items-start p-8 rounded-2xl reveal" style="background:#ffffff; border:1px solid rgba(255,122,107,0.08); box-shadow: 0 14px 36px -16px rgba(255,122,107,0.22), 0 4px 14px -8px rgba(58,58,58,0.06);">
                     <svg class="flex-shrink-0 w-10 h-10 text-spz-purple" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C7.58 2 4 3.79 4 6v12c0 2.21 3.58 4 8 4s8-1.79 8-4V6c0-2.21-3.58-4-8-4zm6 16c0 .55-2.09 2-6 2s-6-1.45-6-2v-2.23c1.61.78 3.72 1.23 6 1.23s4.39-.45 6-1.23V18zm0-5c0 .55-2.09 2-6 2s-6-1.45-6-2v-2.23C7.61 11.55 9.72 12 12 12s4.39-.45 6-1.23V13zm-6-3C8.09 10 6 8.55 6 8s2.09-2 6-2 6 1.45 6 2-2.09 2-6 2z"/></svg>
                     <div>
                         <h4 class="font-extrabold text-xl mb-2 text-gray-900">Arbeitet mit Ihrem System</h4>
                         <p class="text-gray-500 font-medium leading-relaxed">Verbindet sich mit Ihrem CRM oder Kalender. Keine Änderung Ihrer gewohnten Tools erforderlich.</p>
                     </div>
                 </div>
-                <div class="flex gap-6 items-start p-8 rounded-2xl" style="background: linear-gradient(135deg, #F1FAF7 0%, #E2F4EF 100%); box-shadow: 0 4px 24px rgba(255, 122, 107,0.10);">
+                <div class="flex gap-6 items-start p-8 rounded-2xl reveal" style="background:#ffffff; border:1px solid rgba(255,122,107,0.08); box-shadow: 0 14px 36px -16px rgba(255,122,107,0.22), 0 4px 14px -8px rgba(58,58,58,0.06);">
                     <svg class="flex-shrink-0 w-10 h-10 text-spz-purple" fill="currentColor" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
                     <div>
                         <h4 class="font-extrabold text-xl mb-2 text-gray-900">Daten bleiben bei Ihnen</h4>
                         <p class="text-gray-500 font-medium leading-relaxed">Der Schriftverkehr wird in Ihrem System gespeichert. Sie haben die volle Kontrolle über Patientendaten.</p>
                     </div>
                 </div>
-                <div class="flex gap-6 items-start p-8 rounded-2xl" style="background: linear-gradient(135deg, #F1FAF7 0%, #E2F4EF 100%); box-shadow: 0 4px 24px rgba(255, 122, 107,0.10);">
+                <div class="flex gap-6 items-start p-8 rounded-2xl reveal" style="background:#ffffff; border:1px solid rgba(255,122,107,0.08); box-shadow: 0 14px 36px -16px rgba(255,122,107,0.22), 0 4px 14px -8px rgba(58,58,58,0.06);">
                     <svg class="flex-shrink-0 w-10 h-10 text-spz-purple" fill="currentColor" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
                     <div>
                         <h4 class="font-extrabold text-xl mb-2 text-gray-900">Erfüllt Marktanforderungen</h4>
@@ -1027,7 +1308,7 @@
     </section>
 
     <!-- CHANNELS -->
-    <section class="py-24 bg-white relative">
+    <section class="py-24 relative">
         <div class="max-w-4xl mx-auto px-6 text-center">
             <h2 class="text-3xl lg:text-4xl font-extrabold mb-6 text-gray-900 leading-tight tracking-tight">Der Assistent antwortet dort, wo der Patient schreibt</h2>
             <p class="text-lg text-gray-500 font-medium leading-relaxed mb-12">Patienten besuchen keine Website. Sie schreiben dort, wo es ihnen bequem ist — und erhalten sofort eine Antwort.</p>
@@ -1048,7 +1329,7 @@
     </section>
 
     <!-- ABOUT FOUNDER -->
-    <section id="about" class="py-24 relative overflow-hidden" style="background-color: var(--spz-purple-light);">
+    <section id="about" class="py-24 relative overflow-hidden" style="">
         <div class="max-w-4xl mx-auto px-6">
             <div class="clean-card bg-white overflow-hidden grid md:grid-cols-[minmax(0,42%)_1fr] gap-0 items-stretch">
                 <!-- Photo -->
@@ -1077,12 +1358,12 @@
     </section>
 
     <!-- FAQ -->
-    <section id="faq" class="py-24 bg-white relative overflow-hidden">
+    <section id="faq" class="py-24 relative overflow-hidden">
         <div style="position:absolute; top:-80px; right:-80px; width:450px; height:450px; border-radius:50%; background:#7FD9C9; opacity:0.12; filter:blur(80px); pointer-events:none; z-index:0;"></div>
         <div class="max-w-3xl mx-auto px-6 relative z-10">
             <h2 class="text-3xl lg:text-4xl font-extrabold mb-12 text-center text-gray-900 leading-tight tracking-tight">Häufige Fragen</h2>
             <div class="space-y-4">
-                <details class="clean-card bg-white overflow-hidden group">
+                <details class="clean-card bg-white overflow-hidden group reveal">
                     <summary class="p-6 cursor-pointer font-bold text-lg flex justify-between items-center outline-none text-gray-900">
                         Wie viel kostet die Einrichtung?
                         <span class="text-spz-purple text-2xl font-normal leading-none transition-transform group-open:rotate-45">+</span>
@@ -1091,7 +1372,7 @@
                         Die Kosten hängen von den Anforderungen und Integrationen ab. Hinterlassen Sie eine Anfrage — wir zeigen Ihnen die passende Lösung für Ihre Praxis.
                     </div>
                 </details>
-                <details class="clean-card bg-white overflow-hidden group">
+                <details class="clean-card bg-white overflow-hidden group reveal">
                     <summary class="p-6 cursor-pointer font-bold text-lg flex justify-between items-center outline-none text-gray-900">
                         Wie unterscheidet sich das von einem normalen Chatbot?
                         <span class="text-spz-purple text-2xl font-normal leading-none transition-transform group-open:rotate-45">+</span>
@@ -1100,7 +1381,7 @@
                         Ein normaler Bot arbeitet mit Buttons und Vorlagen. Der Assistent versteht Freitext, führt Dialoge und stellt Rückfragen. Er antwortet nicht nur — er hilft dem Patienten, Klarheit zu bekommen und das Gespräch fortzusetzen.
                     </div>
                 </details>
-                <details class="clean-card bg-white overflow-hidden group">
+                <details class="clean-card bg-white overflow-hidden group reveal">
                     <summary class="p-6 cursor-pointer font-bold text-lg flex justify-between items-center outline-none text-gray-900">
                         Wird das Patienten nicht stören?
                         <span class="text-spz-purple text-2xl font-normal leading-none transition-transform group-open:rotate-45">+</span>
@@ -1109,7 +1390,7 @@
                         Nein. Antworten wirken wie eine Unterhaltung mit dem Empfangspersonal. Der Patient erhält eine schnelle und verständliche Antwort — ohne Wartezeit. Liegt eine Frage außerhalb des Szenarios, verliert sich der Assistent nicht. Er übergibt das Gespräch an einen Mitarbeiter und benachrichtigt diesen, z. B. per Telegram. Der Patient bekommt immer eine Antwort — ein Mensch greift einfach im richtigen Moment ein.
                     </div>
                 </details>
-                <details class="clean-card bg-white overflow-hidden group">
+                <details class="clean-card bg-white overflow-hidden group reveal">
                     <summary class="p-6 cursor-pointer font-bold text-lg flex justify-between items-center outline-none text-gray-900">
                         Was bedeutet „Daten und Assistent auf meinem Server"? Ist das kompliziert?
                         <span class="text-spz-purple text-2xl font-normal leading-none transition-transform group-open:rotate-45">+</span>
@@ -1118,7 +1399,7 @@
                         Für Sie — nein. Wir richten alles ein und starten es selbst. Für Sie bedeutet das: Der Assistent wird auf Ihrer Seite betrieben und gehört vollständig Ihrer Praxis. Alle Gespräche und Patientendaten werden bei Ihnen gespeichert — nicht in Drittanbieter-Diensten oder einer externen Cloud. Sie kontrollieren das System und sind von keiner Plattform abhängig.
                     </div>
                 </details>
-                <details class="clean-card bg-white overflow-hidden group">
+                <details class="clean-card bg-white overflow-hidden group reveal">
                     <summary class="p-6 cursor-pointer font-bold text-lg flex justify-between items-center outline-none text-gray-900">
                         Muss ich mein CRM oder Buchungssystem wechseln?
                         <span class="text-spz-purple text-2xl font-normal leading-none transition-transform group-open:rotate-45">+</span>
@@ -1127,7 +1408,7 @@
                         Nein. Der Assistent verbindet sich mit dem, was in der Praxis bereits im Einsatz ist. Sie arbeiten wie gewohnt — nur schneller und ohne verlorene Anfragen.
                     </div>
                 </details>
-                <details class="clean-card bg-white overflow-hidden group">
+                <details class="clean-card bg-white overflow-hidden group reveal">
                     <summary class="p-6 cursor-pointer font-bold text-lg flex justify-between items-center outline-none text-gray-900">
                         Was passiert, wenn der Assistent eine Frage nicht versteht?
                         <span class="text-spz-purple text-2xl font-normal leading-none transition-transform group-open:rotate-45">+</span>
@@ -1136,7 +1417,7 @@
                         Er fragt nach oder übergibt das Gespräch an einen Mitarbeiter. Der Patient bleibt nie ohne Antwort.
                     </div>
                 </details>
-                <details class="clean-card bg-white overflow-hidden group">
+                <details class="clean-card bg-white overflow-hidden group reveal">
                     <summary class="p-6 cursor-pointer font-bold text-lg flex justify-between items-center outline-none text-gray-900">
                         Wie lange dauert die Implementierung?
                         <span class="text-spz-purple text-2xl font-normal leading-none transition-transform group-open:rotate-45">+</span>
@@ -1150,7 +1431,7 @@
     </section>
 
     <!-- CALL TO ACTION -->
-    <section id="cta" class="py-24 bg-gradient-cta relative overflow-hidden">
+    <section id="cta" class="py-24 relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="text-center max-w-2xl mx-auto mb-16">
                 <h2 class="text-3xl lg:text-4xl font-extrabold mb-6 text-gray-900 leading-tight tracking-tight">Schreiben Sie dem Assistenten jetzt</h2>
@@ -1620,5 +1901,71 @@
     })();
     </script>
     <!-- ===== END CHAT WIDGET ===== -->
+
+    <script>
+    (function(){
+        if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        // заголовки секций + лид-абзац под ними выезжают
+        document.querySelectorAll('section h2').forEach(function(h){
+            h.classList.add('reveal');
+            var p = h.nextElementSibling;
+            if(p && p.tagName === 'P'){ p.classList.add('reveal'); p.style.transitionDelay = '0.12s'; }
+        });
+        // стаггер внутри сеток
+        document.querySelectorAll('.grid').forEach(function(g){
+            var kids = g.querySelectorAll(':scope > .reveal');
+            kids.forEach(function(k,i){ if(!k.style.transitionDelay) k.style.transitionDelay = (i*0.08).toFixed(2)+'s'; });
+        });
+        var io = new IntersectionObserver(function(entries){
+            entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+        }, { threshold: 0.12, rootMargin: '0px 0px -7% 0px' });
+        document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+    })();
+    </script>
+
+
+    <script>
+    (function(){
+        if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var cv = document.getElementById('page-particles'); if(!cv) return;
+        var ctx = cv.getContext('2d'), W = 0, H = 0;
+        function size(){ W = cv.width = window.innerWidth; H = cv.height = window.innerHeight; }
+        size(); window.addEventListener('resize', size, {passive:true});
+        var cols = [[255,128,112],[140,212,198],[255,190,150]];
+        function pick(){ return cols[(Math.random()*cols.length)|0]; }
+        // мерцающие точки — деликатные, появляются и пропадают периодически
+        function newDot(){ return { x:Math.random()*W, y:Math.random()*H, r:Math.random()*1.7+0.8, vy:-(Math.random()*0.2+0.06), c:pick(), life:0, max:(Math.random()*240+220)|0, delay:(Math.random()*120)|0 }; }
+        var dots = []; for(var i=0;i<26;i++){ var d=newDot(); d.life=(Math.random()*d.max)|0; d.delay=(Math.random()*60)|0; dots.push(d); }
+        // мягкие пузыри — изредка всплывают
+        var blobs = [], blobTimer = 0, blobEvery = 520;
+        function spawnBlob(){ blobs.push({ x:Math.random()*W, y:H+80, r:(Math.random()*46+38)|0, vy:-(Math.random()*0.26+0.16), life:0, max:(Math.random()*340+300)|0, c:pick() }); }
+        function loop(){
+            ctx.clearRect(0,0,W,H);
+            for(var i=0;i<dots.length;i++){ var d=dots[i];
+                if(d.delay>0){ d.delay--; continue; }
+                d.life++; d.y+=d.vy;
+                var t=d.life/d.max; if(t>=1){ dots[i]=newDot(); continue; }
+                var a=Math.sin(t*Math.PI)*0.42;
+                ctx.beginPath(); ctx.arc(d.x,d.y,d.r,0,6.2832);
+                ctx.fillStyle='rgba('+d.c[0]+','+d.c[1]+','+d.c[2]+','+a.toFixed(3)+')';
+                ctx.shadowBlur=7; ctx.shadowColor='rgba('+d.c[0]+','+d.c[1]+','+d.c[2]+',0.5)'; ctx.fill();
+            }
+            ctx.shadowBlur=0;
+            blobTimer++; if(blobTimer>=blobEvery){ blobTimer=0; spawnBlob(); }
+            for(var j=blobs.length-1;j>=0;j--){ var b=blobs[j];
+                b.life++; b.y+=b.vy;
+                var bt=b.life/b.max; if(bt>=1){ blobs.splice(j,1); continue; }
+                var ba=Math.sin(bt*Math.PI)*0.12;
+                var g=ctx.createRadialGradient(b.x-b.r*0.34, b.y-b.r*0.34, b.r*0.1, b.x, b.y, b.r);
+                g.addColorStop(0,'rgba('+b.c[0]+','+b.c[1]+','+b.c[2]+','+(ba*1.8).toFixed(3)+')');
+                g.addColorStop(0.6,'rgba('+b.c[0]+','+b.c[1]+','+b.c[2]+','+(ba*0.7).toFixed(3)+')');
+                g.addColorStop(1,'rgba('+b.c[0]+','+b.c[1]+','+b.c[2]+',0)');
+                ctx.beginPath(); ctx.arc(b.x,b.y,b.r,0,6.2832); ctx.fillStyle=g; ctx.fill();
+            }
+            requestAnimationFrame(loop);
+        }
+        requestAnimationFrame(loop);
+    })();
+    </script>
 </body>
 </html>

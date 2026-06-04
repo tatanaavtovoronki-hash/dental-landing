@@ -62,7 +62,7 @@
 
         body {
             font-family: 'Inter', system-ui, sans-serif;
-            background-color: var(--bg-body);
+            background-color: transparent;
             color: var(--t-dark);
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
@@ -1952,34 +1952,34 @@
         var ctx = cv.getContext('2d'), W = 0, H = 0;
         function size(){ W = cv.width = window.innerWidth; H = cv.height = window.innerHeight; }
         size(); window.addEventListener('resize', size, {passive:true});
-        var cols = [[255,122,107],[127,217,201],[255,176,128]];
+        var cols = [[232,96,79],[63,186,162],[240,158,86]];
         function pick(){ return cols[(Math.random()*cols.length)|0]; }
         // мерцающие точки — появляются и пропадают периодически
-        function newDot(){ return { x:Math.random()*W, y:Math.random()*H, r:Math.random()*2.8+1.2, vy:-(Math.random()*0.22+0.06), c:pick(), life:0, max:(Math.random()*240+200)|0, delay:(Math.random()*70)|0 }; }
-        var dots = []; for(var i=0;i<50;i++){ var d=newDot(); d.life=(Math.random()*d.max)|0; d.delay=0; dots.push(d); }
+        function newDot(){ return { x:Math.random()*W, y:Math.random()*H, r:Math.random()*4+2.6, vy:-(Math.random()*0.26+0.08), c:pick(), life:0, max:(Math.random()*220+180)|0, delay:(Math.random()*60)|0 }; }
+        var dots = []; for(var i=0;i<46;i++){ var d=newDot(); d.life=(Math.random()*d.max)|0; d.delay=0; dots.push(d); }
         // 3D-кляксы (пузыри) — всплывают раз в несколько секунд
-        var blobs = [], blobTimer = 120, blobEvery = 360;
-        function spawnBlob(){ blobs.push({ x:Math.random()*W, y:H+70, r:(Math.random()*46+36)|0, vy:-(Math.random()*0.3+0.16), life:0, max:(Math.random()*300+260)|0, c:pick() }); }
+        var blobs = [], blobTimer = 60, blobEvery = 230;
+        function spawnBlob(){ blobs.push({ x:Math.random()*W, y:H+90, r:(Math.random()*78+72)|0, vy:-(Math.random()*0.32+0.2), life:0, max:(Math.random()*320+280)|0, c:pick() }); }
         function loop(){
             ctx.clearRect(0,0,W,H);
             for(var i=0;i<dots.length;i++){ var d=dots[i];
                 if(d.delay>0){ d.delay--; continue; }
                 d.life++; d.y+=d.vy;
                 var t=d.life/d.max; if(t>=1){ dots[i]=newDot(); continue; }
-                var a=Math.sin(t*Math.PI)*0.85;
+                var a=Math.sin(t*Math.PI);
                 ctx.beginPath(); ctx.arc(d.x,d.y,d.r,0,6.2832);
                 ctx.fillStyle='rgba('+d.c[0]+','+d.c[1]+','+d.c[2]+','+a.toFixed(3)+')';
-                ctx.shadowBlur=11; ctx.shadowColor='rgba('+d.c[0]+','+d.c[1]+','+d.c[2]+',0.7)'; ctx.fill();
+                ctx.shadowBlur=16; ctx.shadowColor='rgba('+d.c[0]+','+d.c[1]+','+d.c[2]+',0.9)'; ctx.fill();
             }
             ctx.shadowBlur=0;
             blobTimer++; if(blobTimer>=blobEvery){ blobTimer=0; spawnBlob(); }
             for(var j=blobs.length-1;j>=0;j--){ var b=blobs[j];
                 b.life++; b.y+=b.vy;
                 var bt=b.life/b.max; if(bt>=1){ blobs.splice(j,1); continue; }
-                var ba=Math.sin(bt*Math.PI)*0.24;
+                var ba=Math.sin(bt*Math.PI)*0.4;
                 var g=ctx.createRadialGradient(b.x-b.r*0.34, b.y-b.r*0.34, b.r*0.1, b.x, b.y, b.r);
-                g.addColorStop(0,'rgba('+b.c[0]+','+b.c[1]+','+b.c[2]+','+(ba*1.7).toFixed(3)+')');
-                g.addColorStop(0.6,'rgba('+b.c[0]+','+b.c[1]+','+b.c[2]+','+(ba*0.6).toFixed(3)+')');
+                g.addColorStop(0,'rgba('+b.c[0]+','+b.c[1]+','+b.c[2]+','+(ba*1.8).toFixed(3)+')');
+                g.addColorStop(0.6,'rgba('+b.c[0]+','+b.c[1]+','+b.c[2]+','+(ba*0.7).toFixed(3)+')');
                 g.addColorStop(1,'rgba('+b.c[0]+','+b.c[1]+','+b.c[2]+',0)');
                 ctx.beginPath(); ctx.arc(b.x,b.y,b.r,0,6.2832); ctx.fillStyle=g; ctx.fill();
             }

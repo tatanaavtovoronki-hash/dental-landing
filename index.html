@@ -617,17 +617,9 @@
         }
         .prob-ic svg { width: 23px; height: 23px; }
 
-        /* ===== P7 — упрощённая кнопка (сплошной коралл, без свечения и вращения) ===== */
-        .btn-neon {
-            background: var(--nibbl-coral) !important;
-            box-shadow: 0 6px 18px -8px rgba(255,122,107,0.55);
-            transition: background .2s ease, transform .2s ease, box-shadow .2s ease;
-            border-radius: 12px;
-        }
-        .btn-neon-inner { display: none !important; }
-        .btn-neon::before, .btn-neon::after { display: none !important; }
-        .btn-neon:hover { background: #F0664F !important; transform: translateY(-2px); box-shadow: 0 14px 28px -10px rgba(255,122,107,0.6); }
-        .btn-neon:active { transform: translateY(0); box-shadow: 0 4px 12px -6px rgba(255,122,107,0.5); }
+        /* Кнопки — оригинальный неоновый стиль (свечение восстановлено) + единый радиус для всех CTA */
+        .btn-neon { border-radius: 12px; }
+        .btn-neon::before { border-radius: 14px; }
 
         /* ===== P7 — типографика ===== */
         h1, h2, h3 { text-wrap: balance; }
@@ -680,10 +672,10 @@
         .ed-h1 {
             font-family: 'Playfair Display', serif; font-weight: 800;
             font-size: clamp(40px, 7.3vw, 94px); line-height: 1.03; letter-spacing: -0.005em;
-            color: #E8604F; text-wrap: balance;
+            color: var(--nibbl-charcoal); text-wrap: balance;
         }
         .ed-h1 .line { display: block; }
-        .ed-h1 em { font-style: italic; font-weight: 600; }
+        .ed-h1 em { font-style: italic; font-weight: 600; color: #E8604F; }
         .dotgrid {
             position: absolute; z-index: 1; pointer-events: none;
             background-image: radial-gradient(rgba(232,96,79,0.5) 1.4px, transparent 1.5px);
@@ -745,10 +737,10 @@
     <!-- HERO — Editorial + параллакс-фон -->
     <section class="hero-ed relative" style="padding-top: clamp(104px, 11vw, 148px); padding-bottom: clamp(48px, 6vw, 84px);">
         <div class="hero-bg" aria-hidden="true">
-            <div class="orb-wrap" data-depth="0.06" style="width:min(72vw,820px);aspect-ratio:1;left:-10%;top:-10%;"><i style="background:radial-gradient(circle,#FF7A6B 0%,rgba(255,122,107,0) 66%);opacity:.55;"></i></div>
-            <div class="orb-wrap" data-depth="0.10" style="width:min(74vw,860px);aspect-ratio:1;right:-12%;top:-16%;"><i style="background:radial-gradient(circle,#FFB28E 0%,rgba(255,178,142,0) 66%);opacity:.6;"></i></div>
-            <div class="orb-wrap" data-depth="0.08" style="width:min(64vw,720px);aspect-ratio:1;left:20%;bottom:-32%;"><i style="background:radial-gradient(circle,#FFD3A8 0%,rgba(255,211,168,0) 66%);opacity:.6;"></i></div>
-            <div class="orb-wrap" data-depth="0.14" style="width:min(48vw,540px);aspect-ratio:1;right:22%;bottom:-6%;"><i style="background:radial-gradient(circle,#FF9A8B 0%,rgba(255,154,139,0) 66%);opacity:.5;"></i></div>
+            <div class="orb-wrap" data-depth="0.06" style="width:min(72vw,820px);aspect-ratio:1;left:-10%;top:-10%;"><i style="background:radial-gradient(circle,#FF7A6B 0%,rgba(255,122,107,0) 66%);opacity:.28;"></i></div>
+            <div class="orb-wrap" data-depth="0.10" style="width:min(74vw,860px);aspect-ratio:1;right:-12%;top:-16%;"><i style="background:radial-gradient(circle,#7FD9C9 0%,rgba(127,217,201,0) 66%);opacity:.34;"></i></div>
+            <div class="orb-wrap" data-depth="0.08" style="width:min(64vw,720px);aspect-ratio:1;left:20%;bottom:-32%;"><i style="background:radial-gradient(circle,#FFD3A8 0%,rgba(255,211,168,0) 66%);opacity:.32;"></i></div>
+            <div class="orb-wrap" data-depth="0.14" style="width:min(48vw,540px);aspect-ratio:1;right:22%;bottom:-6%;"><i style="background:radial-gradient(circle,#FF9A8B 0%,rgba(255,154,139,0) 66%);opacity:.24;"></i></div>
             <div class="orb-wrap" data-depth="0.12" style="width:min(42vw,460px);aspect-ratio:1;left:2%;bottom:-12%;"><i style="background:radial-gradient(circle,#7FD9C9 0%,rgba(127,217,201,0) 66%);opacity:.3;"></i></div>
         </div>
         <canvas id="hero-particles" aria-hidden="true"></canvas>
@@ -765,11 +757,8 @@
                 <span class="line">и записывает.</span>
             </h1>
             <p class="ed-sub mt-9">Консультирует пациентов в Telegram, WhatsApp и Instagram и доводит до записи на приём. Даже ночью — без администратора.</p>
-            <div class="flex flex-wrap items-center justify-center gap-3 mt-10">
-                <a href="#cta" class="pill pill-coral">Получить демо</a>
-                <a href="#how" class="pill pill-ghost">Как это работает
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-                </a>
+            <div class="flex items-center justify-center mt-10">
+                <a href="#cta" class="btn-neon text-[15px] sm:text-[17px] px-12 py-4"><div class="btn-neon-inner"></div>Познакомиться с Nibbl</a>
             </div>
         </div>
 

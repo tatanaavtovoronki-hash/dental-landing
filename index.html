@@ -34,7 +34,7 @@
         }
     </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Inter:wght@300;400;500;600;700;800;900&family=DM+Mono:wght@400;500&family=Tourney:wght@700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Inter:wght@300;400;500;600;700;800;900&family=DM+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700&family=Tourney:wght@700&display=swap');
 
         /* === Бренд Nibbl: тёплая палитра (имена переменных сохранены с прошлого бренда) === */
         :root {
@@ -658,8 +658,8 @@
         }
         .hero-bg { position: absolute; inset: -25%; z-index: 0; pointer-events: none; }
         .orb-wrap { position: absolute; will-change: transform; }
-        .orb-wrap > i { display: block; width: 100%; height: 100%; border-radius: 50%; filter: blur(56px); animation: orbBreathe 9s ease-in-out infinite; will-change: transform; }
-        @keyframes orbBreathe { 0%,100% { transform: scale(1); } 50% { transform: scale(1.16); } }
+        .orb-wrap > i { display: block; width: 100%; height: 100%; border-radius: 50%; filter: blur(90px); animation: orbBreathe 13s ease-in-out infinite; will-change: transform; }
+        @keyframes orbBreathe { 0%,100% { transform: scale(1); } 50% { transform: scale(1.24); } }
         .hero-spot {
             position: absolute; inset: 0; z-index: 1; pointer-events: none; mix-blend-mode: soft-light;
             background: radial-gradient(440px 440px at var(--mx, 50%) var(--my, 36%), rgba(255,255,255,0.95), rgba(255,255,255,0) 62%);
@@ -672,18 +672,23 @@
         }
         @media (prefers-reduced-motion: reduce) { .orb-wrap > i { animation: none; } }
         .ed-eyebrow {
-            font-size: 12.5px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
-            color: #A98F76; display: inline-flex; align-items: center; gap: 12px;
+            font-family: 'DM Mono', monospace;
+            font-size: 12.5px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase;
+            color: #C0664E; display: inline-flex; align-items: center; gap: 12px;
         }
-        .ed-eyebrow::before, .ed-eyebrow::after { content: ''; width: 28px; height: 1px; background: #D9C7B2; }
+        .ed-eyebrow::before, .ed-eyebrow::after { content: ''; width: 24px; height: 1px; background: rgba(232,96,79,0.4); }
         .ed-h1 {
-            font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800;
-            font-size: clamp(42px, 8.2vw, 100px); line-height: 0.97; letter-spacing: -0.035em;
-            color: var(--nibbl-charcoal); text-wrap: balance;
+            font-family: 'Playfair Display', serif; font-weight: 800;
+            font-size: clamp(40px, 7.3vw, 94px); line-height: 1.03; letter-spacing: -0.005em;
+            color: #E8604F; text-wrap: balance;
         }
         .ed-h1 .line { display: block; }
-        .ed-accent { position: relative; color: var(--nibbl-coral); white-space: nowrap; }
-        .ed-accent svg { position: absolute; left: 0; bottom: -0.16em; width: 100%; height: 0.2em; overflow: visible; }
+        .ed-h1 em { font-style: italic; font-weight: 600; }
+        .dotgrid {
+            position: absolute; z-index: 1; pointer-events: none;
+            background-image: radial-gradient(rgba(232,96,79,0.5) 1.4px, transparent 1.5px);
+            background-size: 15px 15px; opacity: 0.55;
+        }
         .ed-sub { font-size: clamp(16px, 1.45vw, 20px); line-height: 1.6; color: #6E655C; max-width: 34rem; text-wrap: pretty; }
         .pill {
             display: inline-flex; align-items: center; justify-content: center; gap: 9px;
@@ -692,8 +697,8 @@
         }
         .pill-coral { background: var(--nibbl-coral); color: #fff; box-shadow: 0 12px 26px -12px rgba(255,122,107,0.65); }
         .pill-coral:hover { background: #F0664F; transform: translateY(-2px); }
-        .pill-ghost { background: rgba(255,255,255,0.7); color: var(--nibbl-charcoal); border: 1.5px solid rgba(58,58,58,0.18); }
-        .pill-ghost:hover { border-color: var(--nibbl-charcoal); transform: translateY(-2px); background: #fff; }
+        .pill-ghost { background: transparent; color: #E8604F; border: 1.5px solid rgba(232,96,79,0.45); }
+        .pill-ghost:hover { border-color: #E8604F; transform: translateY(-2px); background: rgba(232,96,79,0.06); }
         .ed-sticker { position: absolute; z-index: 2; animation: floaty 6.5s ease-in-out infinite; pointer-events: none; }
         .ticker { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
         .ticker-track { display: inline-flex; white-space: nowrap; animation: tick 30s linear infinite; }
@@ -738,22 +743,25 @@
     </nav>
 
     <!-- HERO — Editorial + параллакс-фон -->
-    <section class="hero-ed relative" style="padding-top: clamp(124px, 15vw, 196px); padding-bottom: clamp(52px, 6vw, 88px);">
+    <section class="hero-ed relative" style="padding-top: clamp(104px, 11vw, 148px); padding-bottom: clamp(48px, 6vw, 84px);">
         <div class="hero-bg" aria-hidden="true">
-            <div class="orb-wrap" data-depth="0.06" style="width:min(60vw,640px);aspect-ratio:1;left:-6%;top:-2%;"><i style="background:radial-gradient(circle,#FF7A6B 0%,rgba(255,122,107,0) 68%);opacity:.58;"></i></div>
-            <div class="orb-wrap" data-depth="0.11" style="width:min(62vw,720px);aspect-ratio:1;right:-9%;top:-12%;"><i style="background:radial-gradient(circle,#7FD9C9 0%,rgba(127,217,201,0) 68%);opacity:.62;"></i></div>
-            <div class="orb-wrap" data-depth="0.08" style="width:min(54vw,580px);aspect-ratio:1;left:26%;bottom:-26%;"><i style="background:radial-gradient(circle,#FFD3A8 0%,rgba(255,211,168,0) 68%);opacity:.6;"></i></div>
-            <div class="orb-wrap" data-depth="0.16" style="width:min(32vw,340px);aspect-ratio:1;right:20%;bottom:0;"><i style="background:radial-gradient(circle,#FF9A8B 0%,rgba(255,154,139,0) 68%);opacity:.5;"></i></div>
+            <div class="orb-wrap" data-depth="0.06" style="width:min(72vw,820px);aspect-ratio:1;left:-10%;top:-10%;"><i style="background:radial-gradient(circle,#FF7A6B 0%,rgba(255,122,107,0) 66%);opacity:.55;"></i></div>
+            <div class="orb-wrap" data-depth="0.10" style="width:min(74vw,860px);aspect-ratio:1;right:-12%;top:-16%;"><i style="background:radial-gradient(circle,#FFB28E 0%,rgba(255,178,142,0) 66%);opacity:.6;"></i></div>
+            <div class="orb-wrap" data-depth="0.08" style="width:min(64vw,720px);aspect-ratio:1;left:20%;bottom:-32%;"><i style="background:radial-gradient(circle,#FFD3A8 0%,rgba(255,211,168,0) 66%);opacity:.6;"></i></div>
+            <div class="orb-wrap" data-depth="0.14" style="width:min(48vw,540px);aspect-ratio:1;right:22%;bottom:-6%;"><i style="background:radial-gradient(circle,#FF9A8B 0%,rgba(255,154,139,0) 66%);opacity:.5;"></i></div>
+            <div class="orb-wrap" data-depth="0.12" style="width:min(42vw,460px);aspect-ratio:1;left:2%;bottom:-12%;"><i style="background:radial-gradient(circle,#7FD9C9 0%,rgba(127,217,201,0) 66%);opacity:.3;"></i></div>
         </div>
         <canvas id="hero-particles" aria-hidden="true"></canvas>
         <div class="hero-spot" aria-hidden="true"></div>
+        <div class="dotgrid" style="top:clamp(118px,15vw,182px);left:5%;width:78px;height:118px;" aria-hidden="true"></div>
+        <div class="dotgrid" style="bottom:13%;right:6%;width:118px;height:80px;" aria-hidden="true"></div>
         <div class="grain" aria-hidden="true"></div>
 
         <div class="relative z-10 max-w-5xl mx-auto px-6 flex flex-col items-center text-center">
             <span class="ed-eyebrow">AI-ассистент для стоматологий</span>
             <h1 class="ed-h1 mt-8">
                 <span class="line">Пациент пишет —</span>
-                <span class="line">Nibbl <span class="ed-accent">отвечает<svg viewBox="0 0 300 16" preserveAspectRatio="none"><path d="M3 11 C 60 4, 110 4, 150 8 S 250 13, 297 6" fill="none" stroke="#FF7A6B" stroke-width="5" stroke-linecap="round"/></svg></span></span>
+                <span class="line">Nibbl <em>отвечает</em></span>
                 <span class="line">и записывает.</span>
             </h1>
             <p class="ed-sub mt-9">Консультирует пациентов в Telegram, WhatsApp и Instagram и доводит до записи на приём. Даже ночью — без администратора.</p>

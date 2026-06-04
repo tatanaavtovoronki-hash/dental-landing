@@ -396,12 +396,18 @@
             z-index: 1;
         }
 
-        /* Bricolage Grotesque — заголовки бренда Nibbl (поддерживает кириллицу) */
-        h1, h2, h3 {
+        /* Заголовки: H1/H2 — серив Playfair (как в референсах HNST/Nothing), H3 — Bricolage */
+        h1, h2 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 800;
+            letter-spacing: -0.005em;
+        }
+        h3 {
             font-family: 'Bricolage Grotesque', sans-serif;
             font-weight: 800;
             letter-spacing: -0.01em;
         }
+        h2 em, .h-accent { font-style: italic; font-weight: 700; color: #E8604F; }
 
         /* Fan Bridge — real-height block, centered on hero/problems boundary via negative margin */
         .fan-bridge {
@@ -862,7 +868,7 @@
 
 
     <!-- HOW IT WORKS -->
-    <section id="how" class="py-24 bg-[#FAFAFA] relative overflow-hidden">
+    <section id="how" class="py-24 bg-[#FBF6EE] relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="text-center max-w-3xl mx-auto mb-20">
                 <h2 class="text-3xl lg:text-4xl font-extrabold mb-6 text-gray-900 leading-tight tracking-tight">Как работает AI-секретарь</h2>
@@ -1218,7 +1224,7 @@
     </section>
 
     <!-- CUSTOM FIT -->
-    <section class="py-24 bg-[#FAFAFA] relative">
+    <section class="py-24 bg-[#FBF6EE] relative">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center max-w-2xl mx-auto mb-16">
                 <h2 class="text-3xl lg:text-4xl font-extrabold mb-6 text-gray-900 leading-tight tracking-tight">Это не сервис. Это ассистент под вашу клинику</h2>

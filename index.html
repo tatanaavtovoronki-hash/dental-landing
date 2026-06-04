@@ -651,6 +651,50 @@
             box-shadow: 0 3px 9px rgba(127,217,201,0.45);
         }
 
+        /* ===== HERO — Editorial (крупный тип, крем/уголь, один коралловый акцент) ===== */
+        .hero-ed {
+            position: relative; overflow: hidden; background: #FAF4EC;
+            background-image:
+                linear-gradient(rgba(58,58,58,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(58,58,58,0.04) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+        .hero-ed::after {
+            content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 1;
+            background: radial-gradient(115% 75% at 50% 28%, transparent 50%, #FAF4EC 100%);
+        }
+        .ed-eyebrow {
+            font-size: 12.5px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+            color: #A98F76; display: inline-flex; align-items: center; gap: 12px;
+        }
+        .ed-eyebrow::before, .ed-eyebrow::after { content: ''; width: 28px; height: 1px; background: #D9C7B2; }
+        .ed-h1 {
+            font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800;
+            font-size: clamp(42px, 8.2vw, 100px); line-height: 0.97; letter-spacing: -0.035em;
+            color: var(--nibbl-charcoal); text-wrap: balance;
+        }
+        .ed-h1 .line { display: block; }
+        .ed-accent { position: relative; color: var(--nibbl-coral); white-space: nowrap; }
+        .ed-accent svg { position: absolute; left: 0; bottom: -0.16em; width: 100%; height: 0.2em; overflow: visible; }
+        .ed-sub { font-size: clamp(16px, 1.45vw, 20px); line-height: 1.6; color: #6E655C; max-width: 34rem; text-wrap: pretty; }
+        .pill {
+            display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+            border-radius: 999px; font-weight: 700; font-size: 16px; padding: 16px 30px;
+            text-decoration: none; transition: background .2s ease, transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+        }
+        .pill-coral { background: var(--nibbl-coral); color: #fff; box-shadow: 0 12px 26px -12px rgba(255,122,107,0.65); }
+        .pill-coral:hover { background: #F0664F; transform: translateY(-2px); }
+        .pill-ghost { background: rgba(255,255,255,0.7); color: var(--nibbl-charcoal); border: 1.5px solid rgba(58,58,58,0.18); }
+        .pill-ghost:hover { border-color: var(--nibbl-charcoal); transform: translateY(-2px); background: #fff; }
+        .ed-sticker { position: absolute; z-index: 2; animation: floaty 6.5s ease-in-out infinite; pointer-events: none; }
+        .ticker { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
+        .ticker-track { display: inline-flex; white-space: nowrap; animation: tick 30s linear infinite; }
+        .ticker-item { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: clamp(19px, 2.6vw, 30px); color: rgba(58,58,58,0.14); padding: 0 26px; letter-spacing: -0.01em; }
+        .ticker-item .d { color: rgba(255,122,107,0.5); }
+        @keyframes tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        @media (prefers-reduced-motion: reduce) { .ticker-track { animation: none; } .ed-sticker { animation: none; } }
+        @media (max-width: 720px) { .ed-sticker { display: none; } }
+
     </style>
 </head>
 <body class="antialiased min-h-screen selection:bg-spz-purple selection:text-white">
@@ -685,54 +729,28 @@
         </div>
     </nav>
 
-    <!-- HERO 2.0 — продукт в герое -->
-    <section class="hero2 relative" style="padding-top: clamp(100px, 10.5vw, 134px); padding-bottom: clamp(48px, 6vw, 84px);">
-        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-[1.04fr_0.96fr] gap-10 lg:gap-12 items-center">
-
-            <!-- LEFT: смысл + CTA -->
-            <div class="relative z-10">
-                <span class="eyebrow"><span class="dot"></span>AI-ассистент для стоматологий</span>
-                <h1 class="hero2-h1 mt-6">Отвечает пациентам за секунды — <span class="accent">и записывает на приём</span></h1>
-                <p class="hero2-lead mt-6">Telegram, WhatsApp и Instagram под управлением AI. Пациент пишет в любое время — Nibbl консультирует, снимает возражения и доводит до записи. Даже ночью.</p>
-
-                <div class="flex flex-wrap items-center gap-3 mt-9">
-                    <a href="#cta" class="btn-neon text-[15px] px-9 py-4"><div class="btn-neon-inner"></div>Получить демо</a>
-                    <a href="#how" class="btn-ghost">Посмотреть, как отвечает
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-                    </a>
-                </div>
-
-                <div class="trust-row mt-9">
-                    <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Отвечает 24/7</span>
-                    <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Не теряет заявки</span>
-                    <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Запись без администратора</span>
-                </div>
+    <!-- HERO — Editorial (концепт направления «смелая типографика») -->
+    <section class="hero-ed relative" style="padding-top: clamp(124px, 15vw, 196px); padding-bottom: clamp(52px, 6vw, 88px);">
+        <div class="relative z-10 max-w-5xl mx-auto px-6 flex flex-col items-center text-center">
+            <span class="ed-eyebrow">AI-ассистент для стоматологий</span>
+            <h1 class="ed-h1 mt-8">
+                <span class="line">Пациент пишет —</span>
+                <span class="line">Nibbl <span class="ed-accent">отвечает<svg viewBox="0 0 300 16" preserveAspectRatio="none"><path d="M3 11 C 60 4, 110 4, 150 8 S 250 13, 297 6" fill="none" stroke="#FF7A6B" stroke-width="5" stroke-linecap="round"/></svg></span></span>
+                <span class="line">и записывает.</span>
+            </h1>
+            <p class="ed-sub mt-9">Консультирует пациентов в Telegram, WhatsApp и Instagram и доводит до записи на приём. Даже ночью — без администратора.</p>
+            <div class="flex flex-wrap items-center justify-center gap-3 mt-10">
+                <a href="#cta" class="pill pill-coral">Получить демо</a>
+                <a href="#how" class="pill pill-ghost">Как это работает
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                </a>
             </div>
+        </div>
 
-            <!-- RIGHT: продукт = живой диалог -->
-            <div class="relative z-10">
-                <div class="phone-wrap">
-                    <div class="phone">
-                        <div class="phone-bar">
-                            <div class="phone-av"><img src="assets/nibbl-avatar.png" alt="Nibbl"></div>
-                            <div>
-                                <div class="phone-name">Nibbl</div>
-                                <div class="phone-status"><span class="live"></span>отвечает за секунды</div>
-                            </div>
-                        </div>
-                        <div class="phone-body">
-                            <div class="msg out" style="animation-delay:.15s"><div class="bubble out">Здравствуйте! Сколько стоит имплант под ключ?<span class="t">22:47</span></div></div>
-                            <div class="msg in" style="animation-delay:.85s"><div class="msg-av"><img src="assets/nibbl-avatar.png" alt=""></div><div class="bubble in">Добрый вечер! Имплант под ключ — от 25 000 ₽, гарантия 5 лет. Подобрать удобное время для консультации?<span class="t">22:47</span></div></div>
-                            <div class="msg out" style="animation-delay:1.6s"><div class="bubble out">Да, можно на завтра?<span class="t">22:48</span></div></div>
-                            <div class="msg in" style="animation-delay:2.3s"><div class="msg-av"><img src="assets/nibbl-avatar.png" alt=""></div><div class="bubble in">Конечно. Завтра свободно 15:00 или 18:30 — какое удобнее?<span class="t">22:48</span></div></div>
-                            <div class="msg out" style="animation-delay:3.0s"><div class="bubble out">15:00<span class="t">22:48</span></div></div>
-                            <div class="msg in" style="animation-delay:3.7s"><div class="msg-av"><img src="assets/nibbl-avatar.png" alt=""></div><div class="bubble in">Готово — записала вас на завтра в 15:00. Напомню за 2 часа до приёма.<span class="t">22:48</span></div></div>
-                            <div class="booked" style="animation-delay:4.6s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Пациент записан · ответ за 8 секунд</div>
-                        </div>
-                    </div>
-                </div>
+        <div class="ticker relative z-10" style="margin-top: clamp(46px, 6vw, 88px);">
+            <div class="ticker-track">
+                <span class="ticker-item"><span class="d">•</span>&nbsp;Telegram</span><span class="ticker-item"><span class="d">•</span>&nbsp;WhatsApp</span><span class="ticker-item"><span class="d">•</span>&nbsp;Instagram</span><span class="ticker-item"><span class="d">•</span>&nbsp;Viber</span><span class="ticker-item"><span class="d">•</span>&nbsp;Facebook</span><span class="ticker-item"><span class="d">•</span>&nbsp;Сайт</span><span class="ticker-item"><span class="d">•</span>&nbsp;Email</span><span class="ticker-item"><span class="d">•</span>&nbsp;Telegram</span><span class="ticker-item"><span class="d">•</span>&nbsp;WhatsApp</span><span class="ticker-item"><span class="d">•</span>&nbsp;Instagram</span><span class="ticker-item"><span class="d">•</span>&nbsp;Viber</span><span class="ticker-item"><span class="d">•</span>&nbsp;Facebook</span><span class="ticker-item"><span class="d">•</span>&nbsp;Сайт</span><span class="ticker-item"><span class="d">•</span>&nbsp;Email</span>
             </div>
-
         </div>
     </section>
 
